@@ -15,6 +15,10 @@ private:
     int Attack = 30; //공격력
     int Defense = 30; //방어력
     int Money = 0; //돈
+    int AdditionalMaxHP = 0; //추가 체력
+    int AdditionalMaxMP = 0; //추가 마나
+    int AdditionalAttack = 0; //추가 공격력
+    int AdditionalDefense = 0; //추가 방어력
 
 public:
     const std::string& GetName() const;
@@ -28,6 +32,10 @@ public:
     int GetAttack() const;
     int GetDefense() const;
     int GetMoney() const;
+    int GetAdditionalMaxHP() const;
+    int GetAdditionalMaxMP() const;
+    int GetAdditionalAttack() const;
+    int GetAdditionalDefense() const;
 
     void SetName(const std::string& name);
     void SetCurrentHP(int currentHP);
@@ -40,6 +48,10 @@ public:
     void SetAttack(int attack);
     void SetDefense(int defense);
     void SetMoney(int money);
+    void SetAdditionalMaxHP(int additionalMaxHP);
+    void SetAdditionalMaxMP(int additionalMaxMP);
+    void SetAdditionalAttack(int additionalAttack);
+    void SetAdditionalDefense(int additionalDefense);
 
     void ShowCharacterInfo() const;
     //상태 출력 함수
