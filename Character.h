@@ -17,6 +17,17 @@ private:
     int DEF = 0;
 
 public:
+    const std::string& GetName() const;
+    int GetCurrentHP() const;
+    int GetMaxHP() const;
+    int GetCurrentMP() const;
+    int GetMaxMP() const;
+    int GetCurrentEXP() const;
+    int GetMaxEXP() const;
+    int GetLevel() const;
+    int GetATK() const;
+    int GetDEF() const;
+
     void SetName(const std::string& name);
     void SetCurrentHP(int currentHP);
     void SetMaxHP(int maxHP);
@@ -28,3 +39,4 @@ public:
     void SetATK(int atk);
     void SetDEF(int def);
 };
+
