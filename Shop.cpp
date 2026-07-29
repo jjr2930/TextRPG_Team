@@ -4,16 +4,16 @@
 using namespace std;
 
 Shop::Shop()
-    : itemsForSale({ "Health Potion", "Power Up Potion" })
+    : itemsForSale({ "체력 포션", "파워 업 포션" })
 {
 }
 
 void Shop::PrintMainMenu()
 {
-    cout << "Welcome to my shop:\n";
-    cout << "1. Sell" << endl;
-    cout << "2. Buy" << endl;
-    cout << "3. Exit" << endl;
+    cout << "나의 상점에 오신것을 환영합니다." << endl;;
+    cout << "1. 판매" << endl;
+    cout << "2. 구매" << endl;
+    cout << "3. 종료" << endl;
 
     SelectedMenuType choice;
     int input;
@@ -36,12 +36,11 @@ void Shop::PrintMainMenu()
 
 void Shop::PrintSellMenu()
 {
-    bool loop = true;
     while (true)
     {
-        cout << "select to sell items." << endl;
-        cout << "1 ~ 9: item to sell" << endl;
-        cout << "0: exit" << endl;
+        cout << "판매할 아이템을 선택하세요." << endl;
+        cout << "1 ~ 9: 판매할 아이템" << endl;
+        cout << "0: 종료" << endl;
 
         //for llop display player inventory
         int input;
@@ -55,7 +54,7 @@ void Shop::PrintSellMenu()
         }
         else if (input == 0)
         {
-            loop = false;
+            break;
         }
         else
         {
@@ -68,9 +67,9 @@ void Shop::PrintBuyMenu()
 {
     while (true)
     {
-        cout << "select to buy items." << endl;
-        cout << "1 ~ 9: item to buy" << endl;
-        cout << "0: exit" << endl;
+        cout << "구매할 아이템을 선택하세요." << endl;
+        cout << "1 ~ 9: 구매할 아이템" << endl;
+        cout << "0: 종료" << endl;
 
         //for loop display shop inventory
         int input;
@@ -84,11 +83,11 @@ void Shop::PrintBuyMenu()
         }
         else if (input == 0)
         {
-            return;
+            break;
         }
         else
         {
-            cout << "Invalid input, please try again." << endl;
+            cout << "잘못된 입력입니다. 다시 시도해주세요." << endl;
         }
     }
 }
