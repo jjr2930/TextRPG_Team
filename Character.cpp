@@ -117,9 +117,9 @@ void Character::ShowCharacterInfo() const
     std::cout << "이름 : " << Name << '\n';
     std::cout << "레벨 : " << Level << " (" << CurrentEXP << '/' << MaxEXP << ")\n";
     std::cout << "체력 : " << CurrentHP << " / " << MaxHP << '\n';
-    std::cout << "마나 : " << CurrentMP << " / " << MaxMP << '\n';
+    //std::cout << "마나 : " << CurrentMP << " / " << MaxMP << '\n';
     std::cout << "공격력 : " << ATK << '\n';
-    std::cout << "방어력 : " << DEF << '\n';
+    //std::cout << "방어력 : " << DEF << '\n';
     std::cout << "소지금 : " << Money << '\n';
 }
 
@@ -129,10 +129,10 @@ void Character::CharacterLevelUP()
     Level += 1;
 
     MaxHP += Level * 20;
-    MaxMP += Level * 20;
+    //MaxMP += Level * 20;
     CurrentHP = MaxHP;
-    CurrentMP = MaxMP;
+    //CurrentMP = MaxMP;
 
     ATK += Level * 5;
-    DEF += Level * 5;
+    //DEF += Level * 5;
 }
