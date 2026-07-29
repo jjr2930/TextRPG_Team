@@ -14,6 +14,13 @@ Item Monster::GetItem() { return *item; }
 void Monster::SetHp(int hp) { this->hp = hp; }
 void Monster::SetPower(int power) { this->power = power; }
 
+int Monster::RandomGold() {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> dis(gold - gold / 2, gold + gold / 2);
+    return dis(gen);
+}
+
 int Monster::RandomHp(int min, int max, int level) {
     std::random_device rd;
     std::mt19937 gen(rd());

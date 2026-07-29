@@ -20,6 +20,7 @@ public:
 	int GetDropExp();
 	std::string GetName();
 	Item GetItem();
+	int RandomGold();
 
 	virtual void SetHp(int hp);
 	virtual void SetPower(int power);
