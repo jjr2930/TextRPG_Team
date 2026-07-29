@@ -12,6 +12,7 @@ void Item::useitem(int itemID, int useQTY) {
     {
         QTY -= useQTY;
         std::cout << "Used " << useQTY << " " << name << ". Remaining quantity: " << QTY << std::endl;
+		std::cout << "You have healed for " << healAmount << " HP!" << std::endl;
     }
 }
 	
