@@ -3,7 +3,7 @@
 #include "Monster.h"
 
 Monster::Monster(std::string name, int minHp, int maxHp, int minPower, int maxPower, int dropExp, std::string dropItemName, int dropItemPrice, int level)
-	: name(name), hp(RandomHp(minHp, maxHp, level)), power(power), dropExp(dropExp), dropItemName(dropItemName), dropItemPrice(dropItemPrice) {}
+	: name(name), hp(RandomHp(minHp, maxHp, level)), power(RandomPower(minPower, maxPower, level)), dropExp(dropExp), dropItemName(dropItemName), dropItemPrice(dropItemPrice) {}
 
 int Monster::GetHp() { return hp; }
 int Monster::GetPower() { return power; }
