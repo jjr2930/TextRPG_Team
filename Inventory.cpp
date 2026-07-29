@@ -1,27 +1,52 @@
-#include "Inventory.h"
-void Inventory::addItem(int itemID, int addQTY)
-{
+#include <iostream>
+#include <string>
 
-    for (int i = 0; i < backpack.size(); i++)
+#include "Inventory.h"
+#include "ItemDatabases.h"
+
+
+void Inventory::AddItem(int itemIdentifier, int quantity)
+{
+    if (quantity <= 0)
+        return;
+
+    for (InventoryItem& item : mItems)
     {
-        if (backpack[i].itemID == itemID)
+        if (item.mItemIdentifier == itemIdentifier)
         {
-            backpack[i].QTY += addQTY;
+            item.mQuantity += quantity;
             return;
         }
     }
 
-    if (backpack.size() < 10)
+    mItems.push_back({itemIdentifier, quantity});
+}
+
+void Inventory::ShowItems() const
+{
+    std::cout << "소지품:\n";
+
+    if (mItems.empty())
     {
-        Inventory newSlot;
-
-        newSlot.itemID = itemID;
-        newSlot.QTY = addQTY;
-
-        backpack.push_back(newSlot);
+        std::cout << "없음\n";
+        return;
     }
-    else
+
+    ItemDatabase itemDatabase;
+
+    for (const InventoryItem& inventoryItem : mItems)
     {
-        cout << "Inventory Full!\n";
+        std::string itemName = "아이템 " + std::to_string(inventoryItem.mItemIdentifier);
+
+        for (const Item& item : itemDatabase.loadedItems)
+        {
+            if (item.itemID == inventoryItem.mItemIdentifier && !item.name.empty())
+            {
+                itemName = item.name;
+                break;
+            }
+        }
+
+        std::cout << itemName << " x" << inventoryItem.mQuantity << '\n';
     }
 }

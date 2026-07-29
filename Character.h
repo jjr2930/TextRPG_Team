@@ -1,6 +1,7 @@
 #pragma once
-
 #include <string>
+
+#include "Inventory.h"
 
 class Character
 {
@@ -20,6 +21,7 @@ private:
     int mAdditionalMaximumMana = 0; //추가 마나
     int mAdditionalAttack = 0; //추가 공격력
     int mAdditionalDefense = 0; //추가 방어력
+    Inventory mInventory;
 
 public:
     const std::string& GetName() const;
@@ -37,6 +39,7 @@ public:
     int GetAdditionalMaxMP() const;
     int GetAdditionalAttack() const;
     int GetAdditionalDefense() const;
+    Inventory& GetInventory();
 
     void SetName(const std::string& name);
     void SetCurrentHP(int currentHealth);

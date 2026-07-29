@@ -1,7 +1,7 @@
-#include "Character.h"
-
-#include <conio.h>
 #include <iostream>
+#include <conio.h>
+
+#include "Character.h"
 
 const std::string& Character::GetName() const
 {
@@ -76,6 +76,11 @@ int Character::GetAdditionalAttack() const
 int Character::GetAdditionalDefense() const
 {
     return mAdditionalDefense;
+}
+
+Inventory& Character::GetInventory()
+{
+    return mInventory;
 }
 
 void Character::SetName(const std::string& name)
@@ -179,6 +184,7 @@ void Character::ShowCharacterInfo() const
     std::cout << '\n';
 
     std::cout << "소지금 : " << mMoney << '\n';
+    mInventory.ShowItems();
     std::cout << ">> 계속하려면 아무 키나 누르세요" << std::endl;
     (void)_getch();
 }
