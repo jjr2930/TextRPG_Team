@@ -13,21 +13,21 @@ class GameManager {
 private:
 public:
     GameManager();
-    void battle(std::string attactName, std::string defenceName, int attactValue, int hpValue);
+    void Battle(std::string attactName, std::string defenceName, int attactValue, int hpValue);
 
     Character character; // gamemanager 생성 시 캐릭터 생성
 
 
 public:
-    void encounter();
-    bool isCharacterDead(int hp);
-    bool isMonsterDead(int hp);
-    void shopEnter();
-    void gameover();
-    void win();
-    void showMainMenu();
-    void levelUp();
-    void makeCharacter();
+    void Encounter();
+    bool IsCharacterDead(int hp);
+    bool IsMonsterDead(int hp);
+    void ShopEnter();
+    void Gameover();
+    void Win();
+    void ShowMainMenu();
+    void LevelUp();
+    void MakeCharacter();
 
 
 
@@ -37,7 +37,7 @@ public:
     bool isWin = false;
 };
 
-inline void waitForKey()
+inline void WaitForKey()
 {
     std::cout << std::endl <<"계속하려면 아무 키나 누르세요...\n";
     (void)_getch();
