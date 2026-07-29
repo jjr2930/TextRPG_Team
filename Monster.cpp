@@ -23,3 +23,13 @@ int Monster::RandomHp(int min, int max, int level) {
 
     return random * level;
 }
+
+int Monster::RandomPower(int min, int max, int level)
+{
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> dis(min, max);
+    int random = dis(gen) * 2;
+
+    return random * level;
+}
