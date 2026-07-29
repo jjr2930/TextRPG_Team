@@ -2,41 +2,32 @@
 
 
 GameManager::GameManager() {
-    makeCharacter();
+    MakeCharacter();
 };
 
-void GameManager::battle(std::string attactName, std::string defenceName, int attactValue, int hpValue) {
+void GameManager::Battle(std::string attactName, std::string defenceName, int attactValue, int hpValue) {
     std::cout << std::endl << attactName << "이(가) " << defenceName << "을(를) 공격합니다!";
     std::cout << defenceName << " 체력 : " << hpValue - attactValue << std::endl;
 };
 
-void GameManager::encounter() {
-    Slime monster(
-        "슬라임",
-        100,
-        10,
-        50,
-        "슬라임 젤리",
-        100
-    );
+void GameManager::Encounter() {
+    Slime monster(character.GetLevel());
     system("cls");
     std::cout << "몬스터 " << monster.GetName() << "(이)가 난입했습니다. 전투 시작!" << std::endl;
     std::cout << "체력 : " << monster.GetHp() << ", 공격력 : " << monster.GetPower() << std::endl;
-	waitForKey();
+	WaitForKey();
 
     int monHp = monster.GetHp();
     int charHp = character.GetCurrentHP();
 
     while (true) {
-        battle(character.GetName(), monster.GetName(), character.GetAttack(), monHp);
+        Battle(character.GetName(), monster.GetName(), character.GetAttack(), monHp);
         monHp -= character.GetAttack();
-        if (isMonsterDead(monHp)) {
-            break;
-        }
-        battle(monster.GetName(), character.GetName(), monster.GetPower(), charHp);
+        if (IsMonsterDead(monHp)) break;
+        Battle(monster.GetName(), character.GetName(), monster.GetPower(), charHp);
         charHp -= monster.GetPower();
-        if (isCharacterDead(charHp)) {
-            gameover();
+        if (IsCharacterDead(charHp)) {
+            Gameover();
             return;
         }
     }
@@ -46,44 +37,41 @@ void GameManager::encounter() {
     
     character.SetCurrentEXP(character.GetCurrentEXP() + monster.GetDropExp());
     character.SetMoney(character.GetMoney() + monster.GetDropItemPrice());
-    levelUp();
+
+    LevelUp();
     
     std::cout << std::endl <<"현재 EXP : " << character.GetCurrentEXP() << "/" << character.GetMaxEXP() << ", 골드 : " << character.GetMoney() << std::endl;
-    waitForKey();
+    WaitForKey();
 };
 
-bool GameManager::isCharacterDead(int hp) {
-	if (hp <= 0) {
-		return true;
-	}
+bool GameManager::IsCharacterDead(int hp) {
+    if (hp <= 0) return true;
 	return false;
 };
 
-bool GameManager::isMonsterDead(int hp) {
-	if (hp <= 0) {
-		return true;
-	}
+bool GameManager::IsMonsterDead(int hp) {
+	if (hp <= 0) return true;
 	return false;
 };
 
-void GameManager::shopEnter() {
+void GameManager::ShopEnter() {
 	Shop shop;
 	shop.PrintMainMenu();
 };
 
-void GameManager::gameover() {
+void GameManager::Gameover() {
     isGameover = true;
 	std::cout << "게임오버..." << std::endl;
-	waitForKey();
+	WaitForKey();
 };
 
-void GameManager::win() {
+void GameManager::Win() {
 	std::cout << "게임 클리어!" << std::endl;
     isGameover = true;
-	waitForKey();
+	WaitForKey();
 };
 
-void GameManager::showMainMenu() {
+void GameManager::ShowMainMenu() {
 
     int select = 0;
 
@@ -115,34 +103,35 @@ void GameManager::showMainMenu() {
             break;
 
         case 2:
-            shopEnter();
+            ShopEnter();
             break;
 
         case 3:
             std::cout << "\n행동을 종료합니다.\n";
             return;
 
-        case 4:
+        case 4: {
             std::cout << "\n게임을 종료합니다.\n";
             isGameover = true;
             return;
-
-        default:
+        }
+        default: {
             std::cout << "\n잘못된 입력입니다.\n";
-            waitForKey();
+            WaitForKey();
             break;
+        }
         }
     }
 };
 
-void GameManager::levelUp() {
+void GameManager::LevelUp() {
     if (character.GetCurrentEXP() >= 100) {
         character.CharacterLevelUP();
         std::cout << "레벨 업!      LV " << character.GetLevel() - 1 << " ->  LV " << character.GetLevel() << std::endl;
     }
 };
 
-void GameManager::makeCharacter()
+void GameManager::MakeCharacter()
 {
     std::cout << "이름을 입력해주세요 : ";
     std::string name;

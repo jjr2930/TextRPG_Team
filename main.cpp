@@ -14,11 +14,11 @@ int main(int argc, char *argv[])
 
     GameManager gameManager;
     while (!gameManager.isGameover) {
-        gameManager.encounter();
+        gameManager.Encounter();
         if (gameManager.isGameover) {
             break;
         }
-        gameManager.showMainMenu();
+        gameManager.ShowMainMenu();
     }
     return 0;
 }
