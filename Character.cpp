@@ -122,7 +122,7 @@ void Character::ShowCharacterInfo() const
     //std::cout << "방어력 : " << Defense << '\n';
     std::cout << "소지금 : " << Money << '\n';
     std::cout << ">> 계속하려면 아무 키나 누르세요" << std::endl;
-    _getch();
+    (void)_getch();
 }
 
 void Character::CharacterLevelUP()
