@@ -13,8 +13,11 @@ int main(int argc, char *argv[])
 
 
     GameManager gameManager;
-    while (true) {
+    while (!gameManager.isGameover) {
         gameManager.encounter();
+        if (gameManager.isGameover) {
+            break;
+        }
         gameManager.showMainMenu();
     }
     return 0;

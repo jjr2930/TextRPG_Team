@@ -13,7 +13,7 @@ void GameManager::battle(std::string attactName, std::string defenceName, int at
 void GameManager::encounter() {
     Slime monster(
         "슬라임",
-        50,
+        100,
         10,
         50,
         "슬라임 젤리",
@@ -79,7 +79,7 @@ void GameManager::gameover() {
 
 void GameManager::win() {
 	std::cout << "게임 클리어!" << std::endl;
-    isWin = true;
+    isGameover = true;
 	waitForKey();
 };
 
@@ -101,6 +101,7 @@ void GameManager::showMainMenu() {
         std::cout << "       [1] 캐릭터 상태 보기\n";
         std::cout << "       [2] 상점 들어가기\n";
         std::cout << "       [3] 행동 종료\n";
+        std::cout << "       [4] 게임 종료\n";
         std::cout << "\n";
         std::cout << "----------------------------------------\n";
         std::cout << "       행동을 선택해 주세요 : ";
@@ -119,6 +120,11 @@ void GameManager::showMainMenu() {
 
         case 3:
             std::cout << "\n행동을 종료합니다.\n";
+            return;
+
+        case 4:
+            std::cout << "\n게임을 종료합니다.\n";
+            isGameover = true;
             return;
 
         default:
