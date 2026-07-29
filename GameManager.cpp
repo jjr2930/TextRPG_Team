@@ -11,14 +11,7 @@ void GameManager::battle(std::string attactName, std::string defenceName, int at
 };
 
 void GameManager::encounter() {
-    Slime monster(
-        "슬라임",
-        100,
-        10,
-        50,
-        "슬라임 젤리",
-        100
-    );
+    Slime monster(character.GetLevel());
     system("cls");
     std::cout << "몬스터 " << monster.GetName() << "(이)가 난입했습니다. 전투 시작!" << std::endl;
     std::cout << "체력 : " << monster.GetHp() << ", 공격력 : " << monster.GetPower() << std::endl;
@@ -46,6 +39,7 @@ void GameManager::encounter() {
     
     character.SetCurrentEXP(character.GetCurrentEXP() + monster.GetDropExp());
     character.SetMoney(character.GetMoney() + monster.GetDropItemPrice());
+
     levelUp();
     
     std::cout << std::endl <<"현재 EXP : " << character.GetCurrentEXP() << "/" << character.GetMaxEXP() << ", 골드 : " << character.GetMoney() << std::endl;

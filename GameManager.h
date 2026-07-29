@@ -33,8 +33,6 @@ public:
 
 
 public:
-    bool getGameover();
-    bool getWin();
     bool isGameover = false;
     bool isWin = false;
 };
