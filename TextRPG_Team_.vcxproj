@@ -151,7 +151,9 @@
     <ClCompile Include="ItemDatabases.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="newClass.cpp" />
     <ClCompile Include="Shop.cpp" />
+    <ClCompile Include="Slime.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Boss.h" />
@@ -161,7 +163,9 @@
     <ClInclude Include="ItemDatabases.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="newClass.h" />
     <ClInclude Include="Shop.h" />
+    <ClInclude Include="Slime.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
