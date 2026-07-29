@@ -1,204 +1,198 @@
 #include "Character.h"
+
 #include <conio.h>
 #include <iostream>
 
 const std::string& Character::GetName() const
 {
-    return Name;
+    return mName;
 }
 
 int Character::GetCurrentHP() const
 {
-    return CurrentHP;
+    return mCurrentHealth;
 }
 
 int Character::GetMaxHP() const
 {
-    return MaxHP;
+    return mMaximumHealth;
 }
 
 int Character::GetCurrentMP() const
 {
-    return CurrentMP;
+    return mCurrentMana;
 }
 
 int Character::GetMaxMP() const
 {
-    return MaxMP;
+    return mMaximumMana;
 }
 
 int Character::GetCurrentEXP() const
 {
-    return CurrentEXP;
+    return mCurrentExperience;
 }
 
 int Character::GetMaxEXP() const
 {
-    return MaxEXP;
+    return mMaximumExperience;
 }
 
 int Character::GetLevel() const
 {
-    return Level;
+    return mLevel;
 }
 
 int Character::GetAttack() const
 {
-    return Attack;
+    return mAttack;
 }
 
 int Character::GetDefense() const
 {
-    return Defense;
+    return mDefense;
 }
 
 int Character::GetMoney() const
 {
-    return Money;
+    return mMoney;
 }
 
 int Character::GetAdditionalMaxHP() const
 {
-    return AdditionalMaxHP;
+    return mAdditionalMaximumHealth;
 }
 
 int Character::GetAdditionalMaxMP() const
 {
-    return AdditionalMaxMP;
+    return mAdditionalMaximumMana;
 }
 
 int Character::GetAdditionalAttack() const
 {
-    return AdditionalAttack;
+    return mAdditionalAttack;
 }
 
 int Character::GetAdditionalDefense() const
 {
-    return AdditionalDefense;
+    return mAdditionalDefense;
 }
 
 void Character::SetName(const std::string& name)
 {
-    Name = name;
+    mName = name;
 }
 
-void Character::SetCurrentHP(int currentHP)
+void Character::SetCurrentHP(int currentHealth)
 {
-    CurrentHP = currentHP;
+    mCurrentHealth = currentHealth;
 }
 
-void Character::SetMaxHP(int maxHP)
+void Character::SetMaxHP(int maximumHealth)
 {
-    MaxHP = maxHP;
+    mMaximumHealth = maximumHealth;
 }
 
-void Character::SetCurrentMP(int currentMP)
+void Character::SetCurrentMP(int currentMana)
 {
-    CurrentMP = currentMP;
+    mCurrentMana = currentMana;
 }
 
-void Character::SetMaxMP(int maxMP)
+void Character::SetMaxMP(int maximumMana)
 {
-    MaxMP = maxMP;
+    mMaximumMana = maximumMana;
 }
 
-void Character::SetCurrentEXP(int currentEXP)
+void Character::SetCurrentEXP(int currentExperience)
 {
-    CurrentEXP = currentEXP;
+    mCurrentExperience = currentExperience;
 }
 
-void Character::SetMaxEXP(int maxEXP)
+void Character::SetMaxEXP(int maximumExperience)
 {
-    MaxEXP = maxEXP;
+    mMaximumExperience = maximumExperience;
 }
 
 void Character::SetLevel(int level)
 {
-    Level = level;
+    mLevel = level;
 }
 
 void Character::SetAttack(int attack)
 {
-    Attack = attack;
+    mAttack = attack;
 }
 
 void Character::SetDefense(int defense)
 {
-    Defense = defense;
+    mDefense = defense;
 }
 
 void Character::SetMoney(int money)
 {
-    Money = money;
+    mMoney = money;
 }
 
-void Character::SetAdditionalMaxHP(int additionalMaxHP)
+void Character::SetAdditionalMaxHP(int additionalMaximumHealth)
 {
-    AdditionalMaxHP = additionalMaxHP;
+    mAdditionalMaximumHealth = additionalMaximumHealth;
 }
 
-void Character::SetAdditionalMaxMP(int additionalMaxMP)
+void Character::SetAdditionalMaxMP(int additionalMaximumMana)
 {
-    AdditionalMaxMP = additionalMaxMP;
+    mAdditionalMaximumMana = additionalMaximumMana;
 }
 
 void Character::SetAdditionalAttack(int additionalAttack)
 {
-    AdditionalAttack = additionalAttack;
+    mAdditionalAttack = additionalAttack;
 }
 
 void Character::SetAdditionalDefense(int additionalDefense)
 {
-    AdditionalDefense = additionalDefense;
+    mAdditionalDefense = additionalDefense;
 }
 
 void Character::ShowCharacterInfo() const
 {
-    std::cout << "이름 : " << Name << '\n';
-    std::cout << "레벨 : " << Level << " (" << CurrentEXP << '/' << MaxEXP << ")\n";
-    std::cout << "체력 : " << CurrentHP << " / " << MaxHP;
-    if (AdditionalMaxHP > 0)
-    {
-        std::cout << " (+" << AdditionalMaxHP << ')';
-    }
+    std::cout << "이름 : " << mName << '\n';
+    std::cout << "레벨 : " << mLevel << " (" << mCurrentExperience << '/' << mMaximumExperience << ")\n";
+
+    std::cout << "체력 : " << mCurrentHealth << " / " << mMaximumHealth;
+    if (mAdditionalMaximumHealth > 0)
+        std::cout << " (+" << mAdditionalMaximumHealth << ')';
     std::cout << '\n';
 
-    std::cout << "마나 : " << CurrentMP << " / " << MaxMP;
-    if (AdditionalMaxMP > 0)
-    {
-        std::cout << " (+" << AdditionalMaxMP << ')';
-    }
+    std::cout << "마나 : " << mCurrentMana << " / " << mMaximumMana;
+    if (mAdditionalMaximumMana > 0)
+        std::cout << " (+" << mAdditionalMaximumMana << ')';
     std::cout << '\n';
 
-    std::cout << "공격력 : " << Attack;
-    if (AdditionalAttack > 0)
-    {
-        std::cout << " (+" << AdditionalAttack << ')';
-    }
+    std::cout << "공격력 : " << mAttack;
+    if (mAdditionalAttack > 0)
+        std::cout << " (+" << mAdditionalAttack << ')';
     std::cout << '\n';
 
-    std::cout << "방어력 : " << Defense;
-    if (AdditionalDefense > 0)
-    {
-        std::cout << " (+" << AdditionalDefense << ')';
-    }
+    std::cout << "방어력 : " << mDefense;
+    if (mAdditionalDefense > 0)
+        std::cout << " (+" << mAdditionalDefense << ')';
     std::cout << '\n';
 
-    std::cout << "소지금 : " << Money << '\n';
+    std::cout << "소지금 : " << mMoney << '\n';
     std::cout << ">> 계속하려면 아무 키나 누르세요" << std::endl;
     (void)_getch();
 }
 
 void Character::CharacterLevelUP()
 {
-    CurrentEXP = CurrentEXP - MaxEXP;
-    Level += 1;
+    mCurrentExperience -= mMaximumExperience;
+    mLevel += 1;
 
-    MaxHP += Level * 20;
-    MaxMP += Level * 20;
-    CurrentHP = MaxHP;
-    CurrentMP = MaxMP;
+    mMaximumHealth += mLevel * 20;
+    mMaximumMana += mLevel * 20;
+    mCurrentHealth = mMaximumHealth;
+    mCurrentMana = mMaximumMana;
 
-    Attack += Level * 5;
-    Defense += Level * 5;
+    mAttack += mLevel * 5;
+    mDefense += mLevel * 5;
 }

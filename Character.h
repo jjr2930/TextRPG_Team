@@ -1,24 +1,25 @@
 #pragma once
+
 #include <string>
 
 class Character
 {
 private:
-    std::string Name; //이름
-    int CurrentHP = 200; //현재 체력
-    int MaxHP = 200; //최대 체력
-    int CurrentMP = 200; //현재 마나
-    int MaxMP = 200; //최대 마나
-    int CurrentEXP = 0; //현재 경험치
-    int MaxEXP = 100; //최대 경험치
-    int Level = 1; //레벨
-    int Attack = 30; //공격력
-    int Defense = 30; //방어력
-    int Money = 0; //돈
-    int AdditionalMaxHP = 0; //추가 체력
-    int AdditionalMaxMP = 0; //추가 마나
-    int AdditionalAttack = 0; //추가 공격력
-    int AdditionalDefense = 0; //추가 방어력
+    std::string mName;
+    int mCurrentHealth = 200; //현재 체력
+    int mMaximumHealth = 200; //최대 체력
+    int mCurrentMana = 200; //현재 마나
+    int mMaximumMana = 200; //최대 마나
+    int mCurrentExperience = 0; //현재 경험치
+    int mMaximumExperience = 100; //최대 경험치
+    int mLevel = 1; //레벨
+    int mAttack = 30; //공격력
+    int mDefense = 30; //방어력
+    int mMoney = 0; //돈
+    int mAdditionalMaximumHealth = 0; //추가 체력
+    int mAdditionalMaximumMana = 0; //추가 마나
+    int mAdditionalAttack = 0; //추가 공격력
+    int mAdditionalDefense = 0; //추가 방어력
 
 public:
     const std::string& GetName() const;
@@ -38,18 +39,18 @@ public:
     int GetAdditionalDefense() const;
 
     void SetName(const std::string& name);
-    void SetCurrentHP(int currentHP);
-    void SetMaxHP(int maxHP);
-    void SetCurrentMP(int currentMP);
-    void SetMaxMP(int maxMP);
-    void SetCurrentEXP(int currentEXP);
-    void SetMaxEXP(int maxEXP);
+    void SetCurrentHP(int currentHealth);
+    void SetMaxHP(int maximumHealth);
+    void SetCurrentMP(int currentMana);
+    void SetMaxMP(int maximumMana);
+    void SetCurrentEXP(int currentExperience);
+    void SetMaxEXP(int maximumExperience);
     void SetLevel(int level);
     void SetAttack(int attack);
     void SetDefense(int defense);
     void SetMoney(int money);
-    void SetAdditionalMaxHP(int additionalMaxHP);
-    void SetAdditionalMaxMP(int additionalMaxMP);
+    void SetAdditionalMaxHP(int additionalMaximumHealth);
+    void SetAdditionalMaxMP(int additionalMaximumMana);
     void SetAdditionalAttack(int additionalAttack);
     void SetAdditionalDefense(int additionalDefense);
 
