@@ -11,10 +11,11 @@ private:
     int CurrentMP = 0;
     int MaxMP = 0;
     int CurrentEXP = 0;
-    int MaxEXP = 0;
+    int MaxEXP = 100;
     int Level = 0;
     int ATK = 0;
     int DEF = 0;
+    int Money = 0;
 
 public:
     const std::string& GetName() const;
@@ -27,6 +28,7 @@ public:
     int GetLevel() const;
     int GetATK() const;
     int GetDEF() const;
+    int GetMoney() const;
 
     void SetName(const std::string& name);
     void SetCurrentHP(int currentHP);
@@ -38,5 +40,8 @@ public:
     void SetLevel(int level);
     void SetATK(int atk);
     void SetDEF(int def);
-};
+    void SetMoney(int money);
 
+    void ShowCharacterInfo() const;
+    void CharacterLevelUP();
+};

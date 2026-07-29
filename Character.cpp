@@ -1,5 +1,6 @@
 #include "Character.h"
 
+#include <iostream>
 
 const std::string& Character::GetName() const
 {
@@ -51,6 +52,11 @@ int Character::GetDEF() const
     return DEF;
 }
 
+int Character::GetMoney() const
+{
+    return Money;
+}
+
 void Character::SetName(const std::string& name)
 {
     Name = name;
@@ -99,4 +105,34 @@ void Character::SetATK(int atk)
 void Character::SetDEF(int def)
 {
     DEF = def;
+}
+
+void Character::SetMoney(int money)
+{
+    Money = money;
+}
+
+void Character::ShowCharacterInfo() const
+{
+    std::cout << "이름 : " << Name << '\n';
+    std::cout << "레벨 : " << Level << " (" << CurrentEXP << '/' << MaxEXP << ")\n";
+    std::cout << "체력 : " << CurrentHP << " / " << MaxHP << '\n';
+    std::cout << "마나 : " << CurrentMP << " / " << MaxMP << '\n';
+    std::cout << "공격력 : " << ATK << '\n';
+    std::cout << "방어력 : " << DEF << '\n';
+    std::cout << "소지금 : " << Money << '\n';
+}
+
+void Character::CharacterLevelUP()
+{
+    CurrentEXP = CurrentEXP - MaxEXP;
+    Level += 1;
+
+    MaxHP += 30;
+    MaxMP += 30;
+    CurrentHP = MaxHP;
+    CurrentMP = MaxMP;
+
+    ATK += 3;
+    DEF += 3;
 }
