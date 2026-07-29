@@ -5,10 +5,19 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Shop.cpp" />
     <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="Item.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Shop.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Inventory.h" />
+    <ClInclude Include="Item.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
   </ItemGroup>
 </Project>
