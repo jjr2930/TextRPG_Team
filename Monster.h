@@ -2,23 +2,24 @@
 #include <string>
 #include <random>
 
+#include "Item.h"
+
 class Monster {
 protected:
 	std::string name;
 	int hp;
 	int power;
 	int dropExp;
-	std::string dropItemName;
-	int dropItemPrice;
+	Item* item;
+	int gold;
 
 public:
-	Monster(std::string name, int minHp, int maxHp, int minPower, int maxPower, int dropExp, std::string dropItemName, int dropItemPrice, int level);
+	Monster(std::string name, int minHp, int maxHp, int minPower, int maxPower, int dropExp, Item* item, int price, int level);
 	int GetHp();
 	int GetPower();
 	int GetDropExp();
 	std::string GetName();
-	std::string GetDropItemName();
-	int GetDropItemPrice();
+	Item GetItem();
 
 	virtual void SetHp(int hp);
 	virtual void SetPower(int power);

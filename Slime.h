@@ -3,6 +3,6 @@
 
 class Slime : public Monster{
 public:
-	Slime(int level);
+	Slime(Item* item, int level);
 };
 

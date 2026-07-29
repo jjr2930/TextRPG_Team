@@ -10,6 +10,7 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemDatabases.cpp" />
     <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="Slime.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Monster.h" />
@@ -20,6 +21,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemDatabases.h" />
     <ClInclude Include="Boss.h" />
+    <ClInclude Include="Slime.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />

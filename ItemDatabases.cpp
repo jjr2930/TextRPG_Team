@@ -84,5 +84,11 @@ ItemDatabase::ItemDatabase()
 	item.healAmount = 30;
     allItems.push_back(item);
 
+    item.itemID = 100;
+    item.name = "슬라임 액체";
+    item.value = 1;
+    item.QTY = 1;
+    allItems.push_back(item);
+
     loadedItems = allItems;
 }
