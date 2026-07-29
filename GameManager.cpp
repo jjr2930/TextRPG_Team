@@ -40,7 +40,7 @@ void GameManager::encounter() {
             return;
         }
     }
-
+    character.SetCurrentHP(charHp);
     std::cout << std::endl << monster.GetName() << " 처치!" << std::endl;
     std::cout << character.GetName() << "(이)가 " << monster.GetDropExp() << "EXP와 " << monster.GetDropItemPrice() << "골드를 획득했습니다.\n";
     
