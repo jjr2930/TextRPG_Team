@@ -1,20 +1,19 @@
 #pragma once
-
 #include <string>
 
 class Character
 {
 private:
     std::string Name; //이름
-    int CurrentHP = 0; //현재 체력
-    int MaxHP = 0; //최대 체력
-    int CurrentMP = 0; //현재 마나
-    int MaxMP = 0; //최대 마나
+    int CurrentHP = 200; //현재 체력
+    int MaxHP = 200; //최대 체력
+    int CurrentMP = 200; //현재 마나
+    int MaxMP = 200; //최대 마나
     int CurrentEXP = 0; //현재 경험치
     int MaxEXP = 100; //최대 경험치
-    int Level = 0; //레벨
-    int ATK = 0; //공격력
-    int DEF = 0; //방어력
+    int Level = 1; //레벨
+    int ATK = 30; //공격력
+    int DEF = 30; //방어력
     int Money = 0; //돈
 
 public:
@@ -45,5 +44,5 @@ public:
     void ShowCharacterInfo() const;
     //상태 출력 함수
     void CharacterLevelUP();
-    //레벨업 함수, 초대경험치 초과분 다음레벨로 이월
+    //레벨업 함수, 최대경험치 초과분 다음레벨로 이월
 };

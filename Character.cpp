@@ -1,5 +1,5 @@
 #include "Character.h"
-
+#include <conio.h>
 #include <iostream>
 
 const std::string& Character::GetName() const
@@ -121,6 +121,8 @@ void Character::ShowCharacterInfo() const
     std::cout << "공격력 : " << ATK << '\n';
     //std::cout << "방어력 : " << DEF << '\n';
     std::cout << "소지금 : " << Money << '\n';
+    std::cout << ">> 계속하려면 아무 키나 누르세요" << std::endl;
+    _getch();
 }
 
 void Character::CharacterLevelUP()
@@ -129,10 +131,10 @@ void Character::CharacterLevelUP()
     Level += 1;
 
     MaxHP += Level * 20;
-    //MaxMP += Level * 20;
+    MaxMP += Level * 20;
     CurrentHP = MaxHP;
-    //CurrentMP = MaxMP;
+    CurrentMP = MaxMP;
 
     ATK += Level * 5;
-    //DEF += Level * 5;
+    DEF += Level * 5;
 }
