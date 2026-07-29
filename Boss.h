@@ -1,17 +1,17 @@
 #pragma once
-#ifndef _H_
-#define _H_
+
 
 #include "Monster.h"
+
+class Character;
 
 class Boss : public Monster
 {
 public:
-	Boss(Character* Character);
+	Boss();
 
 	~Boss();
 
-	void attack(Character* Character);
-};
+	void Attack(Character* Character);
 
-#endif
+};

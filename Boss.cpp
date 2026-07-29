@@ -4,14 +4,19 @@
 #include "Boss.h"
 #include "Character.h"
 
-Boss::Boss(Character* Character)
+Boss::Boss()
+	: Monster("오지게 강한 마왕", 40, 60, 10, 20, 100, "마검", 1, 10) {}
+
+Boss::~Boss() {}
+
+void Boss::Attack(Character* Character)
 {
-	name = "오지게 강하고 고져스한 판타스틱 뷰티풀 지져스 간지나게 잘생긴 마왕";
+	int damage = power - Character->GetDefense();
 
-	//int firstHP = (int)(Character->GetMaxHP() * 1.5f);
-	//int randomHP = (rand() % (firstHP / 5)) - (firstHP / 10);
-	//hp = firstHP + randomHP;
+	if (damage < 0)
+		damage = 1;
 
-	//int firstPower = (int)(Character->GetAttack() * 1.5f);
-	//int random = (rand() % (firstPower / 5 > 0) ? ())
+
+	std::cout << "마왕에 성스러운 마검을 휘둘렀다.\n";
+	std::cout << damage << " 데미지 공격!\n";
 }
