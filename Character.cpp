@@ -128,11 +128,11 @@ void Character::CharacterLevelUP()
     CurrentEXP = CurrentEXP - MaxEXP;
     Level += 1;
 
-    MaxHP += 30;
-    MaxMP += 30;
+    MaxHP += Level * 20;
+    MaxMP += Level * 20;
     CurrentHP = MaxHP;
     CurrentMP = MaxMP;
 
-    ATK += 3;
-    DEF += 3;
+    ATK += Level * 5;
+    DEF += Level * 5;
 }
