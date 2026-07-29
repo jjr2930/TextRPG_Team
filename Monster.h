@@ -11,7 +11,9 @@ protected:
 	int dropItemPrice;
 
 public:
-
+	Monster(std::string name, int hp, int power, int dropExp, std::string dropItemName, int dropItemPrice)
+		: name(name), hp(hp), power(power), dropExp(dropExp), dropItemName(dropItemName), dropItemPrice(dropItemPrice) {
+	}
 	int GetHp();
 	int GetPower();
 	int GetDropExp();
