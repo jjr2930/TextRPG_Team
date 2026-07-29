@@ -19,7 +19,6 @@ public:
 	std::string GetDropItemName();
 	int GetDropItemPrice();
 
-	virtual void Attack() = 0;
-	virtual void TackDamage(int tackDamage) = 0;
-
+	void SetHp(int hp);
+	void SetPower(int power);
 };

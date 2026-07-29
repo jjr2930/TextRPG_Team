@@ -12,3 +12,5 @@ std::string Monster::GetName() { return name; }
 std::string Monster::GetDropItemName() { return dropItemName; }
 int Monster::GetDropItemPrice() { return dropItemPrice; }
 
+void Monster::SetHp(int hp) { this->hp = hp; }
+void Monster::SetPower(int power) { this->power = power; }
