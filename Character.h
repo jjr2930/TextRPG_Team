@@ -1,0 +1,30 @@
+#pragma once
+
+#include <string>
+
+class Character
+{
+private:
+    std::string Name;
+    int CurrentHP = 0;
+    int MaxHP = 0;
+    int CurrentMP = 0;
+    int MaxMP = 0;
+    int CurrentEXP = 0;
+    int MaxEXP = 0;
+    int Level = 0;
+    int ATK = 0;
+    int DEF = 0;
+
+public:
+    void SetName(const std::string& name);
+    void SetCurrentHP(int currentHP);
+    void SetMaxHP(int maxHP);
+    void SetCurrentMP(int currentMP);
+    void SetMaxMP(int maxMP);
+    void SetCurrentEXP(int currentEXP);
+    void SetMaxEXP(int maxEXP);
+    void SetLevel(int level);
+    void SetATK(int atk);
+    void SetDEF(int def);
+};
