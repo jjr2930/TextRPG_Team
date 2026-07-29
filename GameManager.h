@@ -1,20 +1,28 @@
 #pragma once
 #include <iostream>
+#include <string>
+
+
+
 
 class GameManager {
 private:
 public:
-    GameManager() {}
+    GameManager() {};
+    void battle();
+
+
+    Character character(); // gamemanager 생성 시 캐릭터 생성
 
 
 
 public:
-    void makeCharactor();
     void encounter();
-    void battle();
-    void isCharacterDead();
-    void isMonsterDead();
+    bool isCharacterDead(int hp);
+    bool isMonsterDead(int hp);
     void shopEnter();
+    bool gameover();
+    void win();
 };
 
 
