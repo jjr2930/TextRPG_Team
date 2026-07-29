@@ -4,8 +4,8 @@
 #include "Boss.h"
 #include "Character.h"
 
-Boss::Boss()
-	: Monster("오지게 강한 마왕", 40, 60, 10, 20, 100, "마검", 1, 10) {}
+Boss::Boss(Item* item, int level)
+	: Monster("오지게 강한 마왕", 40, 60, 10, 20, 100, item, 1000, level) {}
 
 Boss::~Boss() {}
 

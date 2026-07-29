@@ -8,7 +8,7 @@ class Character;
 class Boss : public Monster
 {
 public:
-	Boss();
+	Boss(Item* item, int level);
 
 	~Boss();
 
