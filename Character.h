@@ -12,8 +12,8 @@ private:
     int CurrentEXP = 0; //현재 경험치
     int MaxEXP = 100; //최대 경험치
     int Level = 1; //레벨
-    int ATK = 30; //공격력
-    int DEF = 30; //방어력
+    int Attack = 30; //공격력
+    int Defense = 30; //방어력
     int Money = 0; //돈
 
 public:
@@ -25,8 +25,8 @@ public:
     int GetCurrentEXP() const;
     int GetMaxEXP() const;
     int GetLevel() const;
-    int GetATK() const;
-    int GetDEF() const;
+    int GetAttack() const;
+    int GetDefense() const;
     int GetMoney() const;
 
     void SetName(const std::string& name);
@@ -37,8 +37,8 @@ public:
     void SetCurrentEXP(int currentEXP);
     void SetMaxEXP(int maxEXP);
     void SetLevel(int level);
-    void SetATK(int atk);
-    void SetDEF(int def);
+    void SetAttack(int attack);
+    void SetDefense(int defense);
     void SetMoney(int money);
 
     void ShowCharacterInfo() const;

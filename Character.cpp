@@ -42,14 +42,14 @@ int Character::GetLevel() const
     return Level;
 }
 
-int Character::GetATK() const
+int Character::GetAttack() const
 {
-    return ATK;
+    return Attack;
 }
 
-int Character::GetDEF() const
+int Character::GetDefense() const
 {
-    return DEF;
+    return Defense;
 }
 
 int Character::GetMoney() const
@@ -97,14 +97,14 @@ void Character::SetLevel(int level)
     Level = level;
 }
 
-void Character::SetATK(int atk)
+void Character::SetAttack(int attack)
 {
-    ATK = atk;
+    Attack = attack;
 }
 
-void Character::SetDEF(int def)
+void Character::SetDefense(int defense)
 {
-    DEF = def;
+    Defense = defense;
 }
 
 void Character::SetMoney(int money)
@@ -118,8 +118,8 @@ void Character::ShowCharacterInfo() const
     std::cout << "레벨 : " << Level << " (" << CurrentEXP << '/' << MaxEXP << ")\n";
     std::cout << "체력 : " << CurrentHP << " / " << MaxHP << '\n';
     //std::cout << "마나 : " << CurrentMP << " / " << MaxMP << '\n';
-    std::cout << "공격력 : " << ATK << '\n';
-    //std::cout << "방어력 : " << DEF << '\n';
+    std::cout << "공격력 : " << Attack << '\n';
+    //std::cout << "방어력 : " << Defense << '\n';
     std::cout << "소지금 : " << Money << '\n';
     std::cout << ">> 계속하려면 아무 키나 누르세요" << std::endl;
     _getch();
@@ -135,6 +135,6 @@ void Character::CharacterLevelUP()
     CurrentHP = MaxHP;
     CurrentMP = MaxMP;
 
-    ATK += Level * 5;
-    DEF += Level * 5;
+    Attack += Level * 5;
+    Defense += Level * 5;
 }
