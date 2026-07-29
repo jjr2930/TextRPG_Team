@@ -5,17 +5,17 @@
 class Character
 {
 private:
-    std::string Name;
-    int CurrentHP = 0;
-    int MaxHP = 0;
-    int CurrentMP = 0;
-    int MaxMP = 0;
-    int CurrentEXP = 0;
-    int MaxEXP = 100;
-    int Level = 0;
-    int ATK = 0;
-    int DEF = 0;
-    int Money = 0;
+    std::string Name; //이름
+    int CurrentHP = 0; //현재 체력
+    int MaxHP = 0; //최대 체력
+    int CurrentMP = 0; //현재 마나
+    int MaxMP = 0; //최대 마나
+    int CurrentEXP = 0; //현재 경험치
+    int MaxEXP = 100; //최대 경험치
+    int Level = 0; //레벨
+    int ATK = 0; //공격력
+    int DEF = 0; //방어력
+    int Money = 0; //돈
 
 public:
     const std::string& GetName() const;
@@ -43,5 +43,7 @@ public:
     void SetMoney(int money);
 
     void ShowCharacterInfo() const;
+    //상태 출력 함수
     void CharacterLevelUP();
+    //레벨업 함수, 초대경험치 초과분 다음레벨로 이월
 };
