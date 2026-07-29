@@ -13,7 +13,9 @@ int main(int argc, char *argv[])
 
 
     GameManager gameManager;
-    gameManager.showMainMenu();
-
+    while (true) {
+        gameManager.encounter();
+        gameManager.showMainMenu();
+    }
     return 0;
 }

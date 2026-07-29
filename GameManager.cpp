@@ -6,7 +6,7 @@ GameManager::GameManager() {
 };
 
 void GameManager::battle(std::string attactName, std::string defenceName, int attactValue, int hpValue) {
-    std::cout << attactName << "이(가) " << defenceName << "을(를) 공격합니다!";
+    std::cout << std::endl << attactName << "이(가) " << defenceName << "을(를) 공격합니다!";
     std::cout << defenceName << " 체력 : " << hpValue - attactValue << std::endl;
 };
 
@@ -15,12 +15,12 @@ void GameManager::encounter() {
         "슬라임",
         50,
         10,
-        20,
+        50,
         "슬라임 젤리",
         100
     );
-
-    std::cout << "몬스터 " << monster.GetName() << "가 난입했습니다. 전투 시작!" << std::endl;
+    system("cls");
+    std::cout << "몬스터 " << monster.GetName() << "(이)가 난입했습니다. 전투 시작!" << std::endl;
     std::cout << "체력 : " << monster.GetHp() << ", 공격력 : " << monster.GetPower() << std::endl;
 	waitForKey();
 
@@ -41,13 +41,14 @@ void GameManager::encounter() {
         }
     }
 
-    std::cout << monster.GetName() << " 처치!" << std::endl;
+    std::cout << std::endl << monster.GetName() << " 처치!" << std::endl;
     std::cout << character.GetName() << "(이)가 " << monster.GetDropExp() << "EXP와 " << monster.GetDropItemPrice() << "골드를 획득했습니다.\n";
     
     character.SetCurrentEXP(character.GetCurrentEXP() + monster.GetDropExp());
     character.SetMoney(character.GetMoney() + monster.GetDropItemPrice());
+    levelUp();
     
-    std::cout << "현재 EXP : " << character.GetCurrentEXP() << "/" << character.GetMaxEXP() << ", 골드 : " << character.GetMoney() << std::endl;
+    std::cout << std::endl <<"현재 EXP : " << character.GetCurrentEXP() << "/" << character.GetMaxEXP() << ", 골드 : " << character.GetMoney() << std::endl;
     waitForKey();
 };
 
@@ -131,6 +132,7 @@ void GameManager::showMainMenu() {
 void GameManager::levelUp() {
     if (character.GetCurrentEXP() >= 100) {
         character.CharacterLevelUP();
+        std::cout << "레벨 업!      LV " << character.GetLevel() - 1 << " ->  LV " << character.GetLevel() << std::endl;
     }
 };
 
@@ -140,8 +142,7 @@ void GameManager::makeCharacter()
     std::string name;
     std::cin >> name;
     character.SetName(name);
-    std::cout << "캐릭터 " << name << " 생성 완료!" << std::endl;
+    std::cout << std::endl << "캐릭터 " << name << " 생성 완료!" << std::endl;
     character.ShowCharacterInfo();
-    waitForKey();
 }
 
