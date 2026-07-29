@@ -144,6 +144,7 @@
     <ClCompile Include="Shop.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Monster.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Shop.h" />
   </ItemGroup>
