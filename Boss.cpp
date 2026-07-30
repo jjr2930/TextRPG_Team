@@ -9,52 +9,30 @@ Boss::Boss(Item* item, int level)
 
 Boss::~Boss() {}
 
-void Boss::Attack(Character* Character)
-{
-	int damage = power - Character->GetDefense();
+float Boss::Attack() {
+	std::cout << "마왕에 성스러운 마검을 휘둘렀다.\n" << std::endl;
 
-	if (damage < 0)
-		damage = 1;
+	return (float)power;
+}
 
-	int newCharacterHP = Character->GetCurrentHP() - damage;
-	if (newCharacterHP <= 0)
-		newCharacterHP = 0;
+void Boss::TakeDamage(float damage) {
 
-	Character->SetCurrentHP(newCharacterHP);
+	int finalDamage = (int)damage;
+		if (finalDamage < 0)
+			finalDamage = 1;
 
+	hp = hp - finalDamage;
+	if (hp <= 0)
+		hp = 0;
 
-	std::cout << "마왕에 성스러운 마검을 휘둘렀다.\n";
-	std::cout << "플레이어에게 " << damage << " 데미지 공격!\n";
-	std::cout << "플레이어의 현재 HP: " << Character->GetCurrentHP() << "\n";
-	std::cin.get();
+	std::cout << "마왕이 " << finalDamage << " 의 데미지를 입혔습니다.!\n" << std::endl;      
 
-	if (Character->GetCurrentHP() <= 0) {
-		std::cout << "===================================================\n";
-		std::cout << "                  [ GAME OVER ]\n";
-		std::cout << " 마왕에 공격에 플레이어가 쓰러졌습니다.\n";
-		std::cout << "===================================================\n";
+	if (hp <= 0) {                                      //컨벤션 확인?
+		std::cout << "===================================================\n" << std::endl;
+		std::cout << " 언젠간 어둠 속에서 다시 일어 날 것이다!!!\n";
+		std::cout << "===================================================\n" << std::endl;
 
 		std::cin.get();
 		exit(0);
 	}
-
-	if (hp <= 0) {
-		std::cout << "===================================================\n";
-		std::cout << "                  [ GAME CLEAR ]\n";
-		std::cout << " 마왕에 사라지고 어둠이 사라졌습니다.\n";
-		std::cout << " 플레이어의 이름은 영원히 기억될 것 입니다.\n";
-		std::cout << "===================================================\n";
-		std::cout << "            - RPG GAME CLEAR & CREDITS -\n";
-		std::cout << "                   팀장 - 주정열\n";
-		std::cout << "                  매니저 - 천우진\n";
-		std::cout << "                   팀원 - 김규정\n";
-		std::cout << "                   팀원 - 황승용\n";
-		std::cout << "                   팀원 - 조수현\n";
-		std::cout << "                   팀원 - 장영민\n";
-		std::cout << " ==================================================\n";
-
-		std::cin.get();
-		exit(0);
-	}
-
 }

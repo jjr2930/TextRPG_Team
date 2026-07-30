@@ -1,7 +1,7 @@
 #pragma once
 
-
 #include "Monster.h"
+#include "Battle.h"
 
 class Character;
 
@@ -12,6 +12,7 @@ public:
 
 	~Boss();
 
-	void Attack(Character* Character);
+	virtual float Attack();
+	virtual void TakeDamage(float damage);
 
 };
