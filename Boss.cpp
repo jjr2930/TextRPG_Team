@@ -10,6 +10,7 @@ Boss::~Boss() {}
 
 void Boss::Attack(Battle* other) {
 	std::cout << "마왕에 성스러운 마검을 휘둘렀다.\n" << std::endl;
+	std::cin.get();
 
 	other->TakeDamage(power);
 }
