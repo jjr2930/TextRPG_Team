@@ -13,6 +13,13 @@ enum class ItemType
 	Miscellaneous
 };
 
+enum class ItemWeapon
+{
+	Staff,
+	SwordnShield,
+	TwoHand,
+	Bow,
+};
 enum class ItemEffect
 {
 	None,
@@ -24,6 +31,7 @@ enum class ItemEffect
 };
 
 
+
 class Item
 {
 public:
@@ -33,13 +41,19 @@ public:
 
 	ItemType itemType;
     ItemEffect itemEffect;
+	ItemWeapon itemWeapon;
 
 	int effectAmount;
 
-	////무기
-	//int weaponAttack; 
-	//int weaponDefense;
+	//무기
+	int weaponAttack; 
+	int weaponDefense;
+	int weaponMaxMP;
+	int weaponMaxHP;
+
 	void usePotion(const Item& item, Character& character);
+	void useWeapon(const Item& item, Character& character);
+
 	
 };
 
