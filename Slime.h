@@ -5,7 +5,7 @@ class Slime : public Monster{
 public:
 	Slime(Item* item, int level);
 
-	void Attack(Battle* other) override;
-	void TakeDamage(int damage) override;
+	virtual void Attack(Battle* other) override;
+	virtual void TakeDamage(int damage) override;
 };
 
