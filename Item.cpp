@@ -2,17 +2,17 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "Inventory.h"
+#include "Character.h"
 
-void Item::useitem(int itemID, int useQTY) {
-	if (itemID >= 0 && itemID <= 7)
-	{
-		std::cout << "Wielded " << useQTY << " " << name << std::endl;
-	}
-    else if (itemID > 7 && itemID <12 && QTY > 0)
-    {
-        QTY -= useQTY;
-        std::cout << "Used " << useQTY << " " << name << ". Remaining quantity: " << QTY << std::endl;
-		std::cout << "You have healed for " << healAmount << " HP!" << std::endl;
+void Item::useHealingPotion (int itemID, int useQuantity, std::vector<InventoryItem> mItems) {
+	GetCurrentHP() += healAmount * useQuantity;
     }
+void Item::useBuffPotion(int itemID, int useQuantity, std::vector<InventoryItem> mItems) {
+
 }
 	
+//void Item::wieldWeapon(int itemID, std::vector<InventoryItem> mItems) {
+//	;
+//
+//    }

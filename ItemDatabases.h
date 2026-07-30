@@ -1,11 +1,13 @@
 #pragma once
 #include "Item.h"
-#include <vector>
+#include <unordered_map>
+
+
 
 class ItemDatabase
 {
 public: 
     ItemDatabase();
 
-    std::vector<Item> loadedItems;
+    std::unordered_map<int, Item> allItems;
 };
