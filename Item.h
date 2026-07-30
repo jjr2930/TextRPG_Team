@@ -51,8 +51,8 @@ public:
 	int weaponMaxMP;
 	int weaponMaxHP;
 
-	void usePotion(const Item& item, Character& character);
-	void useWeapon(const Item& item, Character& character);
+	void UsePotion(const Item& item, Character& character);
+	void UseWeapon(const Item& item, Character& character);
 
 	
 };

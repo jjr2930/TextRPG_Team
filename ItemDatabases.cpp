@@ -114,7 +114,7 @@ ItemDatabase::ItemDatabase()
     item.name = "마나 물약";
     item.value = 50;
     item.itemType = ItemType::Potion;
-    item.effectAmount = 30;
+    item.effectAmount = 50;
     allItems[item.itemID] = item;
 
     item = Item{};
@@ -129,7 +129,7 @@ ItemDatabase::ItemDatabase()
 
     item.itemID = 14;
     item.name = "방어력 물약";
-    item.value = 250;
+    item.value = 150;
     item.itemType = ItemType::Potion;
     item.effectAmount = 10;
     allItems[item.itemID] = item;

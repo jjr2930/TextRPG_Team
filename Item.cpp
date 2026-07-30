@@ -6,7 +6,7 @@
 #include "Character.h"
 
 
-void Item::usePotion(const Item& item, Character& character){
+void Item::UsePotion(const Item& item, Character& character){
     switch (item.itemEffect)
     {
     case ItemEffect::RestoreHealth: {
@@ -41,7 +41,7 @@ void Item::usePotion(const Item& item, Character& character){
     }
     }
 }
-void Item::useWeapon(const Item& item, Character& character) {
+void Item::UseWeapon(const Item& item, Character& character) {
     switch (item.itemWeapon)
     {
     case ItemWeapon::Staff: {
