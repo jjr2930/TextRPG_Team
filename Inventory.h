@@ -1,11 +1,9 @@
 ﻿#pragma once
 #include <vector>
 
-class Inventory
-{
+class Inventory {
 private:
-    struct InventoryItem
-    {
+    struct InventoryItem {
         int mItemIdentifier;
         int mQuantity;
     };

@@ -4,8 +4,7 @@
 #include "Inventory.h"
 #include "Battle.h"
 
-class Character : public Battle 
-{
+class Character : public Battle {
 private:
     std::string mName;
     int mCurrentHealth = 200; //현재 체력
