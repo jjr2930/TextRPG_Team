@@ -40,6 +40,7 @@ void Shop::PrintMainMenu() {
 
 void Shop::PrintSellMenu()
 {
+    cout << " 이것은 테스트" << endl;
     while (true) {
         cout << "판매할 아이템을 선택하세요." << endl;
         cout << "1 ~ 9: 판매할 아이템" << endl;
