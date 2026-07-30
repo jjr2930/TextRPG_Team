@@ -5,18 +5,34 @@
 #include "ItemDatabases.h"
 
 
-void Inventory::AddItem(int itemIdentifier, int quantity) {
-    if (quantity <= 0)
-        return;
+bool Inventory::AddItem(int itemIdentifier, int quantity) {
+    if (quantity == 0) {
+        return false;
+    }
 
-    for (InventoryItem& item : mItems) {
-        if (item.mItemIdentifier == itemIdentifier) {
-            item.mQuantity += quantity;
-            return;
+    for (auto item = mItems.begin(); item != mItems.end(); ++item) {
+        if (item->mItemIdentifier != itemIdentifier) {
+            continue;
         }
+
+        int newQuantity = item->mQuantity + quantity;
+
+        if (newQuantity < 0) {
+            return false;
+        } //보유 수량보다 많이 사용/판매하는 경우
+
+        if (newQuantity == 0) {
+            mItems.erase(item);
+            return true;
+        } //수량이 0이면 인벤토리에서 제거
+
+        item->mQuantity = newQuantity;
+        return true;
     }
 
     mItems.push_back({itemIdentifier, quantity});
+    //새로운 아이템인경우
+    return true;
 }
 
 void Inventory::ShowItems() const {

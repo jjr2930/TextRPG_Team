@@ -13,16 +13,16 @@ int Character::GetCurrentHP() const {
 }
 
 int Character::GetMaxHP() const {
-    return mMaximumHealth;
-}
+    return mMaximumHealth + mAdditionalMaximumHealth;
+} //최대체력과 추가체력의 합산을 get
 
 int Character::GetCurrentMP() const {
     return mCurrentMana;
 }
 
 int Character::GetMaxMP() const {
-    return mMaximumMana;
-}
+    return mMaximumHealth + mAdditionalMaximumHealth;
+} //최대마나와 추가마나의 합산을 get
 
 int Character::GetCurrentEXP() const {
     return mCurrentExperience;
@@ -38,11 +38,11 @@ int Character::GetLevel() const {
 
 int Character::GetAttack() const {
     return mAttack + mAdditionalAttack;
-}
+} //공격력과 추가공격력의 합산을 get
 
 int Character::GetDefense() const {
     return mDefense + mAdditionalDefense;
-}
+} //방어력과 추가방어력의 합산을 get
 
 int Character::GetMoney() const {
     return mMoney;
@@ -73,16 +73,26 @@ void Character::SetName(const std::string& name) {
 }
 
 void Character::SetCurrentHP(int currentHealth) {
+    if(currentHealth > GetMaxHP()) {
+        mCurrentHealth = GetMaxHP();
+    }
+    else {
     mCurrentHealth = currentHealth;
-}
+    }
+} // 최대체력 초과회복이 되지 않게 수정
 
 void Character::SetMaxHP(int maximumHealth) {
     mMaximumHealth = maximumHealth;
 }
 
 void Character::SetCurrentMP(int currentMana) {
+    if(currentMana > GetMaxHP()) {
+        mCurrentMana = GetMaxHP();
+    }
+    else {
     mCurrentMana = currentMana;
-}
+    }
+} // 최대마나 초과회복이 되지 않게 수정
 
 void Character::SetMaxMP(int maximumMana) {
     mMaximumMana = maximumMana;
@@ -132,25 +142,34 @@ void Character::ShowCharacterInfo() const {
     std::cout << "이름 : " << mName << '\n';
     std::cout << "레벨 : " << mLevel << " (" << mCurrentExperience << '/' << mMaximumExperience << ")\n";
 
-    std::cout << "체력 : " << mCurrentHealth << " / " << mMaximumHealth;
-    if (mAdditionalMaximumHealth > 0)
-        std::cout << " (+" << mAdditionalMaximumHealth << ')';
-    std::cout << '\n';
+    std::cout
+    << "체력 : "
+    << GetCurrentHP()
+    << " / "
+    << GetMaxHP()
+    << '\n';
 
-    std::cout << "마나 : " << mCurrentMana << " / " << mMaximumMana;
-    if (mAdditionalMaximumMana > 0)
-        std::cout << " (+" << mAdditionalMaximumMana << ')';
-    std::cout << '\n';
+
+    /*
+    std::cout
+    << "마나 : "
+    << GetCurrentMP()
+    << " / "
+    << GetMaxMP()
+    << '\n';
+    */
 
     std::cout << "공격력 : " << mAttack;
     if (mAdditionalAttack > 0)
         std::cout << " (+" << mAdditionalAttack << ')';
     std::cout << '\n';
 
+    /*
     std::cout << "방어력 : " << mDefense;
     if (mAdditionalDefense > 0)
         std::cout << " (+" << mAdditionalDefense << ')';
     std::cout << '\n';
+    */
 
     std::cout << "소지금 : " << mMoney << '\n';
     mInventory.ShowItems();
@@ -172,16 +191,21 @@ void Character::CharacterLevelUP() {
 }
 
 void Character::Attack(Battle* other) {
+    if (other == nullptr) {
+        return;
+    } //포인터 검사
     int damage = GetAttack();
-    other->TakeDamage(damage);
-
+    
     std::cout
         << GetName()
         << "가 공격했습니다.\n";
+
+    other->TakeDamage(damage);
 }
 
 void Character::TakeDamage(int damage) {
     int actualDamage = std::max(0, damage);
+    //추후 방어력이 적용될 여부로 인해 생성
     int remainingHP = std::max(0,GetCurrentHP() - actualDamage);
 
     SetCurrentHP(remainingHP);

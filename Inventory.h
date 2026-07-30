@@ -11,6 +11,7 @@ private:
     std::vector<InventoryItem> mItems;
 
 public:
+
     void AddItem(int itemIdentifier, int quantity);
     void ShowItems() const;
 };
