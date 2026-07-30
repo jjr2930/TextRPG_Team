@@ -5,14 +5,13 @@
 
 class Character;
 
-class Boss : public Monster
-{
+class Boss : public Monster {
 public:
 	Boss(Item* item, int level);
 
 	~Boss();
 
-	virtual float Attack();
-	virtual void TakeDamage(float damage);
+	virtual void Attack(Battle* other);
+	virtual void TakeDamage(int damage);
 
 };

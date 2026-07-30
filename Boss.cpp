@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <cstdlib>
 #include "Boss.h"
 #include "Character.h"
 
@@ -9,30 +8,29 @@ Boss::Boss(Item* item, int level)
 
 Boss::~Boss() {}
 
-float Boss::Attack() {
+void Boss::Attack(Battle* other) {
 	std::cout << "마왕에 성스러운 마검을 휘둘렀다.\n" << std::endl;
 
-	return (float)power;
+	other->TakeDamage(power);
 }
 
-void Boss::TakeDamage(float damage) {
+void Boss::TakeDamage(int damage) {
 
-	int finalDamage = (int)damage;
+	/* int finalDamage = (int)damage;
 		if (finalDamage < 0)
-			finalDamage = 1;
+			finalDamage = 1;  
 
 	hp = hp - finalDamage;
 	if (hp <= 0)
-		hp = 0;
+		hp = 0;  */
 
-	std::cout << "마왕이 " << finalDamage << " 의 데미지를 입혔습니다.!\n" << std::endl;      
+	std::cout << "마왕이 " << damage << " 의 데미지를 입혔습니다.!\n" << std::endl;      
 
-	if (hp <= 0) {                                      //컨벤션 확인?
+	if (hp <= 0) {                                      
 		std::cout << "===================================================\n" << std::endl;
 		std::cout << " 언젠간 어둠 속에서 다시 일어 날 것이다!!!\n";
 		std::cout << "===================================================\n" << std::endl;
 
 		std::cin.get();
-		exit(0);
 	}
 }
