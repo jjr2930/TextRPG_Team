@@ -1,9 +1,10 @@
 #pragma once
 #include <string>
-#include <random>
 
-#include "Item.h"
+
 #include "Battle.h"
+#include "Item.h"
+class Item;
 
 class Monster : public Battle {
 protected:
