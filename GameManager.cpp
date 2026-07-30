@@ -1,6 +1,7 @@
 #include "GameManager.h"
 
 
+
 GameManager::GameManager() {
     MakeCharacter();
 };
@@ -11,7 +12,7 @@ void GameManager::Battle(std::string attactName, std::string defenceName, int at
 };
 
 void GameManager::Encounter() {
-    Slime monster(character.GetLevel());
+    Slime monster(nullptr, 1); // 나중에 슬라임 드롭아이템 넣을것
     system("cls");
     std::cout << "몬스터 " << monster.GetName() << "(이)가 난입했습니다. 전투 시작!" << std::endl;
     std::cout << "체력 : " << monster.GetHp() << ", 공격력 : " << monster.GetPower() << std::endl;
@@ -33,10 +34,10 @@ void GameManager::Encounter() {
     }
     character.SetCurrentHP(charHp);
     std::cout << std::endl << monster.GetName() << " 처치!" << std::endl;
-    std::cout << character.GetName() << "(이)가 " << monster.GetDropExp() << "EXP와 " << monster.GetDropItemPrice() << "골드를 획득했습니다.\n";
+    std::cout << character.GetName() << "(이)가 " << monster.GetDropExp() << "EXP와 " << monster.RandomGold() << "골드를 획득했습니다.\n";
     
     character.SetCurrentEXP(character.GetCurrentEXP() + monster.GetDropExp());
-    character.SetMoney(character.GetMoney() + monster.GetDropItemPrice());
+    character.SetMoney(character.GetMoney() + monster.RandomGold());
 
     LevelUp();
     
