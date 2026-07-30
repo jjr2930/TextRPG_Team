@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <random>
 #include "Monster.h"
 
 Monster::Monster(std::string name, int minHp, int maxHp, int minPower, int maxPower, int dropExp, Item* item, int gold, int level)
