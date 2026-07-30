@@ -3,8 +3,9 @@
 #include <random>
 
 #include "Item.h"
+#include "Battle.h"
 
-class Monster {
+class Monster : public Battle {
 protected:
 	std::string name;
 	int hp;
