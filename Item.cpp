@@ -6,7 +6,7 @@
 #include "Character.h"
 
 
-void Item::useItem(const Item& item, Character& character){
+void Item::usePotion(const Item& item, Character& character){
     switch (item.itemEffect)
     {
     case ItemEffect::RestoreHealth: {

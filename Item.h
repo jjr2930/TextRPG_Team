@@ -23,6 +23,7 @@ enum class ItemEffect
 	RestoreMana
 };
 
+
 class Item
 {
 public:
@@ -38,7 +39,7 @@ public:
 	////무기
 	//int weaponAttack; 
 	//int weaponDefense;
-	void useItem(const Item& item, Character& character);
+	void usePotion(const Item& item, Character& character);
 	
 };
 
