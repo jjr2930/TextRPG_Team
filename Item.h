@@ -39,6 +39,6 @@ public:
 	//int weaponAttack; 
 	//int weaponDefense;
 	void useItem(const Item& item, Character& character);
-	std::unordered_map<int, Item> allItems;
+	
 };
 
