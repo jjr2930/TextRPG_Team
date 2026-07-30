@@ -204,20 +204,19 @@ void Character::CharacterLevelUP()
     mDefense += mLevel * 5;
 }
 
-float Character::Attack(Battle* other)
+void Character::Attack(Battle* other)
 {
 
-    float damage = static_cast<float>(GetAttack());
+    int damage = GetAttack();
     other->TakeDamage(damage);
 
-    return damage;
 }
 
-void Character::TakeDamage(float damage)
+void Character::TakeDamage(int damage)
 {
-    int actualDamage = std::max(0, static_cast<int>(damage));
+    int actualDamage = std::max(0, damage);
 
-    int remainingHP = std::max(0, GetCurrentHP() - actualDamage);
+    int remainingHP = std::max(0,GetCurrentHP() - actualDamage);
 
     SetCurrentHP(remainingHP);
 }

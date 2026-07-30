@@ -32,7 +32,7 @@ void Inventory::ShowItems() const
         return;
     }
 
-    ItemDatabase itemDatabase;
+    //ItemDatabase itemDatabase;
 
     for (const InventoryItem& inventoryItem : mItems)
     {
