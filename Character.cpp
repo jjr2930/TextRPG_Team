@@ -1,5 +1,6 @@
-#include <iostream>
+﻿#include <iostream>
 #include <conio.h>
+#include <algorithm>
 
 #include "Character.h"
 
@@ -45,12 +46,12 @@ int Character::GetLevel() const
 
 int Character::GetAttack() const
 {
-    return mAttack;
+    return mAttack + mAdditionalAttack;
 }
 
 int Character::GetDefense() const
 {
-    return mDefense;
+    return mDefense + mAdditionalDefense;
 }
 
 int Character::GetMoney() const
@@ -201,4 +202,22 @@ void Character::CharacterLevelUP()
 
     mAttack += mLevel * 5;
     mDefense += mLevel * 5;
+}
+
+float Character::Attack(Battle* other)
+{
+
+    float damage = static_cast<float>(GetAttack());
+    other->TakeDamage(damage);
+
+    return damage;
+}
+
+void Character::TakeDamage(float damage)
+{
+    int actualDamage = std::max(0, static_cast<int>(damage));
+
+    int remainingHP = std::max(0, GetCurrentHP() - actualDamage);
+
+    SetCurrentHP(remainingHP);
 }

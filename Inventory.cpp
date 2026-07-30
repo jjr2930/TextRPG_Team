@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <string>
 
 #include "Inventory.h"
@@ -36,16 +36,9 @@ void Inventory::ShowItems() const
 
     for (const InventoryItem& inventoryItem : mItems)
     {
-        std::string itemName = "아이템 " + std::to_string(inventoryItem.mItemIdentifier);
+        std::string itemName = "아이템 " ;
 
-        for (const Item& item : itemDatabase.loadedItems)
-        {
-            if (item.itemID == inventoryItem.mItemIdentifier && !item.name.empty())
-            {
-                itemName = item.name;
-                break;
-            }
-        }
+        
 
         std::cout << itemName << " x" << inventoryItem.mQuantity << '\n';
     }
