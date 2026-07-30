@@ -2,8 +2,9 @@
 #include <string>
 
 #include "Inventory.h"
+#include "Battle.h"
 
-class Character
+class Character : public Battle
 {
 private:
     std::string mName;
