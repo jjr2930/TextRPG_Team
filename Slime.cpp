@@ -12,8 +12,8 @@ void Slime::Attack() {
 }
 
 void Slime::TakeDamage(int damage) {
-	hp -= damage;
+	currentHp -= damage;
 	std::cout << damage << "만큼 " << name << "이(가) 당했습니다.\n";
-	if (hp <= 0) 
+	if (currentHp <= 0) 
 		std::cout << name << "죽었습니다.\n";
 }
