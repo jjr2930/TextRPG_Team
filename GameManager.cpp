@@ -13,12 +13,41 @@ void GameManager::Battle(std::string attactName, std::string defenceName, int at
 };
 
 void GameManager::Encounter() {
-    Slime monster(nullptr, character.GetLevel()); // 나중에 슬라임 드롭아이템 넣을것
+    Monster* monster = nullptr;
+    if (character->level() >= 10)
+        monster= new boss()
+    else
+        Slime monster(nullptr, character.GetLevel()); // 나중에 슬라임 드롭아이템 넣을것
     system("cls");
     std::cout << "몬스터 " << monster.GetName() << "(이)가 난입했습니다. 전투 시작!" << std::endl;
     std::cout << "체력 : " << monster.GetHp() << ", 공격력 : " << monster.GetPower() << std::endl;
 	WaitForKey();
 
+    ::Battle characters[2]
+    {
+        this->character,
+        monster
+    };
+
+    int characetIndex = 0;
+    int monsterIndex = 1;
+    int currentIndex = 0;
+    while (true)
+    {
+        characters[currentIndex].DoMyTurn();
+        currentIndex = (currentIndex + 1) % 2;
+
+        if (characters[characetIndex].GetCurrentHP() <= 0)
+        {
+            Gameover();
+            break;
+        }
+        else if (characters[monsterIndex].GetHp() <= 0)
+        {
+            Win();
+            break;
+        }
+    }
 
 
 
