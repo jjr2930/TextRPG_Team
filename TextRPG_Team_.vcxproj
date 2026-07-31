@@ -155,7 +155,6 @@
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Shop.cpp" />
     <ClCompile Include="Slime.cpp" />
-    <ClCompile Include="UtilityMethods.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Battle.h" />
@@ -169,7 +168,6 @@
     <ClInclude Include="Random.h" />
     <ClInclude Include="Shop.h" />
     <ClInclude Include="Slime.h" />
-    <ClInclude Include="UtilityMethods.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
