@@ -25,7 +25,7 @@ public:
     static constexpr int MIN_ITEM_NUMBER_FOR_BUY = 1;
     static constexpr int MAX_ITEM_NUMBER_FOR_BUY = 9;
 
-    Shop(ItemDatabase& itemDatabase, Character* character);
+    Shop(ItemDatabase* itemDatabase, Character* character);
 public:
     void PrintMainMenu();
     void PrintSellMenu();

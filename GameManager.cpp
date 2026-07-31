@@ -2,10 +2,11 @@
 
 
 
-GameManager::GameManager() {
+GameManager::GameManager() 
+    : itemDatabase()
+    , character()
+{
     MakeCharacter();
-	Inventory inventory;
-	ItemDatabase itemDatabase;
 };
 
 void GameManager::Battle(Monster* monster) {
@@ -77,8 +78,7 @@ bool GameManager::IsMonsterDead(int hp) {
 };
 
 void GameManager::ShopEnter() {
-    ItemDatabase itemDatabase;
-	Shop shop(itemDatabase, &character);
+	Shop shop(&itemDatabase, &character);
 	shop.PrintMainMenu();
 };
 

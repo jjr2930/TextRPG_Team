@@ -6,12 +6,12 @@
 #include "Shop.h"
 #include "Character.h"
 #include "ItemDatabases.h"
-
+#include "UtilityMethods.h"
 
 using namespace std;
 
-Shop::Shop(ItemDatabase& itemDatabase, Character* character)
-    : itemDatabase(itemDatabase)
+Shop::Shop(ItemDatabase* itemDatabase, Character* character)
+    : itemDatabase(*itemDatabase)
     , character(*character)
 {
 }
@@ -42,8 +42,7 @@ void Shop::PrintMainMenu() {
 
             default:
                 cout << "잘못된 입력입니다. 다시 시도해주세요." << endl;
-                cout << "계속하려면 아무 키나 누르세요." << endl;
-                _getch();
+                UtilityMethods::WaitForKey();
                 break;
         }
     }
@@ -57,8 +56,7 @@ void Shop::PrintSellMenu()
         size_t inventorySize = inventoryItems.size();
         if (inventorySize == 0) {
             cout << "판매할 아이템이 없습니다." << endl;
-            cout << "계속하려면 아무 키나 누르세요." << endl;
-            _getch();
+            UtilityMethods::WaitForKey();
             return;
         }
 
@@ -88,12 +86,14 @@ void Shop::PrintSellMenu()
             character.GetInventory().SetItemQuantity(item.itemIdentifier, item.quantity - 1); // 판매 후 수량 감소
             character.SetMoney(character.GetMoney() + static_cast<int>(sellPrice)); // 골드 증가
             cout << format("판매한 아이템: {} 판매 가격: {} 현재 골드: {}", itemName, sellPrice, character.GetMoney()) << endl;
+            UtilityMethods::WaitForKey();
         }
         else if (input == 0) {
             break;
         }
         else {
             cout << "잘못된 입력입니다. 다시 시도해주세요." << endl;
+            UtilityMethods::WaitForKey();
         }
     }
 }
@@ -133,14 +133,14 @@ void Shop::PrintBuyMenu() {
                 cout << format("골드가 부족합니다. 현재 골드: {}", currentMoney) << endl;
             }
 
-            cout << "계속하려면 아무 키나 누르세요." << endl;
-            _getch();
+            UtilityMethods::WaitForKey();
         }
         else if (input == 0) {
             break;
         }
         else {
             cout << "잘못된 입력입니다. 다시 시도해주세요." << endl;
+            UtilityMethods::WaitForKey();
         }
     }
 }
