@@ -9,6 +9,7 @@
 #include "Slime.h"
 #include "ItemDatabases.h"
 #include "Inventory.h"
+#include "Boss.h"
 
 
 class GameManager {
@@ -36,6 +37,7 @@ public:
 public:
     bool isGameover = false;
     bool isWin = false;
+    bool isLevelTen = false;
 };
 
 inline void WaitForKey()
