@@ -6,6 +6,9 @@
 
 using namespace std;
 
+class ItemDatabase;
+class Character;
+
 enum class SelectedMenuType
 {
     Sell = 1,
@@ -22,12 +25,15 @@ public:
     static constexpr int MIN_ITEM_NUMBER_FOR_BUY = 1;
     static constexpr int MAX_ITEM_NUMBER_FOR_BUY = 9;
 
-    Shop();
+    Shop(ItemDatabase* itemDatabase, Character* character);
 public:
     void PrintMainMenu();
     void PrintSellMenu();
     void PrintBuyMenu();
+
 private:
+    ItemDatabase& itemDatabase;
+    Character& character;
     vector<string> itemsForSale;
 };
 
