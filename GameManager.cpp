@@ -77,7 +77,8 @@ bool GameManager::IsMonsterDead(int hp) {
 };
 
 void GameManager::ShopEnter() {
-	Shop shop;
+    ItemDatabase itemDatabase;
+	Shop shop(itemDatabase, &character);
 	shop.PrintMainMenu();
 };
 

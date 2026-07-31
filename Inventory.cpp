@@ -5,6 +5,11 @@
 #include "ItemDatabases.h"
 
 
+const std::vector<Inventory::InventoryItem>& Inventory::GetItems() const
+{
+    return items;
+}
+
 bool Inventory::AddItem(int itemIdentifier, int quantity) {
     if (quantity == 0) {
         return false;
