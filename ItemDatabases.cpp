@@ -4,6 +4,10 @@
 #include "Item.h"
 
 
+const Item& ItemDatabase::GetItem(int itemID) const{
+    return allItems[itemID];
+}
+
 ItemDatabase::ItemDatabase()
 {
     Item item;
