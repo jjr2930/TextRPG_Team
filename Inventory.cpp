@@ -30,6 +30,10 @@ bool Inventory::AddItem(int itemIdentifier, int quantity) {
         return true;
     }
 
+    if (quantity < 0) {
+        return false;
+    } // 보유하지 않은 아이템이 음수로 추가되는것 방지
+
     items.push_back({itemIdentifier, quantity});
     //새로운 아이템인경우
     return true;
