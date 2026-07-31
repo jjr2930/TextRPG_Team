@@ -4,6 +4,13 @@
 #include "Battle.h"
 
 class Boss : public Monster {
+protected:
+	bool israge = false;
+	bool isawaken = false;
+
+	// bool isdestruct = false;
+	// int destructcount = 3;
+
 public:
 	Boss(Item* item, int level);
 
