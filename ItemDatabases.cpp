@@ -4,7 +4,7 @@
 #include "Item.h"
 
 
-const Item& ItemDatabase::GetItem(int itemID) const{
+const Item& ItemDatabase::GetItem(int itemID){
     return allItems[itemID];
 }
 
