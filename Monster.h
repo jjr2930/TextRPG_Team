@@ -5,14 +5,15 @@
 #include "Battle.h"
 #include "Item.h"
 #include "Random.h"
+
 class Item;
-class Random;
 
 class Monster : public Battle {
 protected:
 	Random random;
 	std::string name;
-	int hp;
+	int maxHp;
+	int currentHp;
 	int power;
 	int dropExp;
 	Item* item;
@@ -20,7 +21,7 @@ protected:
 
 public:
 	Monster(std::string name, int minHp, int maxHp, int minPower, int maxPower, int dropExp, Item* item, int price, int level);
-	int GetHp();
+	int GetCurrentHp();
 	int GetPower();
 	int GetDropExp();
 	std::string GetName();
