@@ -114,19 +114,7 @@ void GameManager::ShowMainMenu() {
         std::cout << "----------------------------------------\n";
         std::cout << "       행동을 선택해 주세요 : ";
 
-        int select = 0;
-        if (!(std::cin >> select))
-        {
-            std::cin.clear();
-            std::cin.ignore(
-                std::numeric_limits<std::streamsize>::max(),
-                '\n'
-            );
-
-            std::cout << "\n숫자만 입력해 주세요.\n";
-            WaitForKey();
-            continue;
-        }
+		int select = GetIntegerInRange(1, 4);
 
         switch (select)
         {
@@ -148,8 +136,6 @@ void GameManager::ShowMainMenu() {
             return;
         }
         default: {
-            std::cout << "\n1~4 중에서 선택해 주세요.\n";
-            WaitForKey();
             break;
         }
         }

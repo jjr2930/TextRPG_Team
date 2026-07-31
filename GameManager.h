@@ -3,6 +3,8 @@
 #include <string>
 #include <conio.h>
 
+
+#include "Tools.h"
 #include "Character.h"
 #include "Monster.h"
 #include "Shop.h"
