@@ -106,6 +106,10 @@ void Character::SetMaxEXP(int maximumExperience) {
     this->maximumExperience = maximumExperience;
 }
 
+/// <summary>
+/// TODO: 안쓰네! CharacterLevelUP을 쓰네!
+/// </summary>
+/// <param name="level"></param>
 void Character::SetLevel(int level) {
     this->level = level;
     if(level == 10) {
@@ -180,6 +184,9 @@ void Character::ShowCharacterInfo() const {
     (void)_getch();
 }
 
+/// <summary>
+/// TODO : 코딩 컨벤션을 지켜주시기 바랍니다.
+/// </summary>
 void Character::CharacterLevelUP() {
     currentExperience -= maximumExperience;
     level += 1;

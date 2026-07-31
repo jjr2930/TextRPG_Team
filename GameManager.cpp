@@ -10,6 +10,7 @@ GameManager::GameManager() {
 
 void GameManager::Battle(Monster* monster) {
     int currentIndex = 0;
+    //TODO: 줄일 수 있는 방법이 있을거 같은데... 중복이 많은데..
     while (true) {
 		currentIndex = (currentIndex + 1) % 2;
 		if (currentIndex == 0) {
