@@ -146,8 +146,6 @@
     <ClCompile Include="Battle.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Character.cpp" />
-    <ClCompile Include="Dungeon.cpp" />
-    <ClCompile Include="DungeonEvent.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -157,26 +155,19 @@
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Shop.cpp" />
     <ClCompile Include="Slime.cpp" />
-    <ClCompile Include="Tools.cpp" />
-    <ClCompile Include="UtilityMethods.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Battle.h" />
     <ClInclude Include="Boss.h" />
-    <ClInclude Include="Dungeon.h" />
-    <ClInclude Include="DungeonEvent.h" />
     <ClInclude Include="GameManager.h" />
-    <ClInclude Include="GreenSlimeForest.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemDatabases.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Character.h" />
-    <ClInclude Include="Tools.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Shop.h" />
     <ClInclude Include="Slime.h" />
-    <ClInclude Include="UtilityMethods.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
