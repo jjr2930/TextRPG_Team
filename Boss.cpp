@@ -8,11 +8,10 @@ Boss::Boss(Item* item, int level)
 
 Boss::~Boss() {}
 
-void Boss::Attack(Battle* other) {
-	std::cout << "마왕에 성스러운 마검을 휘둘렀다.\n" << std::endl;
-	std::cin.get();
-
-	other->TakeDamage(power);
+void Boss::Attack() {
+	target->TakeDamage(power);
+	std::cout << "마왕에 성스러운 마검을 휘둘러 " << power << "를 입혔습니다.\n" << std::endl;
+	std::cin.get(); 
 }
 
 void Boss::TakeDamage(int damage) {
@@ -25,7 +24,7 @@ void Boss::TakeDamage(int damage) {
 	if (hp <= 0)
 		hp = 0;  */
 
-	std::cout << "마왕이 " << damage << " 의 데미지를 입혔습니다.!\n" << std::endl;      
+	std::cout << "마왕에 성스러운 마검을 휘둘러 " << damage << "를 입혔습니다.!\n" << std::endl;      
 
 	if (hp <= 0) {                                      
 		std::cout << "===================================================\n" << std::endl;
