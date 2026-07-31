@@ -4,15 +4,16 @@
 
 GameManager::GameManager() {
     MakeCharacter();
+	Inventory inventory;
+	ItemDatabase itemDatabase;
 };
 
 void GameManager::Battle(std::string attactName, std::string defenceName, int attactValue, int hpValue) {
-    std::cout << std::endl << attactName << "이(가) " << defenceName << "을(를) 공격합니다!";
-    std::cout << defenceName << " 체력 : " << hpValue - attactValue << std::endl;
+
 };
 
 void GameManager::Encounter() {
-    Slime monster(nullptr, 1); // 나중에 슬라임 드롭아이템 넣을것
+    Slime monster(nullptr, character.GetLevel()); // 나중에 슬라임 드롭아이템 넣을것
     system("cls");
     std::cout << "몬스터 " << monster.GetName() << "(이)가 난입했습니다. 전투 시작!" << std::endl;
     std::cout << "체력 : " << monster.GetHp() << ", 공격력 : " << monster.GetPower() << std::endl;
@@ -124,7 +125,7 @@ void GameManager::MakeCharacter()
 {
     std::cout << "이름을 입력해주세요 : ";
     std::string name;
-    std::cin >> name;
+	std::getline(std::cin, name);
     character.SetName(name);
     std::cout << std::endl << "캐릭터 " << name << " 생성 완료!" << std::endl;
     character.ShowCharacterInfo();
