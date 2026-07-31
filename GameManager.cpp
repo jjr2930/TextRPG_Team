@@ -18,21 +18,9 @@ void GameManager::Encounter() {
     std::cout << "체력 : " << monster.GetHp() << ", 공격력 : " << monster.GetPower() << std::endl;
 	WaitForKey();
 
-    int monHp = monster.GetHp();
-    int charHp = character.GetCurrentHP();
 
-    while (true) {
-        Battle(character.GetName(), monster.GetName(), character.GetAttack(), monHp);
-        monHp -= character.GetAttack();
-        if (IsMonsterDead(monHp)) break;
-        Battle(monster.GetName(), character.GetName(), monster.GetPower(), charHp);
-        charHp -= monster.GetPower();
-        if (IsCharacterDead(charHp)) {
-            Gameover();
-            return;
-        }
-    }
-    character.SetCurrentHP(charHp);
+
+
     std::cout << std::endl << monster.GetName() << " 처치!" << std::endl;
     std::cout << character.GetName() << "(이)가 " << monster.GetDropExp() << "EXP와 " << monster.RandomGold() << "골드를 획득했습니다.\n";
     
