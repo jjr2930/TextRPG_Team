@@ -21,7 +21,7 @@ int Character::GetCurrentMP() const {
 }
 
 int Character::GetMaxMP() const {
-    return maximumHealth + additionalMaximumMana;
+    return maximumMana + additionalMaximumMana;
 } //최대마나와 추가마나의 합산을 get
 
 int Character::GetCurrentEXP() const {
@@ -108,6 +108,9 @@ void Character::SetMaxEXP(int maximumExperience) {
 
 void Character::SetLevel(int level) {
     this->level = level;
+    if(level == 10) {
+        std::cout << "이제 일반 몬스터는 상대도 안 된다!\n";
+    }
 }
 
 void Character::SetAttack(int attack) {
