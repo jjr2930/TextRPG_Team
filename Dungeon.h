@@ -3,6 +3,9 @@
 #include <string>
 #include <vector>
 
+#include "Tools.h"
+#include "DungeonEvent.h"
+
 struct DungeonMap {
 	int mapID; // 던전 맵 ID
 	int difficultyLevel; // 난이도 레벨
@@ -25,6 +28,7 @@ public:
 private:
 	bool isDungeonFinished = false;
 	int selectedDifficultyLevel = 0;
+	int dungeonLength = 0;
 
 	std::string selectedMap = "";
 	std::string selectedDifficultyIcon = "";
@@ -35,7 +39,4 @@ private:
 		{2, 20, "★★☆", "망자의 지하묘지"}, 
 		{3, 30, "★★★", "마왕의 검은 성채"},
 	};
-
-	
-
 };

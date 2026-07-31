@@ -66,3 +66,4 @@ public:
     virtual void TakeDamage(int damage) override;
     //플레이어 피격 함수
 };
+

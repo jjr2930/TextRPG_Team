@@ -18,12 +18,13 @@ void Dungeon::SelectDungeonPath() {
 		std::cout << "		난이도: " << path.difficultyIcon << "  " << path.dungeonName << std::endl;
 	}
 	int selectedPathIndex = 0;
-	selectedPathIndex = std::cin.get() - 1; // 1, 2, 3 중 선택
+	selectedPathIndex = GetIntegerInRange(1, dungeonPaths.size()) - 1; 
 	
 	selectedMap = dungeonPaths[selectedPathIndex].dungeonName;
 	selectedDifficultyIcon = dungeonPaths[selectedPathIndex].difficultyIcon;
 	selectedDifficultyLevel = dungeonPaths[selectedPathIndex].difficultyLevel;
-
+	
+	dungeonLength = GetRandomValue(5, 15); // 던전 길이 랜덤 설정
 }
 
 void Dungeon::GenerateDungeonEvent() {
