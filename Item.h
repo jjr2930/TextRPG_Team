@@ -13,6 +13,13 @@ enum class ItemType
 	Miscellaneous
 };
 
+enum class ItemWeapon
+{
+	Staff,
+	SwordnShield,
+	TwoHand,
+	Bow,
+};
 enum class ItemEffect
 {
 	None,
@@ -22,9 +29,7 @@ enum class ItemEffect
 	RestoreStamina,
 	RestoreMana
 };
-
-class Item
-{
+class Item{
 public:
 	std::string name;
 	int itemID;
@@ -32,13 +37,19 @@ public:
 
 	ItemType itemType;
     ItemEffect itemEffect;
+	ItemWeapon itemWeapon;
 
 	int effectAmount;
 
-	////무기
-	//int weaponAttack; 
-	//int weaponDefense;
-	void useItem(const Item& item, Character& character);
+	//무기
+	int weaponAttack; 
+	int weaponDefense;
+	int weaponMaxMP;
+	int weaponMaxHP;
+
+	void UsePotion(const Item& item, Character& character);
+	void UseWeapon(const Item& item, Character& character);
+
 	
 };
 

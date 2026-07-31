@@ -7,6 +7,8 @@
 #include "Monster.h"
 #include "Shop.h"
 #include "Slime.h"
+#include "ItemDatabases.h"
+#include "Inventory.h"
 
 
 class GameManager {
