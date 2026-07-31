@@ -1,6 +1,4 @@
 #include "Tools.h"
-#include <random>
-
 
 int GetIntegerInRange(int minValue, int maxValue) {
     while (true) {
@@ -32,4 +30,11 @@ int GetRandomValue(int minValue, int maxValue) {
     std::uniform_int_distribution<int> distribution(minValue, maxValue);
 
     return distribution(randomEngine);
+}
+
+
+inline void WaitForKey()
+{
+    std::cout << std::endl << "계속하려면 아무 키나 누르세요...\n";
+    (void)_getch();
 }
