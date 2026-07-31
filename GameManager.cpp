@@ -9,25 +9,23 @@ GameManager::GameManager() {
 };
 
 void GameManager::Battle(Monster* monster) {
-    int currentIndex = 0;
-    //TODO: 줄일 수 있는 방법이 있을거 같은데... 중복이 많은데..
+
+	monster->SetTarget(&character);
+	character.SetTarget(monster);
+
     while (true) {
-		currentIndex = (currentIndex + 1) % 2;
-		if (currentIndex == 0) {
-			monster->SetTarget(&character);
-			monster->Attack();
-			if (IsCharacterDead(character.GetCurrentHP())) {
-				Gameover();
-				break;
-			}
-		}
-		else {
-			character.SetTarget(monster);
-			character.Attack();
-			if (IsMonsterDead(monster->GetHp())) {
-				std::cout << "몬스터 " << monster->GetName() << "(을)를 처치했습니다!" << std::endl;
-				break;
-			}
+        character.DoMyTurn();
+
+        if (IsMonsterDead(monster->GetHp())) {
+            std::cout << "몬스터 " << monster->GetName() << "(을)를 처치했습니다!" << std::endl;
+            break;
+        }
+
+		monster->DoMyTurn();
+
+		if (IsCharacterDead(character.GetCurrentHP())) {
+			Gameover();
+			break;
 		}
     }
 };
