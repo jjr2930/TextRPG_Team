@@ -11,16 +11,16 @@ Boss::~Boss() {}
 void Boss::Attack() {
 	
 
-	int CurrentPower = power;
+	int currentPower = power;
 
 	if (currentHp <= (maxHp / 2)) {
-		CurrentPower = (power * 2) / 3;
+		currentPower = (power * 2) / 3;
 
 		std::cout << " 마력으로 감싸진 성스러운 마검으로 " << name << "을(를) 공격했습니다.\n" << std::endl;
 		std::cin.get();
 	}
 	else if (currentHp <= (maxHp / 5)) {
-		CurrentPower = power * 2;
+		currentPower = power * 2;
 
 		std::cout << " 마왕에 모든 마력이 담긴 짙은 푸른색 성스러운 마검으로 " << name << "을(를) 공격했습니다.\n" << std::endl;
 		std::cin.get();
@@ -44,8 +44,8 @@ void Boss::TakeDamage(int damage) {
 	if (hp <= 0)
 		hp = 0;  */
 
-	if (currentHp <= (maxHp / 2) && currentHp > (maxHp / 5) && !israge) {
-		israge = true;
+	if (currentHp <= (maxHp / 2) && currentHp > (maxHp / 5) && !isRage) {
+		isRage = true;
 
 		std::cout << "===================================================\n" << std::endl;
 		std::cout << " 재밌어지는군. 좀 더 날 즐겁게 해다오!!" << name << "(이)여!!!!!~~~~~~\n" << std::endl;
@@ -56,8 +56,8 @@ void Boss::TakeDamage(int damage) {
 		std::cin.get();
 	}
 
-	if (currentHp <= (maxHp / 5) && !isawaken) {
-		isawaken = true;
+	if (currentHp <= (maxHp / 5) && !isAwaken) {
+		isAwaken = true;
 
 		std::cout << "===================================================\n" << std::endl;
 		std::cout << " 날 여기까지 몰아부치는" << name << "는(은) 오랜만이군......\n" << std::endl;

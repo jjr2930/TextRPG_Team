@@ -5,8 +5,8 @@
 
 class Boss : public Monster {
 protected:
-	bool israge = false;
-	bool isawaken = false;
+	bool isRage = false;
+	bool isAwaken = false;
 
 	// bool isdestruct = false;
 	// int destructcount = 3;
