@@ -33,7 +33,7 @@ int GetRandomValue(int minValue, int maxValue) {
 }
 
 
-inline void WaitForKey()
+void WaitForKey()
 {
     std::cout << std::endl << "계속하려면 아무 키나 누르세요...\n";
     (void)_getch();

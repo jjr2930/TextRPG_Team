@@ -16,7 +16,7 @@ void GameManager::Battle(Monster* monster) {
     while (true) {
         character.DoMyTurn();
 
-        if (IsMonsterDead(monster->GetHp())) {
+        if (IsMonsterDead(monster->GetCurrentHp())) {
             std::cout << "몬스터 " << monster->GetName() << "(을)를 처치했습니다!" << std::endl;
             break;
         }
@@ -35,7 +35,7 @@ void GameManager::Encounter() {
         Slime monster(nullptr, character.GetLevel()); // 나중에 슬라임 드롭아이템 넣을것
         system("cls");
         std::cout << "몬스터 " << monster.GetName() << "(이)가 난입했습니다. 전투 시작!" << std::endl;
-        std::cout << "체력 : " << monster.GetHp() << ", 공격력 : " << monster.GetPower() << std::endl;
+        std::cout << "체력 : " << monster.GetCurrentHp() << ", 공격력 : " << monster.GetPower() << std::endl;
         WaitForKey();
 
         Battle(&monster);

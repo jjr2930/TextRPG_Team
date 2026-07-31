@@ -165,6 +165,7 @@
     <ClInclude Include="Dungeon.h" />
     <ClInclude Include="DungeonEvent.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GreenSlimeForest.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemDatabases.h" />
