@@ -11,8 +11,8 @@
     <ClCompile Include="ItemDatabases.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Slime.cpp" />
-    <ClCompile Include="newClass.cpp" />
     <ClCompile Include="Battle.cpp" />
+    <ClCompile Include="Random.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Monster.h" />
@@ -24,8 +24,8 @@
     <ClInclude Include="ItemDatabases.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="Slime.h" />
-    <ClInclude Include="newClass.h" />
     <ClInclude Include="Battle.h" />
+    <ClInclude Include="Random.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
