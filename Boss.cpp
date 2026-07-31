@@ -8,11 +8,10 @@ Boss::Boss(Item* item, int level)
 
 Boss::~Boss() {}
 
-void Boss::Attack(Battle* other) {
+void Boss::Attack() {
+	target->TakeDamage(power);
 	std::cout << "마왕에 성스러운 마검을 휘둘렀다.\n" << std::endl;
 	std::cin.get();
-
-	other->TakeDamage(power);
 }
 
 void Boss::TakeDamage(int damage) {

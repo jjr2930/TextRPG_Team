@@ -9,7 +9,7 @@ public:
 
 	~Boss();
 
-	virtual void Attack(Battle* other) override;
+	virtual void Attack() override;
 	virtual void TakeDamage(int damage) override;
 
 };
