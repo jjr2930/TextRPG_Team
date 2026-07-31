@@ -193,17 +193,19 @@ void Character::CharacterLevelUP() {
     defense += level * 5;
 }
 
-void Character::Attack(Battle* other) {
-    if (other == nullptr) {
+void Character::Attack() {
+    if (target == nullptr) {
         return;
     } //포인터 검사
     int damage = GetAttack();
     
     std::cout
         << GetName()
-        << "가 공격했습니다.\n";
+        << "이(가) 공격하였습니다. ("
+        << damage
+        << ")\n";
 
-    other->TakeDamage(damage);
+    target->TakeDamage(damage);
 }
 
 void Character::TakeDamage(int damage) {
@@ -214,14 +216,23 @@ void Character::TakeDamage(int damage) {
     SetCurrentHP(remainingHP);
 
     std::cout
-        << GetName()
-        << "가 "
         << actualDamage
-        << "의 피해를 입었습니다.\n";
+        << "만큼 "
+        << GetName()
+        << "이(가) 피해를 입었습니다.\n";
 
+    if (GetCurrentHP() <= 0) {
+        std::cout
+            << GetName()
+            << "이(가) 죽었습니다.\n";
+    }
+    else {
     std::cout
         << GetName()
         << "의 남은 체력: "
         << GetCurrentHP()
+        << " / "
+        << GetMaxHP()
         << '\n';
+    }
 }
