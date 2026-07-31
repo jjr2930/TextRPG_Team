@@ -21,7 +21,7 @@ int Character::GetCurrentMP() const {
 }
 
 int Character::GetMaxMP() const {
-    return maximumHealth + additionalMaximumHealth;
+    return maximumHealth + additionalMaximumMana;
 } //최대마나와 추가마나의 합산을 get
 
 int Character::GetCurrentEXP() const {
@@ -74,7 +74,7 @@ void Character::SetName(const std::string& name) {
 
 void Character::SetCurrentHP(int currentHealth) {
     if(currentHealth > GetMaxHP()) {
-        currentHealth = GetMaxHP();
+        this->currentHealth = GetMaxHP();
     }
     else {
     this->currentHealth = currentHealth;
@@ -86,8 +86,8 @@ void Character::SetMaxHP(int maximumHealth) {
 }
 
 void Character::SetCurrentMP(int currentMana) {
-    if(currentMana > GetMaxHP()) {
-        currentMana = GetMaxHP();
+    if(currentMana > GetMaxMP()) {
+        this->currentMana = GetMaxMP();
     }
     else {
     this->currentMana = currentMana;
