@@ -8,60 +8,48 @@ GameManager::GameManager() {
 	ItemDatabase itemDatabase;
 };
 
-void GameManager::Battle(std::string attactName, std::string defenceName, int attactValue, int hpValue) {
-
+void GameManager::Battle(Monster* monster) {
+    int currentIndex = 0;
+    while (true) {
+		currentIndex = (currentIndex + 1) % 2;
+		if (currentIndex == 0) {
+			monster->Attack(&character);
+			if (IsCharacterDead(character.GetCurrentHP())) {
+				Gameover();
+				break;
+			}
+		}
+		else {
+			character.Attack(monster);
+			if (IsMonsterDead(monster->GetHp())) {
+				std::cout << "몬스터 " << monster->GetName() << "(을)를 처치했습니다!" << std::endl;
+				break;
+			}
+		}
+    }
 };
 
 void GameManager::Encounter() {
-    Monster* monster = nullptr;
-    if (character->level() >= 10)
-        monster= new boss()
-    else
-        Slime monster(nullptr, character.GetLevel()); // 나중에 슬라임 드롭아이템 넣을것
+    Slime monster(nullptr, character.GetLevel()); // 나중에 슬라임 드롭아이템 넣을것
     system("cls");
     std::cout << "몬스터 " << monster.GetName() << "(이)가 난입했습니다. 전투 시작!" << std::endl;
     std::cout << "체력 : " << monster.GetHp() << ", 공격력 : " << monster.GetPower() << std::endl;
 	WaitForKey();
 
-    ::Battle characters[2]
-    {
-        this->character,
-        monster
-    };
-
-    int characetIndex = 0;
-    int monsterIndex = 1;
-    int currentIndex = 0;
-    while (true)
-    {
-        characters[currentIndex].DoMyTurn();
-        currentIndex = (currentIndex + 1) % 2;
-
-        if (characters[characetIndex].GetCurrentHP() <= 0)
-        {
-            Gameover();
-            break;
-        }
-        else if (characters[monsterIndex].GetHp() <= 0)
-        {
-            Win();
-            break;
-        }
-    }
-
-
+	Battle(&monster);
 
     std::cout << std::endl << monster.GetName() << " 처치!" << std::endl;
     std::cout << character.GetName() << "(이)가 " << monster.GetDropExp() << "EXP와 " << monster.RandomGold() << "골드를 획득했습니다.\n";
-    
+
+
     character.SetCurrentEXP(character.GetCurrentEXP() + monster.GetDropExp());
     character.SetMoney(character.GetMoney() + monster.RandomGold());
-
     LevelUp();
-    
     std::cout << std::endl <<"현재 EXP : " << character.GetCurrentEXP() << "/" << character.GetMaxEXP() << ", 골드 : " << character.GetMoney() << std::endl;
     WaitForKey();
 };
+
+
 
 bool GameManager::IsCharacterDead(int hp) {
     if (hp <= 0) return true;

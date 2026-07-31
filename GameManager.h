@@ -15,8 +15,7 @@ class GameManager {
 private:
 public:
     GameManager();
-    void Battle(std::string attactName, std::string defenceName, int attactValue, int hpValue);
-
+    void Battle(Monster* monster);
     Character character; // gamemanager 생성 시 캐릭터 생성
 
 

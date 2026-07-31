@@ -1,6 +1,6 @@
 #include "Battle.h"
 
-void Battle::DoMyTurn()
+void Battle::DoMyTurn(Battle* other)
 {
-    Attack();
+    Attack(other);
 }

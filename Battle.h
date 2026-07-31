@@ -2,10 +2,10 @@
 
 class Battle {
 public:
-    virtual void DoMyTurn();
-	virtual void Attack() = 0 ;
+	virtual void Attack(Battle* other) = 0 ;
 	virtual void TakeDamage(int damage) = 0;
+	virtual void DoMyTurn(Battle* other);
 
 protected:
-    Battle* target;
+    Battle* target = nullptr;
 };
