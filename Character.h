@@ -3,6 +3,7 @@
 
 #include "Inventory.h"
 #include "Battle.h"
+#include "job.h"
 
 class Character : public Battle {
 private:
@@ -21,6 +22,7 @@ private:
     int additionalMaximumMana = 0; //추가 마나
     int additionalAttack = 0; //추가 공격력
     int additionalDefense = 0; //추가 방어력
+    const Job* job = nullptr; //직업
     Inventory inventory;
 
 public:
@@ -39,6 +41,7 @@ public:
     int GetAdditionalMaxMP() const;
     int GetAdditionalAttack() const;
     int GetAdditionalDefense() const;
+    const Job* GetJob() const;
     Inventory& GetInventory();
 
     void SetName(const std::string& name);
@@ -48,7 +51,6 @@ public:
     void SetMaxMP(int maximumMana);
     void SetCurrentEXP(int currentExperience);
     void SetMaxEXP(int maximumExperience);
-    void SetLevel(int level);
     void SetAttack(int attack);
     void SetDefense(int defense);
     void SetMoney(int money);
@@ -57,12 +59,14 @@ public:
     void SetAdditionalAttack(int additionalAttack);
     void SetAdditionalDefense(int additionalDefense);
 
-    void ShowCharacterInfo() const;
+    //전직 함수
+    void ChangeJob();
     //상태 출력 함수
-    void CharacterLevelUP();
+    void ShowCharacterInfo() const;
     //레벨업 함수, 최대경험치 초과분 다음레벨로 이월
-    virtual void Attack() override;
+    void LevelUP();
     //플레이어 공격 함수
-    virtual void TakeDamage(int damage) override;
+    virtual void Attack() override;
     //플레이어 피격 함수
+    virtual void TakeDamage(int damage) override;
 };

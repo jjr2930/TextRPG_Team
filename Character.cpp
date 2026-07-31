@@ -64,6 +64,10 @@ int Character::GetAdditionalDefense() const {
     return additionalDefense;
 }
 
+const Job* Character::GetJob() const {
+    return job;
+}
+
 Inventory& Character::GetInventory() {
     return inventory;
 }
@@ -106,12 +110,7 @@ void Character::SetMaxEXP(int maximumExperience) {
     this->maximumExperience = maximumExperience;
 }
 
-void Character::SetLevel(int level) {
-    this->level = level;
-    if(level == 10) {
-        std::cout << "이제 일반 몬스터는 상대도 안 된다!\n";
-    }
-}
+
 
 void Character::SetAttack(int attack) {
     this->attack = attack;
@@ -141,8 +140,23 @@ void Character::SetAdditionalDefense(int additionalDefense) {
     this->additionalDefense = additionalDefense;
 }
 
+void Character::ChangeJob() {
+    job = Job::SelectJob();
+
+    std::cout
+        << job->GetName()
+        << "(으)로 전직했습니다.\n";
+}
+
 void Character::ShowCharacterInfo() const {
     std::cout << "이름 : " << name << '\n';
+    std::cout << "직업 : ";
+    if (job == nullptr) {
+        std::cout << "무직\n";
+    }
+    else {
+        std::cout << job->GetName() << '\n';
+    }
     std::cout << "레벨 : " << level << " (" << currentExperience << '/' << maximumExperience << ")\n";
 
     std::cout
@@ -152,27 +166,22 @@ void Character::ShowCharacterInfo() const {
     << GetMaxHP()
     << '\n';
 
-
-    /*
     std::cout
     << "마나 : "
     << GetCurrentMP()
     << " / "
     << GetMaxMP()
     << '\n';
-    */
 
     std::cout << "공격력 : " << attack;
     if (additionalAttack > 0)
         std::cout << " (+" << additionalAttack << ')';
     std::cout << '\n';
 
-    /*
     std::cout << "방어력 : " << defense;
     if (additionalDefense > 0)
         std::cout << " (+" << additionalDefense << ')';
     std::cout << '\n';
-    */
 
     std::cout << "소지금 : " << money << '\n';
     inventory.ShowItems();
@@ -180,7 +189,7 @@ void Character::ShowCharacterInfo() const {
     (void)_getch();
 }
 
-void Character::CharacterLevelUP() {
+void Character::LevelUP() {
     currentExperience -= maximumExperience;
     level += 1;
 
@@ -191,6 +200,9 @@ void Character::CharacterLevelUP() {
 
     attack += level * 5;
     defense += level * 5;
+    if(level == 10) {
+        std::cout << "이제 일반 몬스터는 상대도 안 된다!\n";
+    }
 }
 
 void Character::Attack() {
@@ -209,8 +221,8 @@ void Character::Attack() {
 }
 
 void Character::TakeDamage(int damage) {
-    int actualDamage = std::max(0, damage);
-    //추후 방어력이 적용될 여부로 인해 생성
+    int damageReduction = GetDefense() * 5 / 100; //방어력의 5%만큼 고정수치 피해감소
+    int actualDamage = std::max(1, damage - damageReduction); //최소 1의 데미지는 입음
     int remainingHP = std::max(0,GetCurrentHP() - actualDamage);
 
     SetCurrentHP(remainingHP);

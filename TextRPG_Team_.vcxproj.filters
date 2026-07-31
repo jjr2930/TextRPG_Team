@@ -13,6 +13,7 @@
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="Battle.cpp" />
     <ClCompile Include="Random.cpp" />
+    <ClCompile Include="job.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Monster.h" />
@@ -26,6 +27,7 @@
     <ClInclude Include="Slime.h" />
     <ClInclude Include="Battle.h" />
     <ClInclude Include="Random.h" />
+    <ClInclude Include="job.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
