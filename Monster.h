@@ -5,8 +5,8 @@
 #include "Battle.h"
 #include "Item.h"
 #include "Random.h"
+
 class Item;
-class Random;
 
 class Monster : public Battle {
 protected:

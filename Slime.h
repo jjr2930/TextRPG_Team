@@ -7,5 +7,9 @@ public:
 
 	virtual void Attack() override;
 	virtual void TakeDamage(int damage) override;
+
+	void NomalAttack();
+	void ComboAttack();
+	void PowerfulAttack();
 };
 
