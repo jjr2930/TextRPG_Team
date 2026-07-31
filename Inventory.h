@@ -1,18 +1,17 @@
 ﻿#pragma once
 #include <vector>
 
-class Inventory
-{
+class Inventory {
 private:
-    struct InventoryItem
-    {
-        int mItemIdentifier;
-        int mQuantity;
+    struct InventoryItem {
+        int itemIdentifier;
+        int quantity;
     };
 
-    std::vector<InventoryItem> mItems;
+    std::vector<InventoryItem> items;
 
 public:
-    void AddItem(int itemIdentifier, int quantity);
+
+    bool AddItem(int itemIdentifier, int quantity);
     void ShowItems() const;
 };

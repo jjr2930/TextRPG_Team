@@ -29,11 +29,7 @@ enum class ItemEffect
 	RestoreStamina,
 	RestoreMana
 };
-
-
-
-class Item
-{
+class Item{
 public:
 	std::string name;
 	int itemID;

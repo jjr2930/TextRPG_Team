@@ -9,5 +9,7 @@ class ItemDatabase
 public: 
     ItemDatabase();
 
+    const Item& GetItem(int itemID);
+
     std::unordered_map<int, Item> allItems;
 };
