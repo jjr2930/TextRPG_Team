@@ -8,60 +8,62 @@ GameManager::GameManager() {
 	ItemDatabase itemDatabase;
 };
 
-void GameManager::Battle(std::string attactName, std::string defenceName, int attactValue, int hpValue) {
-
+void GameManager::Battle(Monster* monster) {
+    int currentIndex = 0;
+    while (true) {
+		currentIndex = (currentIndex + 1) % 2;
+		if (currentIndex == 0) {
+			monster->SetTarget(&character);
+			monster->Attack();
+			if (IsCharacterDead(character.GetCurrentHP())) {
+				Gameover();
+				break;
+			}
+		}
+		else {
+			character.SetTarget(monster);
+			character.Attack();
+			if (IsMonsterDead(monster->GetHp())) {
+				std::cout << "몬스터 " << monster->GetName() << "(을)를 처치했습니다!" << std::endl;
+				break;
+			}
+		}
+    }
 };
 
 void GameManager::Encounter() {
-    Monster* monster = nullptr;
-    if (character->level() >= 10)
-        monster= new boss()
-    else
+    if (!isLevelTen) {
         Slime monster(nullptr, character.GetLevel()); // 나중에 슬라임 드롭아이템 넣을것
-    system("cls");
-    std::cout << "몬스터 " << monster.GetName() << "(이)가 난입했습니다. 전투 시작!" << std::endl;
-    std::cout << "체력 : " << monster.GetHp() << ", 공격력 : " << monster.GetPower() << std::endl;
-	WaitForKey();
+        system("cls");
+        std::cout << "몬스터 " << monster.GetName() << "(이)가 난입했습니다. 전투 시작!" << std::endl;
+        std::cout << "체력 : " << monster.GetHp() << ", 공격력 : " << monster.GetPower() << std::endl;
+        WaitForKey();
 
-    ::Battle characters[2]
-    {
-        this->character,
-        monster
-    };
+        Battle(&monster);
 
-    int characetIndex = 0;
-    int monsterIndex = 1;
-    int currentIndex = 0;
-    while (true)
-    {
-        characters[currentIndex].DoMyTurn();
-        currentIndex = (currentIndex + 1) % 2;
+        std::cout << std::endl << monster.GetName() << " 처치!" << std::endl;
+        std::cout << character.GetName() << "(이)가 " << monster.GetDropExp() << "EXP와 " << monster.RandomGold() << "골드를 획득했습니다.\n";
 
-        if (characters[characetIndex].GetCurrentHP() <= 0)
-        {
-            Gameover();
-            break;
-        }
-        else if (characters[monsterIndex].GetHp() <= 0)
-        {
-            Win();
-            break;
+
+        character.SetCurrentEXP(character.GetCurrentEXP() + monster.GetDropExp());
+        character.SetMoney(character.GetMoney() + monster.RandomGold());
+        LevelUp();
+        std::cout << std::endl << "현재 EXP : " << character.GetCurrentEXP() << "/" << character.GetMaxEXP() << ", 골드 : " << character.GetMoney() << std::endl;
+
+        if (character.GetLevel() >= 10) {
+            isLevelTen = true;
         }
     }
+	else if (isLevelTen) {
+		Boss boss(nullptr, character.GetLevel());
+		Battle(&boss);
+	}
 
 
-
-    std::cout << std::endl << monster.GetName() << " 처치!" << std::endl;
-    std::cout << character.GetName() << "(이)가 " << monster.GetDropExp() << "EXP와 " << monster.RandomGold() << "골드를 획득했습니다.\n";
-    
-    character.SetCurrentEXP(character.GetCurrentEXP() + monster.GetDropExp());
-    character.SetMoney(character.GetMoney() + monster.RandomGold());
-
-    LevelUp();
-    
-    std::cout << std::endl <<"현재 EXP : " << character.GetCurrentEXP() << "/" << character.GetMaxEXP() << ", 골드 : " << character.GetMoney() << std::endl;
     WaitForKey();
 };
+
+
 
 bool GameManager::IsCharacterDead(int hp) {
     if (hp <= 0) return true;
@@ -92,8 +94,6 @@ void GameManager::Win() {
 
 void GameManager::ShowMainMenu() {
 
-    int select = 0;
-
     while (true)
     {
         system("cls");
@@ -113,7 +113,19 @@ void GameManager::ShowMainMenu() {
         std::cout << "----------------------------------------\n";
         std::cout << "       행동을 선택해 주세요 : ";
 
-        std::cin >> select;
+        int select = 0;
+        if (!(std::cin >> select))
+        {
+            std::cin.clear();
+            std::cin.ignore(
+                std::numeric_limits<std::streamsize>::max(),
+                '\n'
+            );
+
+            std::cout << "\n숫자만 입력해 주세요.\n";
+            WaitForKey();
+            continue;
+        }
 
         switch (select)
         {
@@ -135,7 +147,7 @@ void GameManager::ShowMainMenu() {
             return;
         }
         default: {
-            std::cout << "\n잘못된 입력입니다.\n";
+            std::cout << "\n1~4 중에서 선택해 주세요.\n";
             WaitForKey();
             break;
         }
