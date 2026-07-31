@@ -13,7 +13,7 @@ void GameManager::Battle(Monster* monster) {
     while (true) {
 		currentIndex = (currentIndex + 1) % 2;
 		if (currentIndex == 0) {
-			monster->Attack(&character);
+			monster->Attack();
 			if (IsCharacterDead(character.GetCurrentHP())) {
 				Gameover();
 				break;
