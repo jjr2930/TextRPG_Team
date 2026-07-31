@@ -61,7 +61,7 @@ public:
     //상태 출력 함수
     void CharacterLevelUP();
     //레벨업 함수, 최대경험치 초과분 다음레벨로 이월
-    void Attack(Battle* other) override;
+    void Attack() override;
     //플레이어 공격 함수
     void TakeDamage(int damage) override;
     //플레이어 피격 함수
