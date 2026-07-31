@@ -4,25 +4,24 @@
 #include "Inventory.h"
 #include "Battle.h"
 
-class Character : public Battle 
-{
+class Character : public Battle {
 private:
-    std::string mName;
-    int mCurrentHealth = 200; //현재 체력
-    int mMaximumHealth = 200; //최대 체력
-    int mCurrentMana = 200; //현재 마나
-    int mMaximumMana = 200; //최대 마나
-    int mCurrentExperience = 0; //현재 경험치
-    int mMaximumExperience = 100; //최대 경험치
-    int mLevel = 1; //레벨
-    int mAttack = 30; //공격력
-    int mDefense = 30; //방어력
-    int mMoney = 0; //돈
-    int mAdditionalMaximumHealth = 0; //추가 체력
-    int mAdditionalMaximumMana = 0; //추가 마나
-    int mAdditionalAttack = 0; //추가 공격력
-    int mAdditionalDefense = 0; //추가 방어력
-    Inventory mInventory;
+    std::string name;
+    int currentHealth = 200; //현재 체력
+    int maximumHealth = 200; //최대 체력
+    int currentMana = 200; //현재 마나
+    int maximumMana = 200; //최대 마나
+    int currentExperience = 0; //현재 경험치
+    int maximumExperience = 100; //최대 경험치
+    int level = 1; //레벨
+    int attack = 30; //공격력
+    int defense = 30; //방어력
+    int money = 0; //돈
+    int additionalMaximumHealth = 0; //추가 체력
+    int additionalMaximumMana = 0; //추가 마나
+    int additionalAttack = 0; //추가 공격력
+    int additionalDefense = 0; //추가 방어력
+    Inventory inventory;
 
 public:
     const std::string& GetName() const;
@@ -63,5 +62,7 @@ public:
     void CharacterLevelUP();
     //레벨업 함수, 최대경험치 초과분 다음레벨로 이월
     void Attack(Battle* other) override;
+    //플레이어 공격 함수
     void TakeDamage(int damage) override;
+    //플레이어 피격 함수
 };
