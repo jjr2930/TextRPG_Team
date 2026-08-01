@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "Tools.h"
+#include "Random.h"
 #include "DungeonEvent.h"
 
 struct DungeonMap {
@@ -27,10 +28,12 @@ public:
 	void GenerateDungeonEvent(); // 던전 이벤트 생성
 	void HandleDungeonEvent(); // 던전 이벤트 처리
 	void HandleDungeonBattle(); // 던전 전투 처리
-	bool IsDungeonFinished(); // 던전 완료 여부 확인
+	void IsDungeonFinished(); // 던전 완료 여부 확인
+	void EncounterBossEvent(); // 보스 이벤트 처리
 
 private:
-	bool isDungeonFinished = false;
+	bool dungeonFinished = false;
+	bool dungeonCleared = false;
 	int selectedDifficultyLevel = 0;
 	int dungeonLength = 0;
 	int selectedMapID = 0;
@@ -53,6 +56,7 @@ private:
 		"인기척을 느낀 슬라임들이 수풀 너머에서 모습을 드러내기 시작한다.\n\n"
 		"이 숲을 지나려면 녀석들을 상대해야 할 것 같다.",
 
+		// 망자의 지하묘지에 대한 설명
 		"낡은 돌계단을 따라 지하묘지 안으로 들어섰다.\n"
 		"차가운 공기와 함께 오래된 흙냄새가 코끝을 스친다.\n\n"
 		"벽에 걸린 푸른 횃불이 저절로 타오르고,\n"
