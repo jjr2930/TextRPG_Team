@@ -6,50 +6,59 @@
 #include "Character.h"
 
 
-enum class ItemType
-{
+enum class ItemType {
 	Weapon,
 	Potion,
+	UpgradeCore,
 	Miscellaneous
 };
 
-enum class ItemWeapon
-{
+enum class ItemWeapon {
 	Staff,
 	SwordnShield,
 	TwoHand,
-	Bow,
+	Daggers,
+	Bow
 };
-enum class ItemEffect
-{
+enum class ItemEffect {
 	None,
 	RestoreHealth,
 	AttackBuff,
 	DefenseBuff,
-	RestoreStamina,
+	IncreaseEXP,
 	RestoreMana
 };
-class Item{
+
+enum class ItemUpgrade {
+	UpgradeAttack,
+	UpgradeDefense,
+	UpgradeMaxHP,
+	UpgradeMaxMP
+};
+
+class Item {
 public:
 	std::string name;
 	int itemID;
 	int value; //가격
 
 	ItemType itemType;
-    ItemEffect itemEffect;
+	ItemEffect itemEffect;
 	ItemWeapon itemWeapon;
+	ItemUpgrade itemUpgrade;
 
 	int effectAmount;
+	int upgradeAmount;
 
 	//무기
-	int weaponAttack; 
+	int weaponAttack;
 	int weaponDefense;
 	int weaponMaxMP;
 	int weaponMaxHP;
 
 	void UsePotion(const Item& item, Character& character);
-	void UseWeapon(const Item& item, Character& character);
+	void WieldWeapon(const Item& item, Character& character);
+	void UpgradeWeapon(const Item& item, Character& character);
 
-	
 };
 
