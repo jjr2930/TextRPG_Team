@@ -27,7 +27,7 @@ public:
 	const std::vector<DungeonEventData>& GetEvents() const;
 
 protected:
-	explicit DungeonEvent(std::vector<DungeonEventData> events);
+	DungeonEvent(std::vector<DungeonEventData> events);
 
 private:
 	Random random;
