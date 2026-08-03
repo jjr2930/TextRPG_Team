@@ -193,7 +193,7 @@ void Character::ShowCharacterInfo() const {
     (void)_getch();
 }
 
-void Character::CharacterLevelUP() {
+void Character::LevelUP() {
     currentExperience -= maximumExperience;
     level += 1;
 
