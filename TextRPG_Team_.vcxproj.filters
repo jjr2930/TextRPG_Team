@@ -16,6 +16,7 @@
     <ClCompile Include="Dungeon.cpp" />
     <ClCompile Include="DungeonEvent.cpp" />
     <ClCompile Include="Tools.cpp" />
+    <ClCompile Include="job.cpp" />
     <ClCompile Include="Goblin.cpp" />
     <ClCompile Include="DungeonEvent_DemonCastle.cpp" />
     <ClCompile Include="DungeonEvent_GreenSlimeForest.cpp" />
@@ -43,6 +44,7 @@
     <ClInclude Include="DungeonEvent_GreenSlimeForest.h" />
     <ClInclude Include="DungeonEvent_UndeadTomb.h" />
     <ClInclude Include="Tools.h" />
+    <ClInclude Include="job.h" />
     <ClInclude Include="Goblin.h" />
     <ClInclude Include="SlimeKing.h" />
     <ClInclude Include="SkeletonKing.h" />
