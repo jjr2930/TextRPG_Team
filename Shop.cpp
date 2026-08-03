@@ -72,8 +72,7 @@ void Shop::PrintSellMenu()
         }
 
         //for llop display player inventory
-        int input;
-        cin >> input;
+        int input = Tools::GetIntegerInRange(0, inventorySize);
 
         if (1 <= input && input <= inventorySize) {
             int index = input - 1;
@@ -114,9 +113,9 @@ void Shop::PrintBuyMenu() {
             ++count;
         }
         //for loop display shop inventory
-        int input;
+
         cout << ">> ";
-        cin >> input;
+		int input = Tools::GetIntegerInRange(0, itemSize);
 
         if (1 <= input && input <= itemSize) {
             int index = input - 1;
