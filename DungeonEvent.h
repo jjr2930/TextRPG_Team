@@ -9,6 +9,8 @@
 #include "Tools.h"
 #include "Monster.h"
 #include "Slime.h"
+#include "Goblin.h"
+#include "Item.h"
 
 enum class DungeonEventType {
 	Exploration,
@@ -41,7 +43,7 @@ protected:
 
 	void GiveGold(int minGold, int maxGold);
 	void LoseGold(int minGold, int maxGold);
-	void AddItem(int itemIdentifier, int quantity);
+	void AddItem(Item item, int quantity);
 	void RestoreHealth(int minHealth, int maxHealth);
 	void DamageHealth(int minDamage, int maxDamage);
 	void StartMonsterEncounter();

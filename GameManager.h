@@ -14,7 +14,7 @@
 #include "Boss.h"
 #include "Dungeon.h"
 
-enum class MenuSelect {
+enum class MenuSelection {
 	Character = 1,
 	Shop = 2,
 	Dungeon = 3,
@@ -44,6 +44,6 @@ public:
     bool isLevelTen = false;
 
 public:
-    MenuSelect GetLevel();
+    MenuSelection GetLevel();
 
 };
