@@ -5,6 +5,6 @@
 class UndeadTombEvent final : public DungeonEvent {
 public:
     UndeadTombEvent(Character& character); 
-    void RandomEvent() override;
-    void BossEvent() override;
+    virtual void RunRandomEvent() override;
+    virtual void RunBossEvent() override;
 };

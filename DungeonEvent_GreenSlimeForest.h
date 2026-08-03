@@ -5,6 +5,6 @@
 class GreenSlimeForestEvent final : public DungeonEvent {
 public:
     GreenSlimeForestEvent(Character& character);
-    void RandomEvent() override;
-    void BossEvent() override;
+    virtual void RunRandomEvent() override;
+    virtual void RunBossEvent() override;
 };

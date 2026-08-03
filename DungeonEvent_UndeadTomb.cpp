@@ -1,15 +1,13 @@
 #include "DungeonEvent_UndeadTomb.h"
 
-UndeadTombEvent::UndeadTombEvent(Character& character) : DungeonEvent(character) 
-{
+UndeadTombEvent::UndeadTombEvent(Character& character) : DungeonEvent(character) {
 	std::cout << "언데드 무덤 이벤트 생성!" << std::endl;
 }
 
-void UndeadTombEvent::RandomEvent() {
+void UndeadTombEvent::RunRandomEvent() {
 	DungeonEventType randomEventType = DungeonEvent::GetRandomEventType();
 
-	switch (randomEventType)
-	{
+	switch (randomEventType) {
 	case DungeonEventType::Exploration:
 		std::cout << "던전 탐험 이벤트 발생!" << std::endl;
 		break;
@@ -28,6 +26,6 @@ void UndeadTombEvent::RandomEvent() {
 	}
 }
 
-void UndeadTombEvent::BossEvent() {
+void UndeadTombEvent::RunBossEvent() {
 	std::cout << "보스 이벤트 발생!" << std::endl;
 }

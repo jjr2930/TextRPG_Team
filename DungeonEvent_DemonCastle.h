@@ -5,6 +5,6 @@
 class DemonCastleEvent final : public DungeonEvent {
 public:
     DemonCastleEvent(Character& character);
-    void RandomEvent() override;
-    void BossEvent() override;
+    virtual void RunRandomEvent() override;
+    virtual void RunBossEvent() override;
 };

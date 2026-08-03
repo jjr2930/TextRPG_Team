@@ -1,15 +1,13 @@
 #include "DungeonEvent_GreenSlimeForest.h"
 
-GreenSlimeForestEvent::GreenSlimeForestEvent(Character& character) : DungeonEvent(character) 
-{
+GreenSlimeForestEvent::GreenSlimeForestEvent(Character& character) : DungeonEvent(character) {
 	std::cout << "초록 슬라임 숲 이벤트 생성!" << std::endl;
 }
 
-void GreenSlimeForestEvent::RandomEvent() {
+void GreenSlimeForestEvent::RunRandomEvent() {
 	DungeonEventType randomEventType = DungeonEvent::GetRandomEventType();
 
-	switch (randomEventType)
-	{
+	switch (randomEventType) {
 	case DungeonEventType::Exploration:
 		std::cout << "던전 탐험 이벤트 발생!" << std::endl;
 		break;
@@ -28,6 +26,6 @@ void GreenSlimeForestEvent::RandomEvent() {
 	}
 }
 
-void GreenSlimeForestEvent::BossEvent() {
+void GreenSlimeForestEvent::RunBossEvent() {
 	std::cout << "보스 이벤트 발생!" << std::endl;
 }

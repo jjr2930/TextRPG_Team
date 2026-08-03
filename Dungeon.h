@@ -32,7 +32,7 @@ private:
 	Character& character;
 	Random random;
 	DungeonEventCollection dungeonEventCollection;
-	std::unique_ptr<DungeonEvent> dungeonEvent;;
+	std::unique_ptr<DungeonEvent> dungeonEvent;
 
 	bool dungeonFinished = false;
 	int selectedDifficultyLevel = 0;

@@ -29,7 +29,7 @@ void DungeonEvent::DamageHealth(int minDamage, int maxDamage) {
 	character.TakeDamage(damage);
 }
 
-void DungeonEvent::MonsterEncounter() {}
+void DungeonEvent::StartMonsterEncounter() {}
 
 DungeonEventType DungeonEvent::GetRandomEventType() {
 	int randomValue = random.GetRandomValue(0, 3);

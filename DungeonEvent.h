@@ -17,11 +17,11 @@ enum class DungeonEventType {
 
 enum class DungeonEventEffectType {
 	None,
-	AddItem,
-	RestoreHealth,
-	DamageHealth,
-	GainGold,
-	LoseGold,
+	ItemAddition,
+	HealthRecovery,
+	HealthDamage,
+	GoldGain,
+	GoldLoss,
 	MonsterEncounter
 };
 
@@ -35,12 +35,12 @@ protected:
 	void AddItem(int itemIdentifier, int quantity);
 	void RestoreHealth(int minHealth, int maxHealth);
 	void DamageHealth(int minDamage, int maxDamage);
-	void MonsterEncounter();
+	void StartMonsterEncounter();
 	DungeonEventType GetRandomEventType();
 
 public:
-	virtual void RandomEvent() = 0;
-	virtual void BossEvent() = 0;
+	virtual void RunRandomEvent() = 0;
+	virtual void RunBossEvent() = 0;
 	virtual ~DungeonEvent() = default;
 
 private:

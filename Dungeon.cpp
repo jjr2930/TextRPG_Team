@@ -70,7 +70,7 @@ void Dungeon::StartDungeon() {
 void Dungeon::ProcessDungeon() {
 	while (currentDungeonLength < dungeonLength) {
 		HandleDungeonEvent();
-		currentDungeonLength++;
+		++currentDungeonLength;
 	}
 	EncounterBossEvent();
 }
@@ -79,7 +79,7 @@ void Dungeon::HandleDungeonEvent() {
 	if (!dungeonEvent)
 		return;
 
-	dungeonEvent->RandomEvent();
+	dungeonEvent->RunRandomEvent();
 	Tools::WaitForKey();
 }
 
@@ -87,7 +87,7 @@ void Dungeon::EncounterBossEvent() {
 	if (!dungeonEvent)
 		return;
 
-	dungeonEvent->BossEvent();
+	dungeonEvent->RunBossEvent();
 	Tools::WaitForKey();
 	FinishDungeon();
 }

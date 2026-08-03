@@ -2,16 +2,14 @@
 
 
 
-DemonCastleEvent::DemonCastleEvent(Character& character) : DungeonEvent(character) 
-{
+DemonCastleEvent::DemonCastleEvent(Character& character) : DungeonEvent(character) {
 	std::cout << "마왕의 검은 성채 이벤트 생성!" << std::endl;
 }
 
-void DemonCastleEvent::RandomEvent() {
+void DemonCastleEvent::RunRandomEvent() {
 	DungeonEventType randomEventType = DungeonEvent::GetRandomEventType();
 
-	switch (randomEventType)
-	{	
+	switch (randomEventType) {	
 	case DungeonEventType::Exploration:
 		std::cout << "던전 탐험 이벤트 발생!" << std::endl;
 		break;
@@ -29,6 +27,6 @@ void DemonCastleEvent::RandomEvent() {
 		break;
 	}
 }
-void DemonCastleEvent::BossEvent() {
+void DemonCastleEvent::RunBossEvent() {
 	std::cout << "보스 이벤트 발생!" << std::endl;
 }
