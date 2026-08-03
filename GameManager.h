@@ -14,6 +14,13 @@
 #include "Boss.h"
 #include "Dungeon.h"
 
+enum class DebugMode {
+	None,
+	All,
+	Character,
+	Shop,
+	Dungeon
+};
 
 class GameManager {
 private:
@@ -35,4 +42,8 @@ public:
     bool isGameover = false;
     bool isWin = false;
     bool isLevelTen = false;
+
+public:
+    DebugMode GetLevel();
+
 };

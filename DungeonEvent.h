@@ -51,6 +51,9 @@ protected:
 	bool IsMonsterDead(int currentHealth);
 	DungeonEventType GetRandomEventType(Character& character);
 
+protected:
+	Character& GetCharacter();
+
 public:
 	virtual void RunRandomEvent(Character& character) = 0;
 	virtual void RunBossEvent() = 0;

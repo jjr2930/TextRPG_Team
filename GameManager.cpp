@@ -43,11 +43,12 @@ void GameManager::ShowMainMenu() {
         std::cout << "       [2] 상점 들어가기\n";
         std::cout << "       [3] 던전 입장\n";
         std::cout << "       [4] 게임 종료\n";
+        std::cout << "       [5] 디버그 : 레벨10설정 <- 던전3 들어가는데 사용\n"; // 나중에 제거
         std::cout << "\n";
         std::cout << "----------------------------------------\n";
         std::cout << "       행동을 선택해 주세요 : ";
 
-		int select = Tools::GetIntegerInRange(1, 4);
+		int select = Tools::GetIntegerInRange(1, 5);
 
         switch (select)
         {
@@ -71,6 +72,11 @@ void GameManager::ShowMainMenu() {
             isGameover = true;
             return;
         }
+
+        case 5: 
+            GetLevel();
+            return;
+
         default: {
             break;
         }
@@ -95,3 +101,9 @@ void GameManager::MakeCharacter()
     character.ShowCharacterInfo();
 }
 
+DebugMode GameManager::GetLevel() {
+	character.SetLevel(10);
+	std::cout << "레벨10 설정" << std::endl;
+	return DebugMode::Character;
+	Tools::WaitForKey();
+}

@@ -84,13 +84,16 @@ GameState DungeonEvent::Encounter() {
     return GameState::Playing;
 };
 
-    bool DungeonEvent::IsCharacterDead(int hp) {
-        if (hp <= 0) return true;
-        return false;
-    };
+bool DungeonEvent::IsCharacterDead(int hp) {
+    if (hp <= 0) return true;
+    return false;
+};
 
-    bool DungeonEvent::IsMonsterDead(int hp) {
-        if (hp <= 0) return true;
-        return false;
-    };
+bool DungeonEvent::IsMonsterDead(int hp) {
+    if (hp <= 0) return true;
+    return false;
+};
 
+Character& DungeonEvent::GetCharacter() {
+	return character;
+}
