@@ -1,15 +1,21 @@
 #include "Dungeon.h"
 
+#include <stdexcept>
+#include <utility>
 
-Dungeon::Dungeon() {
-	EnterDungeon();
-};
+
+
+Dungeon::Dungeon(Character& character)
+	: character(character) {}
 
 
 void Dungeon::EnterDungeon() {
+	dungeonFinished = false;
+	currentDungeonLength = 0;
+
 	std::cout << "앞에 여러가지 던전의 입구가 보입니다." << std::endl;
 	SelectDungeonPath();
-	GenerateDungeonEvent(); 
+	StartDungeon();
 }
 
 void Dungeon::SelectDungeonPath() {
@@ -24,8 +30,11 @@ void Dungeon::SelectDungeonPath() {
 	selectedMapID = dungeonPaths[selectedPathIndex].mapID;
 	selectedDifficultyIcon = dungeonPaths[selectedPathIndex].difficultyIcon;
 	selectedDifficultyLevel = dungeonPaths[selectedPathIndex].difficultyLevel;
+	dungeonLength = random.GetRandomValue(7, 14);
+
+	DungeonEventCollection dungeonEventCollection(character, selectedMapID);
 	
-	dungeonLength = Tools::randomInt(7, 14); // 던전 길이 랜덤 설정
+
 }
 
 void Dungeon::StartDungeon() {
@@ -33,21 +42,22 @@ void Dungeon::StartDungeon() {
 	Tools::WaitForKey();
 	system("cls");
 
-	std::cout << dungeonDescriptions[selectedDifficultyLevel - 1] << std::endl;
+	std::cout << dungeonDescriptions[selectedMapID] << std::endl;
 	std::cout << "선택지를 골라주십시오." << std::endl;
 	std::cout << "1. 앞으로 나아간다." << std::endl;
 	std::cout << "2. 아직은 때가 아니다. 물러선다." << std::endl;
 
 	int choice = Tools::GetIntegerInRange(1, 2);
 	switch (choice) {
-	case 1:{
+	case 1: {
 		std::cout << "앞으로 나아갑니다..." << std::endl;
 		ProcessDungeon();
 		break;
 	}
-	case 2:
+	case 2: {
 		std::cout << "물러섭니다. 거점으로 돌아갑니다..." << std::endl;
-		break;
+		return;
+	}
 	default:
 		break;
 	}
@@ -56,7 +66,6 @@ void Dungeon::StartDungeon() {
 void Dungeon::ProcessDungeon() {
 	while (!dungeonFinished) {
 		GenerateDungeonEvent();
-
 		currentDungeonLength++;
 	}
 }
@@ -66,23 +75,19 @@ void Dungeon::GenerateDungeonEvent() {
 		EncounterBossEvent();
 		return;
 	}
-	
-
-
-}
-
-void Dungeon::EncounterBossEvent() {
-	
+	HandleDungeonEvent();
 }
 
 void Dungeon::HandleDungeonEvent() {
-
+	dungeonEvent->RandomEvent();
 }
 
-void Dungeon::HandleDungeonBattle() {
-
+void Dungeon::EncounterBossEvent() {
+	dungeonEvent->BossEvent();
+	FinishDungeon();
 }
 
-void Dungeon::IsDungeonFinished() {
+
+void Dungeon::FinishDungeon() {
 	dungeonFinished = true;
 }

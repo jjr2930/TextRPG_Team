@@ -37,7 +37,7 @@ void GameManager::Encounter() {
         system("cls");
         std::cout << "몬스터 " << monster.GetName() << "(이)가 난입했습니다. 전투 시작!" << std::endl;
         std::cout << "체력 : " << monster.GetCurrentHp() << ", 공격력 : " << monster.GetPower() << std::endl;
-        WaitForKey();
+        Tools::WaitForKey();
 
         Battle(&monster);
 
@@ -60,7 +60,7 @@ void GameManager::Encounter() {
 	}
 
 
-    WaitForKey();
+    Tools::WaitForKey();
 };
 
 
@@ -83,13 +83,13 @@ void GameManager::ShopEnter() {
 void GameManager::Gameover() {
     isGameover = true;
 	std::cout << "게임오버..." << std::endl;
-	WaitForKey();
+	Tools::WaitForKey();
 };
 
 void GameManager::Win() {
 	std::cout << "게임 클리어!" << std::endl;
     isGameover = true;
-	WaitForKey();
+	Tools::WaitForKey();
 };
 
 void GameManager::ShowMainMenu() {
@@ -107,13 +107,13 @@ void GameManager::ShowMainMenu() {
         std::cout << "\n";
         std::cout << "       [1] 캐릭터 상태 보기\n";
         std::cout << "       [2] 상점 들어가기\n";
-        std::cout << "       [3] 행동 종료\n";
+        std::cout << "       [3] 던전 입장\n";
         std::cout << "       [4] 게임 종료\n";
         std::cout << "\n";
         std::cout << "----------------------------------------\n";
         std::cout << "       행동을 선택해 주세요 : ";
 
-		int select = GetIntegerInRange(1, 4);
+		int select = Tools::GetIntegerInRange(1, 4);
 
         switch (select)
         {
@@ -125,9 +125,12 @@ void GameManager::ShowMainMenu() {
             ShopEnter();
             break;
 
-        case 3:
-            std::cout << "\n행동을 종료합니다.\n";
+        case 3: {
+            std::cout << "\n던전으로 입장합니다.\n";
+			Dungeon dungeon(character);
+			dungeon.EnterDungeon();
             return;
+        }
 
         case 4: {
             std::cout << "\n게임을 종료합니다.\n";

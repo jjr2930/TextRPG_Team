@@ -1,36 +1,32 @@
 #include "DungeonEvent.h"
 
-#include <stdexcept>
-#include <utility>
+#include <algorithm>
 
-#include "DungeonEvent_DemonCastle.h"
-#include "DungeonEvent_GreenSlimeForest.h"
-#include "DungeonEvent_UndeadTomb.h"
+DungeonEvent::DungeonEvent(Character& character)
+	: character(character) {}
 
-DungeonEvent::DungeonEvent(std::vector<DungeonEventData> events)
-	: events(std::move(events)) {}
-
-const DungeonEventData& DungeonEvent::GetRandomEvent() {
-	if (events.empty())
-		throw std::logic_error("던전 이벤트가 비어 있습니다.");
-
-	int eventIndex = random.GetRandomValue(0, static_cast<int>(events.size()) - 1);
-	return events[eventIndex];
+void DungeonEvent::GiveGold(int minGold, int maxGold) {
+	int gold = random.GetRandomValue(minGold, maxGold);
+	character.SetMoney(character.GetMoney() + gold);
 }
 
-const std::vector<DungeonEventData>& DungeonEvent::GetEvents() const {
-	return events;
+void DungeonEvent::LoseGold(int minGold, int maxGold) {
+	int gold = random.GetRandomValue(minGold, maxGold);
+	character.SetMoney(std::max(0, character.GetMoney() - gold));
 }
 
-std::unique_ptr<DungeonEvent> CreateDungeonEvent(int mapID) {
-	switch (mapID) {
-	case 0:
-		return std::make_unique<GreenSlimeForestEvent>();
-	case 1:
-		return std::make_unique<UndeadTombEvent>();
-	case 2:
-		return std::make_unique<DemonCastleEvent>();
-	default:
-		throw std::out_of_range("존재하지 않는 던전 맵 ID입니다.");
-	}
+void DungeonEvent::AddItem(int itemIdentifier, int quantity) {
+	character.GetInventory().AddItem(itemIdentifier, quantity);
 }
+
+void DungeonEvent::RestoreHealth(int minHealth, int maxHealth) {
+	int health = random.GetRandomValue(minHealth, maxHealth);
+	character.SetCurrentHP(character.GetCurrentHP() + health);
+}
+
+void DungeonEvent::DamageHealth(int minDamage, int maxDamage) {
+	int damage = random.GetRandomValue(minDamage, maxDamage);
+	character.TakeDamage(damage);
+}
+
+void DungeonEvent::MonsterEncounter() {}
