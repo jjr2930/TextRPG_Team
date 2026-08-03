@@ -49,6 +49,7 @@ public:
 
 	int effectAmount;
 	int upgradeAmount;
+	int upgradeLevel=0;
 
 	//무기
 	int weaponAttack;
@@ -57,8 +58,7 @@ public:
 	int weaponMaxHP;
 
 	void UsePotion(const Item& item, Character& character);
-	void WieldWeapon(const Item& item, Character& character);
-	void UpgradeWeapon(const Item& item, Character& character);
-
+	void WieldWeapon(const Item& item, Item& playerWeapon);
+	void UpgradeWeapon(const Item& item, Item& playerWeapon);	
 };
 
