@@ -1,7 +1,13 @@
 #pragma once
 
 class Battle {
+protected:
+	Battle* target;
 public:
-	virtual void Attack(Battle* other) = 0 ;
+	Battle();
+	void SetTarget(Battle* target);
+
+    virtual void DoMyTurn();
+	virtual void Attack() = 0 ;
 	virtual void TakeDamage(int damage) = 0;
 };

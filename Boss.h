@@ -3,16 +3,20 @@
 #include "Monster.h"
 #include "Battle.h"
 
-class Character;
+class Boss : public Monster {
+protected:
+	bool isRage = false;
+	bool isAwaken = false;
 
-class Boss : public Monster
-{
+	// bool isdestruct = false;
+	// int destructcount = 3;
+
 public:
 	Boss(Item* item, int level);
 
 	~Boss();
 
-	virtual float Attack();
-	virtual void TakeDamage(float damage);
+	virtual void Attack() override;
+	virtual void TakeDamage(int damage) override;
 
 };
