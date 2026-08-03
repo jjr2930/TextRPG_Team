@@ -14,11 +14,13 @@ void Dungeon::EnterDungeon() {
 	currentDungeonLength = 0;
 
 	std::cout << "앞에 여러가지 던전의 입구가 보입니다." << std::endl;
-	SelectDungeonPath();
+	if (!SelectDungeonPath()) {
+		return;
+	}
 	StartDungeon();
 }
 
-void Dungeon::SelectDungeonPath() {
+bool Dungeon::SelectDungeonPath() {
 	std::cout << "들어갈 던전을 선택하세요." << std::endl << std::endl;
 
 	int dungeonNumber = 1;
@@ -29,6 +31,15 @@ void Dungeon::SelectDungeonPath() {
 
 	selectedPathIndex = Tools::GetIntegerInRange(1, (int)dungeonPaths.size()) - 1; 
 	
+	if (selectedPathIndex == 2) {
+		if (character.GetLevel() < 10) {
+			std::cout << "마왕의 검은 성채는 레벨 10 이상부터 입장 가능합니다." << std::endl;
+			std::cout << "레벨을 올린 후 다시 시도해주세요." << std::endl;
+			Tools::WaitForKey();
+			return false;
+		}
+	}
+
 	const DungeonMap& selectedPath = dungeonPaths[selectedPathIndex];
 
 	selectedMap = selectedPath.dungeonName;
@@ -38,6 +49,8 @@ void Dungeon::SelectDungeonPath() {
 	dungeonEvent = dungeonEventCollection.CreateDungeonEvent(selectedPath.mapType);
 
 	dungeonLength = random.GetRandomValue(7, 14);
+	
+	return true;
 }
 
 void Dungeon::StartDungeon() {
@@ -78,7 +91,7 @@ void Dungeon::HandleDungeonEvent() {
 	if (!dungeonEvent)
 		return;
 
-	dungeonEvent->RunRandomEvent();
+	dungeonEvent->RunRandomEvent(character);
 	Tools::WaitForKey();
 }
 
@@ -90,7 +103,6 @@ void Dungeon::EncounterBossEvent() {
 	Tools::WaitForKey();
 	FinishDungeon();
 }
-
 
 void Dungeon::FinishDungeon() {
 	dungeonFinished = true;
