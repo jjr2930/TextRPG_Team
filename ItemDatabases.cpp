@@ -135,8 +135,8 @@ ItemDatabase::ItemDatabase()
 
     item = Item{};
 
-    // 회복 포션
-    item.itemID = 10;
+    // 회복 포션 (무기가 0~11번을 사용하므로 12번부터 이어서 부여한다)
+    item.itemID = 12;
     item.name = "체력 물약";
     item.value = 50;
     item.itemType = ItemType::Potion;
@@ -144,7 +144,7 @@ ItemDatabase::ItemDatabase()
     item.effectAmount = 50;
     allItems[item.itemID] = item;
 
-    item.itemID = 11;
+    item.itemID = 13;
     item.name = "경험치 물약";
     item.value = 50;
     item.itemType = ItemType::Potion;
@@ -152,7 +152,7 @@ ItemDatabase::ItemDatabase()
     item.effectAmount = 50;
     allItems[item.itemID] = item;
 
-    item.itemID = 12;
+    item.itemID = 14;
     item.name = "마나 물약";
     item.value = 50;
     item.itemType = ItemType::Potion;
@@ -163,7 +163,7 @@ ItemDatabase::ItemDatabase()
     item = Item{};
 
     // 버프 포션
-    item.itemID = 13;
+    item.itemID = 15;
     item.name = "공격력 물약";
     item.value = 150;
     item.itemType = ItemType::Potion;
@@ -171,7 +171,7 @@ ItemDatabase::ItemDatabase()
     item.effectAmount = 10;
     allItems[item.itemID] = item;
 
-    item.itemID = 14;
+    item.itemID = 16;
     item.name = "방어력 물약";
     item.value = 150;
     item.itemType = ItemType::Potion;

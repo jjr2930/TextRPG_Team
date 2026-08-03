@@ -35,6 +35,12 @@ void Item::UsePotion(const Item& item, Character& character){
         character.SetCurrentMP(currentMana);
         break;
     }
+    case ItemEffect::IncreaseEXP: {
+        int currentEXP = character.GetCurrentEXP();
+        currentEXP += item.effectAmount;
+        character.SetCurrentEXP(currentEXP);
+        break;
+    }
     }
 }
 void Item::UseWeapon(const Item& item, Character& character) {
