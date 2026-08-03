@@ -6,7 +6,7 @@
 
 
 Dungeon::Dungeon(Character& character)
-	: character(character) {}
+	: character(character), dungeonEventCollection(character) {}
 
 
 void Dungeon::EnterDungeon() {
@@ -20,21 +20,25 @@ void Dungeon::EnterDungeon() {
 
 void Dungeon::SelectDungeonPath() {
 	std::cout << "들어갈 던전을 선택하세요." << std::endl << std::endl;
+
 	for (DungeonMap& path : dungeonPaths) {
-		std::cout << "		난이도: " << path.difficultyIcon << "  " << path.dungeonName << std::endl;
+		std::cout << path.mapID + 1 << ".		난이도: " << path.difficultyIcon << "  " << path.dungeonName << std::endl;
 	}
+
 	int selectedPathIndex = 0;
+
 	selectedPathIndex = Tools::GetIntegerInRange(1, (int)dungeonPaths.size()) - 1; 
 	
-	selectedMap = dungeonPaths[selectedPathIndex].dungeonName;
-	selectedMapID = dungeonPaths[selectedPathIndex].mapID;
-	selectedDifficultyIcon = dungeonPaths[selectedPathIndex].difficultyIcon;
-	selectedDifficultyLevel = dungeonPaths[selectedPathIndex].difficultyLevel;
+	const DungeonMap& selectedPath = dungeonPaths[selectedPathIndex];
+
+	selectedMap = selectedPath.dungeonName;
+	selectedMapID = selectedPath.mapID;
+	selectedDifficultyIcon = selectedPath.difficultyIcon;
+	selectedDifficultyLevel = selectedPath.difficultyLevel;
+
+	dungeonEvent = dungeonEventCollection.CreateDungeonEvent(selectedMapID);
+
 	dungeonLength = random.GetRandomValue(7, 14);
-
-	DungeonEventCollection dungeonEventCollection(character, selectedMapID);
-	
-
 }
 
 void Dungeon::StartDungeon() {
@@ -64,26 +68,27 @@ void Dungeon::StartDungeon() {
 }
 
 void Dungeon::ProcessDungeon() {
-	while (!dungeonFinished) {
-		GenerateDungeonEvent();
+	while (currentDungeonLength < dungeonLength) {
+		HandleDungeonEvent();
 		currentDungeonLength++;
 	}
-}
-
-void Dungeon::GenerateDungeonEvent() {
-	if (currentDungeonLength >= dungeonLength) {
-		EncounterBossEvent();
-		return;
-	}
-	HandleDungeonEvent();
+	EncounterBossEvent();
 }
 
 void Dungeon::HandleDungeonEvent() {
+	if (!dungeonEvent)
+		return;
+
 	dungeonEvent->RandomEvent();
+	Tools::WaitForKey();
 }
 
 void Dungeon::EncounterBossEvent() {
+	if (!dungeonEvent)
+		return;
+
 	dungeonEvent->BossEvent();
+	Tools::WaitForKey();
 	FinishDungeon();
 }
 

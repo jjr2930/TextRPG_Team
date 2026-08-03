@@ -11,6 +11,6 @@ private:
 	Character& character;
 
 public:
-	explicit DungeonEventCollection(Character& character);
+	DungeonEventCollection(Character& character);
 	std::unique_ptr<DungeonEvent> CreateDungeonEvent(int mapID);
 };

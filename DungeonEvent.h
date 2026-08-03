@@ -36,7 +36,7 @@ protected:
 	void RestoreHealth(int minHealth, int maxHealth);
 	void DamageHealth(int minDamage, int maxDamage);
 	void MonsterEncounter();
-	DungeonEventType GetRandomEventType(int min, int max);
+	DungeonEventType GetRandomEventType();
 
 public:
 	virtual void RandomEvent() = 0;

@@ -30,3 +30,8 @@ void DungeonEvent::DamageHealth(int minDamage, int maxDamage) {
 }
 
 void DungeonEvent::MonsterEncounter() {}
+
+DungeonEventType DungeonEvent::GetRandomEventType() {
+	int randomValue = random.GetRandomValue(0, 3);
+	return static_cast<DungeonEventType>(randomValue);
+}

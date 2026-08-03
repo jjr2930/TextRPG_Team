@@ -2,10 +2,9 @@
 
 #include <stdexcept>
 
-DungeonEventCollection::DungeonEventCollection(Character& character, int mapID)
-	: character(character), mapID(mapID) 
+DungeonEventCollection::DungeonEventCollection(Character& character)
+	: character(character)
 {
-
 }
 
 std::unique_ptr<DungeonEvent> DungeonEventCollection::CreateDungeonEvent(int mapID) {

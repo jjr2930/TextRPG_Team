@@ -24,7 +24,6 @@ public:
 	void StartDungeon(); // 던전 시작
 	void SelectDungeonPath(); // 던전 경로 선택
 	void ProcessDungeon(); // 던전 진행
-	void GenerateDungeonEvent(); // 던전 이벤트 생성
 	void HandleDungeonEvent(); // 던전 이벤트 처리
 	void EncounterBossEvent(); // 보스 이벤트 처리
 	void FinishDungeon();
@@ -32,7 +31,8 @@ public:
 private:
 	Character& character;
 	Random random;
-	std::unique_ptr<DungeonEvent> dungeonEvent;
+	DungeonEventCollection dungeonEventCollection;
+	std::unique_ptr<DungeonEvent> dungeonEvent;;
 
 	bool dungeonFinished = false;
 	int selectedDifficultyLevel = 0;
