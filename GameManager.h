@@ -11,6 +11,7 @@
 #include "Slime.h"
 #include "ItemDatabases.h"
 #include "Inventory.h"
+#include "Dungeon.h"
 #include "DemonKing.h"
 
 
