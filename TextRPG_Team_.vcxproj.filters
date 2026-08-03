@@ -44,6 +44,8 @@
     <ClInclude Include="DungeonEvent_GreenSlimeForest.h" />
     <ClInclude Include="DungeonEvent_UndeadTomb.h" />
     <ClInclude Include="Tools.h" />
+    <ClInclude Include="Goblin.h" />
+    <ClInclude Include="job.h" />
     <ClInclude Include="job.h" />
     <ClInclude Include="Goblin.h" />
     <ClInclude Include="SlimeKing.h" />
