@@ -21,10 +21,6 @@ ItemDatabase::ItemDatabase()
     item.weaponAttack = 35;
     item.weaponDefense = 5;
     item.weaponMaxMP = 30;
-	item.SetAdditionalWeaponAttack(0);
-    item.SetAdditionalWeaponDefense(0);
-    item.SetAdditionalWeaponMaxMP(0);
-    item.SetAdditionalWeaponMaxHP(0);
 	item.upgradeLevel = 0;
     allItems[item.itemID] = item;
 

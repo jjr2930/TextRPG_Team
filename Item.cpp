@@ -37,8 +37,6 @@ void Item::UsePotion(const Item& item, Character& character){
     }
     }
 }
-//무기 장착
-
 //무기 각성
 void Item::UpgradeWeapon(const Item& item) {
     switch (item.itemUpgrade)
