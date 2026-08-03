@@ -71,3 +71,19 @@ void Inventory::ShowItems() const {
             << '\n';
     }
 }
+
+
+void Inventory::SetItemQuantity(int itemID,int quantity) {
+    for (std::size_t i = 0; i < items.size(); ++i) {
+        if (items[i].item.itemID != itemID) {
+            continue;
+        }
+        if (quantity <= 0) {
+            items.erase(items.begin() + i);
+        }
+        else {
+            items[i].quantity = quantity;
+        }
+        return;
+    }
+}

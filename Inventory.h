@@ -17,16 +17,5 @@ public:
     bool AddItem(const Item& item, int quantity);
     void ShowItems() const;
 
-    void SetItemQuantity(int itemID, int quantity) {
-        size_t size = items.size();
-        for (size_t i = 0; i < size; ++i) {
-            if (items[i].item.itemID == itemID) {
-                items[i].quantity = quantity;
-                if (items[i].quantity <= 0) {
-                    items.erase(items.begin() + i);
-                }
-                return;
-            }
-        }
-    }
+    void SetItemQuantity(int itemID, int quantity);
 };

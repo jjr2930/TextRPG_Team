@@ -1,9 +1,12 @@
 ﻿#pragma once
 #include <string>
+#include <vector>
 
 #include "Inventory.h"
 #include "Battle.h"
 #include "job.h"
+#include "skill.h"
+#include "Random.h"
 
 class Character : public Battle {
 private:
@@ -32,6 +35,11 @@ private:
     int gearDefense = 0; // 장비 방어력
     int gearMaxHealth = 0; // 장비 체력
     int gearMaxMana = 0; // 장비 마나
+
+    std::vector<const Skill*> learnedSkills;
+    Random random;
+
+    const Skill* SelectSkill();
 
 public:
     const std::string& GetName() const;
@@ -73,6 +81,9 @@ public:
     void SetAdditionalAttack(int additionalAttack);
     void SetAdditionalDefense(int additionalDefense);
 
+    const std::vector<const Skill*>&
+        GetLearnedSkills() const;
+
     //무기 장착
     void SetEquippedWeapon(
         int itemID,
@@ -94,7 +105,9 @@ public:
     virtual void Attack() override;
     //플레이어 피격 함수
     virtual void TakeDamage(int damage) override;
-
+    //기본공격 분리
+    void NormalAttack();
+    void LearnAvailableSkills();
 
 };
 
