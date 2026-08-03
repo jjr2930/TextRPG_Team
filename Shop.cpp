@@ -61,6 +61,7 @@ void Shop::PrintSellMenu()
         }
 
         cout << "판매할 아이템을 선택하세요." << endl;
+        cout << "현재 골드: " << character.GetMoney() << endl;
         cout << format("1 ~ {}: 판매할 아이템", inventorySize) << endl;
         cout << "0: 종료" << endl;
         cout << "----------------------------------------" << endl;
@@ -79,12 +80,12 @@ void Shop::PrintSellMenu()
             int index = input - 1;
             const auto& item = inventoryItems[index];
             const auto& itemInfo = itemDatabase.GetItem(item.itemIdentifier);
-            float itemValue = static_cast<float>(itemInfo.value);
-            float sellPrice = itemValue * 0.6f; // 판매 가격은 아이템 가격의 60%
+            float itemValue = (float)(itemInfo.value);
+            int sellPrice = (int)(itemValue * 0.6f); // 판매 가격은 아이템 가격의 60%
             
             string itemName = itemInfo.name;
             character.GetInventory().SetItemQuantity(item.itemIdentifier, item.quantity - 1); // 판매 후 수량 감소
-            character.SetMoney(character.GetMoney() + static_cast<int>(sellPrice)); // 골드 증가
+            character.SetMoney(character.GetMoney() + sellPrice); // 골드 증가
             cout << format("판매한 아이템: {} 판매 가격: {} 현재 골드: {}", itemName, sellPrice, character.GetMoney()) << endl;
             Tools::WaitForKey();
         }
@@ -103,6 +104,7 @@ void Shop::PrintBuyMenu() {
         system("cls");
         size_t itemSize = itemDatabase.allItems.size();
         cout << "구매할 아이템을 선택하세요." << endl;
+        cout << "현재 골드: " << character.GetMoney() << endl;
         cout << format("1 ~ {}: 구매할 아이템", itemSize) << endl;
         cout << "0: 종료" << endl;
         cout << "----------------------------------------" << endl;
