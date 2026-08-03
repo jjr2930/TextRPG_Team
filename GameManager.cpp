@@ -49,31 +49,32 @@ void GameManager::ShowMainMenu() {
         std::cout << "       행동을 선택해 주세요 : ";
 
 		int select = Tools::GetIntegerInRange(1, 5);
+		MenuSelect menuSelect = static_cast<MenuSelect>(select);
 
-        switch (select)
+        switch (menuSelect)
         {
-        case 1:
+        case MenuSelect::Character:
             character.ShowCharacterInfo();
             break;
 
-        case 2:
+        case MenuSelect::Shop:
             ShopEnter();
             break;
 
-        case 3: {
+        case MenuSelect::Dungeon: {
             std::cout << "\n던전으로 입장합니다.\n";
 			Dungeon dungeon(character);
 			dungeon.EnterDungeon();
             return;
         }
 
-        case 4: {
+        case MenuSelect::GameExit: {
             std::cout << "\n게임을 종료합니다.\n";
             isGameover = true;
             return;
         }
 
-        case 5: 
+        case MenuSelect::Debug: 
             GetLevel();
             return;
 
@@ -101,9 +102,9 @@ void GameManager::MakeCharacter()
     character.ShowCharacterInfo();
 }
 
-DebugMode GameManager::GetLevel() {
+MenuSelect GameManager::GetLevel() {
 	character.SetLevel(10);
 	std::cout << "레벨10 설정" << std::endl;
-	return DebugMode::Character;
-	Tools::WaitForKey();
+    Tools::WaitForKey();
+	return MenuSelect::Debug;
 }

@@ -14,7 +14,7 @@
 #include "Boss.h"
 #include "Dungeon.h"
 
-enum class DebugMode {
+enum class MenuSelect {
 	None,
 	All,
 	Character,
@@ -44,6 +44,6 @@ public:
     bool isLevelTen = false;
 
 public:
-    DebugMode GetLevel();
+    MenuSelect GetLevel();
 
 };
