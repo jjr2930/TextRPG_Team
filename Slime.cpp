@@ -20,7 +20,7 @@ void Slime::Attack() {
 		PowerfulAttack();
 		break;
 	}
-
+	std::cin.get();
 }
 
 void Slime::TakeDamage(int damage) {
@@ -28,6 +28,7 @@ void Slime::TakeDamage(int damage) {
 	std::cout << damage << "만큼 " << name << "이 당했습니다.\n";
 	if (currentHp <= 0) 
 		std::cout << name << "죽었습니다.\n";
+	std::cin.get();
 }
 
 void Slime::NomalAttack() {
