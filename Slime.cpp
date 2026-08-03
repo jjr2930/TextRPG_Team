@@ -38,12 +38,12 @@ void Slime::NomalAttack() {
 
 void Slime::ComboAttack() {
 	std::cout << name << "이 연속 공격을 합니다!\n";
-	int totalPower = 1;
-	for (totalPower; totalPower <= 3; ++totalPower) {
-		std::cout << totalPower << " 번째 공격합니다. (" << power / 2 << ")\n";
+	int totalPower = 0;
+	for (int i = 1; i <= 3; ++i) {
+		std::cout << i << " 번째 공격합니다. (" << power / 2 << ")\n";
 		target->TakeDamage(power/2);
+		totalPower += power / 2;
 	}
-	totalPower *= power / 2;
 	std::cout << "총 공격을 " << totalPower << "하였습니다.\n";
 }
 
