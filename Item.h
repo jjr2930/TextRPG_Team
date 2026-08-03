@@ -59,7 +59,7 @@ public:
 	int effectAmount=0;
 	int upgradeAmount=0;
 	int upgradeLevel=0;
-
+	
 	//무기
 	int weaponAttack=0;
 	int weaponDefense=0;
@@ -67,7 +67,6 @@ public:
 	int weaponMaxHP=0;
 
 	void UsePotion(const Item& item, Character& character);
-	void EquipWeapon(const Item& item);
 	void UpgradeWeapon(const Item& item);
 
 	//무기 장착 시 공격력, 방어력, 최대마나, 최대체력 증가
@@ -75,11 +74,6 @@ public:
 	int GetWeaponDefense() const;
 	int GetWeaponMaxMP() const;
 	int GetWeaponMaxHP() const;
-
-	void SetWeaponAttack(int weaponAttack);
-	void SetWeaponDefense(int weaponDefense);
-	void SetWeaponMaxMP(int weaponMaxMP);
-	void SetWeaponMaxHP(int weaponMaxHP);
 	//무기 각성시 추가 공격력, 추가 방어력, 추가 최대마나, 추가 최대체력 증가
 	int GetAdditionalWeaponAttack() const;
 	int GetAdditionalWeaponDefense() const;
@@ -96,8 +90,4 @@ public:
 	int GetTotalWeaponMaxMP() const;
 	int GetTotalWeaponMaxHP() const;
 
-	void SetTotalWeaponAttack(int totalWeaponAttack);
-	void SetTotalWeaponDefense(int totalWeaponDefense);
-	void SetTotalWeaponMaxMP(int totalWeaponMaxMP);
-	void SetTotalWeaponMaxHP(int totalWeaponMaxHP);
 };

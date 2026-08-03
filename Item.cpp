@@ -38,35 +38,7 @@ void Item::UsePotion(const Item& item, Character& character){
     }
 }
 //무기 장착
-void Item::EquipWeapon(const Item& item) {
-    switch (item.itemWeapon)
-    {
-    case ItemWeapon::Staff: {
-        SetWeaponAttack(item.weaponAttack);
-        SetWeaponDefense(item.weaponDefense);
-        SetWeaponMaxMP(item.weaponMaxMP);
-        break;
-    }
-    case ItemWeapon::SwordnShield: {
-        SetWeaponAttack(item.weaponAttack);
-        SetWeaponDefense(item.weaponDefense);
-        SetWeaponMaxHP(item.weaponMaxHP);
-        break;
-    }
-    case ItemWeapon::TwoHand: {
-        SetWeaponAttack(item.weaponAttack);
-        SetWeaponDefense(item.weaponDefense);
-        SetWeaponMaxHP(item.weaponMaxHP);
-        break;
-    }
-    case ItemWeapon::Bow: {
-        SetWeaponAttack(item.weaponAttack);
-        SetWeaponDefense(item.weaponDefense);
-        SetWeaponMaxMP(item.weaponMaxMP);
-        break;
-    }
-    }
-}
+
 //무기 각성
 void Item::UpgradeWeapon(const Item& item) {
     switch (item.itemUpgrade)
@@ -114,18 +86,7 @@ int Item::GetWeaponMaxMP() const {
 int Item::GetWeaponMaxHP() const {
 	return weaponMaxHP;
 }
-void Item::SetWeaponAttack(int weaponAttack) {
-    this->weaponAttack = weaponAttack;
-}
-void Item::SetWeaponDefense(int weaponDefense) {
-    this->weaponDefense = weaponDefense;
-}
-void Item::SetWeaponMaxMP(int weaponMaxMP) {
-    this->weaponMaxMP = weaponMaxMP;
-}
-void Item::SetWeaponMaxHP(int weaponMaxHP) {
-    this->weaponMaxHP = weaponMaxHP;
-}
+
 //무기 각성 Getter/Setter
 int Item::GetAdditionalWeaponAttack() const {
 	return additionalWeaponAttack;
@@ -163,16 +124,4 @@ int Item::GetTotalWeaponMaxMP() const {
 }
 int Item::GetTotalWeaponMaxHP() const {
 	return GetWeaponMaxHP() + GetAdditionalWeaponMaxHP();
-}
-void Item::SetTotalWeaponAttack(int totalWeaponAttack) {
-	SetWeaponAttack(totalWeaponAttack);
-}
-void Item::SetTotalWeaponDefense(int totalWeaponDefense) {
-	SetWeaponDefense(totalWeaponDefense);
-}
-void Item::SetTotalWeaponMaxMP(int totalWeaponMaxMP) {
-	SetWeaponMaxMP(totalWeaponMaxMP);
-}
-void Item::SetTotalWeaponMaxHP(int totalWeaponMaxHP) {
-	SetWeaponMaxHP(totalWeaponMaxHP);
 }

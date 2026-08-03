@@ -21,6 +21,11 @@ ItemDatabase::ItemDatabase()
     item.weaponAttack = 35;
     item.weaponDefense = 5;
     item.weaponMaxMP = 30;
+	item.SetAdditionalWeaponAttack(0);
+    item.SetAdditionalWeaponDefense(0);
+    item.SetAdditionalWeaponMaxMP(0);
+    item.SetAdditionalWeaponMaxHP(0);
+	item.upgradeLevel = 0;
     allItems[item.itemID] = item;
 
     item.itemID = 1;
@@ -31,6 +36,11 @@ ItemDatabase::ItemDatabase()
     item.weaponAttack = 35;
     item.weaponDefense = 10;
     item.weaponMaxMP = 30;
+	item.SetAdditionalWeaponAttack(0);
+    item.SetAdditionalWeaponDefense(0);
+    item.SetAdditionalWeaponMaxMP(0);
+    item.SetAdditionalWeaponMaxHP(0);
+	item.upgradeLevel = 0;
     allItems[item.itemID] = item;
 
     item.itemID = 2;
@@ -179,7 +189,7 @@ ItemDatabase::ItemDatabase()
     item.name = "각성 원소(공격력)";
     item.value = 300;
     item.itemType = ItemType::UpgradeCore;
-    item.itemUpgrade = ItemUpgrade::UpgradeAttack;
+	item.itemUpgrade = ItemUpgrade::UpgradeAttack;
     item.upgradeAmount = 20;
     allItems[item.itemID] = item;
 
@@ -209,6 +219,8 @@ ItemDatabase::ItemDatabase()
 
     // 기타 아이템
 
+
+	//슬라임 관련 아이템
     item.itemID = 100;
     item.name = "슬라임 액체";
     item.value = 20;
@@ -224,6 +236,82 @@ ItemDatabase::ItemDatabase()
     item.itemID = 102;
     item.name = "슬라임 분비물";
     item.value = 40;
+    item.itemType = ItemType::Miscellaneous;
+    allItems[item.itemID] = item;
+
+	//고블린 관련 아이템
+    item.itemID = 103;
+    item.name = "고블린 이빨";
+    item.value = 40;
+    item.itemType = ItemType::Miscellaneous;
+    allItems[item.itemID] = item;
+
+    item.itemID = 104;
+    item.name = "고블린 손가락";
+    item.value = 60;
+    item.itemType = ItemType::Miscellaneous;
+    allItems[item.itemID] = item;
+
+    item.itemID = 105;
+    item.name = "고블린 갑옷";
+    item.value = 80;
+    item.itemType = ItemType::Miscellaneous;
+    allItems[item.itemID] = item;
+
+	//스켈레톤 관련 아이템
+    item.itemID = 106;
+    item.name = "뼈다귀";
+    item.value = 50;
+    item.itemType = ItemType::Miscellaneous;
+    allItems[item.itemID] = item;
+
+    item.itemID = 107;
+    item.name = "병사의 해골";
+    item.value = 70;
+    item.itemType = ItemType::Miscellaneous;
+    allItems[item.itemID] = item;
+
+    item.itemID = 108;
+    item.name = "뼛가루";
+    item.value = 90;
+    item.itemType = ItemType::Miscellaneous;
+    allItems[item.itemID] = item;
+
+	//슬라임 킹 관련 아이템
+    item.itemID = 109;
+    item.name = "슬라임 농축액";
+    item.value = 100;
+    item.itemType = ItemType::Miscellaneous;
+    allItems[item.itemID] = item;
+
+    item.itemID = 110;
+    item.name = "발효된 슬라임 구토물";
+    item.value = 150;
+    item.itemType = ItemType::Miscellaneous;
+    allItems[item.itemID] = item;
+
+    item.itemID = 111;
+    item.name = "온전한 슬라임 킹의 진주";
+    item.value = 200;
+    item.itemType = ItemType::Miscellaneous;
+    allItems[item.itemID] = item;
+
+	//스켈레톤 킹 관련 아이템
+    item.itemID = 112;
+    item.name = "왕의 강철갑옷";
+    item.value = 150;
+    item.itemType = ItemType::Miscellaneous;
+    allItems[item.itemID] = item;
+
+    item.itemID = 113;
+    item.name = "망가진 대검";
+    item.value = 200;
+    item.itemType = ItemType::Miscellaneous;
+    allItems[item.itemID] = item;
+
+    item.itemID = 114;
+    item.name = "스켈레톤 킹의 왕관";
+    item.value = 250;
     item.itemType = ItemType::Miscellaneous;
     allItems[item.itemID] = item;
 }
