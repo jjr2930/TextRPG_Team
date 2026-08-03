@@ -41,6 +41,27 @@ void Item::UsePotion(const Item& item, Character& character){
     }
     }
 }
+
+//승용: 제가 생각했던 구조는 이런거라 아예 함수를 UseItem 하나로 묶고 그 안에서 if 로 아이템 타입을 받아서
+// 무기면 착용이 되고 포션이면 사용이 되는 그런 형태면 더 낫지 않을까요
+void Item::UseWeapon(
+    const Item& item,
+    Character& character
+) {
+    if (item.itemType != ItemType::Weapon) {
+        return;
+    }
+
+    character.SetEquippedWeapon(
+        item.itemID,
+        item.weaponAttack,
+        item.weaponDefense,
+        item.weaponMaxHP,
+        item.weaponMaxMP
+    );
+}
+
+/*
 void Item::UseWeapon(const Item& item, Character& character) {
     switch (item.itemWeapon)
     {
@@ -91,3 +112,4 @@ void Item::UseWeapon(const Item& item, Character& character) {
     }
     }
 }
+*/

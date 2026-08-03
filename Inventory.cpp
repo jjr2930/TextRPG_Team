@@ -2,7 +2,6 @@
 #include <string>
 
 #include "Inventory.h"
-#include "ItemDatabases.h"
 
 
 const std::vector<Inventory::InventoryItem>& Inventory::GetItems() const
@@ -10,28 +9,40 @@ const std::vector<Inventory::InventoryItem>& Inventory::GetItems() const
     return items;
 }
 
-bool Inventory::AddItem(int itemIdentifier, int quantity) {
+bool Inventory::AddItem(const Item& item, int quantity) {
     if (quantity == 0) {
         return false;
     }
 
-    for (auto item = items.begin(); item != items.end(); ++item) {
-        if (item->itemIdentifier != itemIdentifier) {
+    if (item.itemType == ItemType::Weapon) {
+    if (quantity < 0) {
+        return false;
+    }
+
+    for (int i = 0; i < quantity; ++i) {
+        items.push_back({item, 1});
+    }
+
+    return true;
+    }
+
+    for (auto itemi = items.begin(); itemi != items.end(); ++itemi) {
+        if (itemi->item.itemID != item.itemID) {
             continue;
         }
 
-        int newQuantity = item->quantity + quantity;
+        const int newQuantity = itemi->quantity + quantity;
 
         if (newQuantity < 0) {
             return false;
         } //보유 수량보다 많이 사용/판매하는 경우
 
         if (newQuantity == 0) {
-            items.erase(item);
+            items.erase(itemi);
             return true;
         } //수량이 0이면 인벤토리에서 제거
 
-        item->quantity = newQuantity;
+        itemi->quantity = newQuantity;
         return true;
     }
 
@@ -39,7 +50,7 @@ bool Inventory::AddItem(int itemIdentifier, int quantity) {
         return false;
     } // 보유하지 않은 아이템이 음수로 추가되는것 방지
 
-    items.push_back({itemIdentifier, quantity});
+    items.push_back({item, quantity});
     //새로운 아이템인경우
     return true;
 }
@@ -52,30 +63,11 @@ void Inventory::ShowItems() const {
         return;
     }
 
-    ItemDatabase itemDatabase;
-
     for (const InventoryItem& inventoryItem : items) {
-        const auto found =
-            itemDatabase.allItems.find(
-                inventoryItem.itemIdentifier
-            );
-
-        if (found != itemDatabase.allItems.end()) {
-            const Item& item = found->second;
-
-            std::cout
-                << item.name
-                << " x"
-                << inventoryItem.quantity
-                << '\n';
-        }
-        else {
-            std::cout
-                << "알 수 없는 아이템(ID: "
-                << inventoryItem.itemIdentifier
-                << ") x"
-                << inventoryItem.quantity
-                << '\n';
-        }
+        std::cout
+            << inventoryItem.item.name
+            << " x"
+            << inventoryItem.quantity
+            << '\n';
     }
 }

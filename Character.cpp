@@ -13,16 +13,20 @@ int Character::GetCurrentHP() const {
 }
 
 int Character::GetMaxHP() const {
-    return maximumHealth + additionalMaximumHealth;
-} //최대체력과 추가체력의 합산을 get
+    return maximumHealth
+        + additionalMaximumHealth
+        + gearMaxHealth;
+} //체력 + 추가체력 + 장비체력
 
 int Character::GetCurrentMP() const {
     return currentMana;
 }
 
 int Character::GetMaxMP() const {
-    return maximumMana + additionalMaximumMana;
-} //최대마나와 추가마나의 합산을 get
+    return maximumMana
+        + additionalMaximumMana
+        + gearMaxMana;
+} //마나 + 추가마나 + 장비마나
 
 int Character::GetCurrentEXP() const {
     return currentExperience;
@@ -37,12 +41,16 @@ int Character::GetLevel() const {
 }
 
 int Character::GetAttack() const {
-    return attack + additionalAttack;
-} //공격력과 추가공격력의 합산을 get
+    return attack
+        + additionalAttack
+        + gearAttack;
+} //공격력 + 추가공격력 + 장비공격력
 
 int Character::GetDefense() const {
-    return defense + additionalDefense;
-} //방어력과 추가방어력의 합산을 get
+    return defense
+        + additionalDefense
+        + gearDefense;
+} //방어력과 + 추가방어력 + 장비방어력
 
 int Character::GetMoney() const {
     return money;
@@ -70,6 +78,31 @@ const Job* Character::GetJob() const {
 
 Inventory& Character::GetInventory() {
     return inventory;
+}
+
+int Character::GetCurrentEquippedWeapon() const
+{
+    return currentEquippedWeapon;
+}
+
+int Character::GetGearAttack() const
+{
+    return gearAttack;
+}
+
+int Character::GetGearDefense() const
+{
+    return gearDefense;
+}
+
+int Character::GetGearMaxHealth() const
+{
+    return gearMaxHealth;
+}
+
+int Character::GetGearMaxMana() const
+{
+    return gearMaxMana;
 }
 
 void Character::SetName(const std::string& name) {
@@ -177,12 +210,12 @@ void Character::ShowCharacterInfo() const {
     << GetMaxMP()
     << '\n';
 
-    std::cout << "공격력 : " << attack;
+    std::cout << "공격력 : " << GetAttack();
     if (additionalAttack > 0)
         std::cout << " (+" << additionalAttack << ')';
     std::cout << '\n';
 
-    std::cout << "방어력 : " << defense;
+    std::cout << "방어력 : " << GetDefense();
     if (additionalDefense > 0)
         std::cout << " (+" << additionalDefense << ')';
     std::cout << '\n';
@@ -199,8 +232,8 @@ void Character::LevelUP() {
 
     maximumHealth += level * 20;
     maximumMana += level * 20;
-    currentHealth = maximumHealth;
-    currentMana = maximumMana;
+    currentHealth = GetMaxHP();
+    currentMana = GetMaxMP();
 
     attack += level * 5;
     defense += level * 5;
@@ -251,4 +284,40 @@ void Character::TakeDamage(int damage) {
         << GetMaxHP()
         << '\n';
     }
+}
+
+void Character::SetEquippedWeapon(
+    int itemID,
+    int weaponAttack,
+    int weaponDefense,
+    int weaponMaxHealth,
+    int weaponMaxMana
+) {
+    if (itemID < 0) {
+        return;
+    }
+
+    currentEquippedWeapon = itemID;
+
+    gearAttack = weaponAttack;
+    gearDefense = weaponDefense;
+    gearMaxHealth = weaponMaxHealth;
+    gearMaxMana = weaponMaxMana;
+
+    // 장비 교체로 최대치가 감소했을 경우 보정
+    currentHealth = std::min(currentHealth, GetMaxHP());
+    currentMana = std::min(currentMana, GetMaxMP());
+}
+
+void Character::ClearEquippedWeapon()
+{
+    currentEquippedWeapon = noWeapon;
+
+    gearAttack = 0;
+    gearDefense = 0;
+    gearMaxHealth = 0;
+    gearMaxMana = 0;
+
+    currentHealth = std::min(currentHealth, GetMaxHP());
+    currentMana = std::min(currentMana, GetMaxMP());
 }

@@ -1,23 +1,26 @@
 ﻿#pragma once
 #include <vector>
+#include "Item.h"
 
 class Inventory {
-private:
+public:
     struct InventoryItem {
-        int itemIdentifier;
+        Item item;
         int quantity;
     };
 
+private:
     std::vector<InventoryItem> items;
 
 public:
     const std::vector<InventoryItem>& GetItems() const;
-    bool AddItem(int itemIdentifier, int quantity);
+    bool AddItem(const Item& item, int quantity);
     void ShowItems() const;
-    void SetItemQuantity(int itemIdentifier, int quantity) {
+
+    void SetItemQuantity(int itemID, int quantity) {
         size_t size = items.size();
         for (size_t i = 0; i < size; ++i) {
-            if (items[i].itemIdentifier == itemIdentifier) {
+            if (items[i].item.itemID == itemID) {
                 items[i].quantity = quantity;
                 if (items[i].quantity <= 0) {
                     items.erase(items.begin() + i);
