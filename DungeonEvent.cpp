@@ -15,8 +15,8 @@ void DungeonEvent::LoseGold(int minGold, int maxGold) {
 	character.SetMoney(std::max(0, character.GetMoney() - gold));
 }
 
-void DungeonEvent::AddItem(int itemIdentifier, int quantity) {
-	character.GetInventory().AddItem(itemIdentifier, quantity);
+void DungeonEvent::AddItem(Item item, int quantity) {
+	character.GetInventory().AddItem(item, quantity);
 }
 
 void DungeonEvent::RestoreHealth(int minHealth, int maxHealth) {
@@ -77,7 +77,7 @@ GameState DungeonEvent::Encounter() {
     character.SetCurrentEXP(character.GetCurrentEXP() + monster.GetDropExp());
     character.SetMoney(character.GetMoney() + monster.RandomGold());
 
-    if (character.GetCurrentEXP() >= character.GetMaxEXP()) character.CharacterLevelUP();
+    if (character.GetCurrentEXP() >= character.GetMaxEXP()) character.LevelUP();
 
     std::cout << std::endl << "현재 EXP : " << character.GetCurrentEXP() << "/" << character.GetMaxEXP() << ", 골드 : " << character.GetMoney() << std::endl;
 	
