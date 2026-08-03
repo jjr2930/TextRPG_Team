@@ -162,6 +162,7 @@
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Shop.cpp" />
     <ClCompile Include="SkeletonKing.cpp" />
+    <ClCompile Include="skeleton.cpp" />
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="SlimeKing.cpp" />
     <ClCompile Include="Tools.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="Random.h" />
     <ClInclude Include="Shop.h" />
     <ClInclude Include="SkeletonKing.h" />
+    <ClInclude Include="skeleton.h" />
     <ClInclude Include="Slime.h" />
     <ClInclude Include="SlimeKing.h" />
     <ClInclude Include="Tools.h" />
