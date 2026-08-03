@@ -151,7 +151,7 @@ void GameManager::ShowMainMenu() {
 
 void GameManager::LevelUp() {
     if (character.GetCurrentEXP() >= 100) {
-        character.CharacterLevelUP();
+        character.LevelUP();
         std::cout << "레벨 업!      LV " << character.GetLevel() - 1 << " ->  LV " << character.GetLevel() << std::endl;
     }
 };

@@ -157,10 +157,12 @@
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemDatabases.cpp" />
+    <ClCompile Include="job.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Shop.cpp" />
+    <ClCompile Include="skill.cpp" />
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="Tools.cpp" />
   </ItemGroup>
@@ -179,10 +181,12 @@
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemDatabases.h" />
+    <ClInclude Include="job.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Shop.h" />
+    <ClInclude Include="skill.h" />
     <ClInclude Include="Slime.h" />
     <ClInclude Include="Tools.h" />
   </ItemGroup>
