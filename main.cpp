@@ -13,12 +13,13 @@ int main(int argc, char *argv[])
 
 
     GameManager gameManager;
+
     while (!gameManager.isGameover) {
-        gameManager.Encounter();
+        gameManager.ShowMainMenu();
         if (gameManager.isGameover) {
             break;
         }
-        gameManager.ShowMainMenu();
+
     }
     return 0;
 }

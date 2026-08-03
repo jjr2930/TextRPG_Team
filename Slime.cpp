@@ -6,6 +6,7 @@
 
 Slime::Slime(Item* item, int level) : Monster("Slime", 20, 30, 5, 10, 30, item, 20, level) {};
 
+// 공격 메서드 - 랜덤으로 공격이 실행됨
 void Slime::Attack() {
 	int num = random.GetRandomValue(0, 2);
 	switch (num) {
@@ -19,7 +20,7 @@ void Slime::Attack() {
 		PowerfulAttack();
 		break;
 	}
-
+	std::cin.get();
 }
 
 void Slime::TakeDamage(int damage) {
@@ -27,6 +28,7 @@ void Slime::TakeDamage(int damage) {
 	std::cout << damage << "만큼 " << name << "이 당했습니다.\n";
 	if (currentHp <= 0) 
 		std::cout << name << "죽었습니다.\n";
+	std::cin.get();
 }
 
 void Slime::NomalAttack() {

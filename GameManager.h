@@ -12,19 +12,19 @@
 #include "ItemDatabases.h"
 #include "Inventory.h"
 #include "Boss.h"
+#include "Dungeon.h"
 
 
 class GameManager {
 private:
-public:
-    GameManager();
-    void Battle(Monster* monster);
-
-    //TODO: 멤버변수는 특별한 사유가 없다면 숨겨야함 고로 private;
     Character character; // gamemanager 생성 시 캐릭터 생성
     ItemDatabase itemDatabase;
 
 public:
+    GameManager();
+
+public:
+    void Battle(Monster* monster);
     void Encounter();
     bool IsCharacterDead(int hp);
     bool IsMonsterDead(int hp);
