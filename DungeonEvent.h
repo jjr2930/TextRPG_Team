@@ -63,8 +63,9 @@ protected:
 	Character& GetCharacter();
 
 public:
-	virtual void RunRandomEvent(Character& character) = 0; // 맵별 일반 이벤트 구현 지점
-	virtual void RunBossEvent() = 0;                       // 맵별 보스 이벤트 구현 지점
+	// 이벤트 결과를 반환해 상위 던전 진행이 사망·승리를 판단할 수 있게 한다.
+	virtual GameState RunRandomEvent(Character& character) = 0; // 맵별 일반 이벤트 구현 지점
+	virtual GameState RunBossEvent() = 0;                       // 맵별 보스 이벤트 구현 지점
 	virtual ~DungeonEvent() = default;                     // 부모 포인터 삭제를 위한 가상 소멸자
 
 private:

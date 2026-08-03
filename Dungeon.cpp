@@ -11,15 +11,15 @@ Dungeon::Dungeon(Character& character)
 
 
 // 새 입장마다 이전 진행도를 초기화하고, 선택이 성공한 경우에만 던전을 시작한다.
-void Dungeon::EnterDungeon() {
+GameState Dungeon::EnterDungeon() {
 	dungeonFinished = false;
 	currentDungeonLength = 0;
 
 	std::cout << "앞에 여러가지 던전의 입구가 보입니다." << std::endl;
 	if (!SelectDungeonPath()) {
-		return;
+		return GameState::Playing;
 	}
-	StartDungeon();
+	return StartDungeon();
 }
 
 // 목록을 출력하고 선택한 맵의 설정과 전용 이벤트 객체를 준비한다.
@@ -63,7 +63,7 @@ bool Dungeon::SelectDungeonPath() {
 }
 
 // 던전 설명을 보여 주고 플레이어가 진행을 확정하면 실제 이벤트 루프로 이동한다.
-void Dungeon::StartDungeon() {
+GameState Dungeon::StartDungeon() {
 	std::cout << selectedMap << "으로 나아갑니다..." << std::endl << std::endl;
 	Tools::WaitForKey();
 	system("cls");
@@ -78,45 +78,53 @@ void Dungeon::StartDungeon() {
 	switch (choice) {
 	case 1: {
 		std::cout << "앞으로 나아갑니다..." << std::endl;
-		ProcessDungeon();
-		break;
+		return ProcessDungeon();
 	}
 	case 2: {
 		std::cout << "물러섭니다. 거점으로 돌아갑니다..." << std::endl;
-		return;
+		return GameState::Playing;
 	}
 	default:
 		break;
 	}
+
+	return GameState::Playing;
 }
 
 // 던전 길이만큼 일반 이벤트를 처리한 후 보스 이벤트를 한 번 실행한다.
-void Dungeon::ProcessDungeon() {
+GameState Dungeon::ProcessDungeon() {
 	while (currentDungeonLength < dungeonLength) {
-		HandleDungeonEvent();
+		// 도중에 사망하면 남은 이벤트와 보스를 건너뛰고 즉시 결과를 전달한다.
+		GameState eventResult = HandleDungeonEvent();
+		if (eventResult != GameState::Playing) {
+			return eventResult;
+		}
+
 		++currentDungeonLength;
 	}
-	EncounterBossEvent();
+	return EncounterBossEvent();
 }
 
 // 이벤트 객체가 정상 생성된 경우에만 무작위 이벤트를 실행한다.
-void Dungeon::HandleDungeonEvent() {
+GameState Dungeon::HandleDungeonEvent() {
 	if (!dungeonEvent)
-		return;
+		return GameState::Playing;
 
 	// 가상 함수를 통해 실제 맵에 해당하는 자식 클래스의 구현이 호출된다.
-	dungeonEvent->RunRandomEvent(character);
+	GameState eventResult = dungeonEvent->RunRandomEvent(character);
 	Tools::WaitForKey();
+	return eventResult;
 }
 
 // 현재 맵 전용 보스 이벤트를 실행하고 던전을 완료 상태로 바꾼다.
-void Dungeon::EncounterBossEvent() {
+GameState Dungeon::EncounterBossEvent() {
 	if (!dungeonEvent)
-		return;
+		return GameState::Playing;
 
-	dungeonEvent->RunBossEvent();
+	GameState bossResult = dungeonEvent->RunBossEvent();
 	Tools::WaitForKey();
 	FinishDungeon();
+	return bossResult;
 }
 
 // 이후 흐름에서 던전 종료 여부를 확인할 수 있도록 상태만 기록한다.

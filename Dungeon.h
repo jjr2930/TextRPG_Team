@@ -23,13 +23,14 @@ public:
 	// GameManager가 보유한 캐릭터를 참조로 받아 같은 상태를 계속 사용한다.
 	Dungeon(Character& character);
 	
-	void EnterDungeon();          // 진행 상태를 초기화하고 던전 선택을 시작한다.
-	void StartDungeon();          // 선택한 던전 설명과 최종 입장 여부를 처리한다.
-	bool SelectDungeonPath();     // 맵을 선택하고 해당 이벤트 객체를 생성한다.
-	void ProcessDungeon();        // 정해진 길이만큼 일반 이벤트를 반복한다.
-	void HandleDungeonEvent();    // 현재 맵의 무작위 일반 이벤트 하나를 실행한다.
-	void EncounterBossEvent();   // 현재 맵의 보스 이벤트를 실행한다.
-	void FinishDungeon();         // 던전 완료 상태를 기록한다.
+	// 던전 도중 사망하거나 최종 승리할 수 있으므로 진행 결과를 호출자에게 돌려준다.
+	GameState EnterDungeon();          // 진행 상태를 초기화하고 던전 선택을 시작한다.
+	GameState StartDungeon();          // 선택한 던전 설명과 최종 입장 여부를 처리한다.
+	bool SelectDungeonPath();          // 맵을 선택하고 해당 이벤트 객체를 생성한다.
+	GameState ProcessDungeon();        // 정해진 길이만큼 일반 이벤트를 반복한다.
+	GameState HandleDungeonEvent();    // 현재 맵의 무작위 일반 이벤트 하나를 실행한다.
+	GameState EncounterBossEvent();    // 현재 맵의 보스 이벤트를 실행한다.
+	void FinishDungeon();              // 던전 완료 상태를 기록한다.
 
 private:
 	Character& character;                              // GameManager가 소유한 플레이어
