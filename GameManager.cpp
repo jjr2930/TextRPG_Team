@@ -17,7 +17,7 @@ void GameManager::Battle(Monster* monster) {
     while (true) {
         character.DoMyTurn();
 
-        if (IsMonsterDead(monster->GetHp())) {
+        if (IsMonsterDead(monster->GetCurrentHp())) {
             std::cout << "몬스터 " << monster->GetName() << "(을)를 처치했습니다!" << std::endl;
             break;
         }
@@ -36,7 +36,7 @@ void GameManager::Encounter() {
         Slime monster(nullptr, character.GetLevel()); // 나중에 슬라임 드롭아이템 넣을것
         system("cls");
         std::cout << "몬스터 " << monster.GetName() << "(이)가 난입했습니다. 전투 시작!" << std::endl;
-        std::cout << "체력 : " << monster.GetHp() << ", 공격력 : " << monster.GetPower() << std::endl;
+        std::cout << "체력 : " << monster.GetCurrentHp() << ", 공격력 : " << monster.GetPower() << std::endl;
         WaitForKey();
 
         Battle(&monster);
@@ -113,19 +113,7 @@ void GameManager::ShowMainMenu() {
         std::cout << "----------------------------------------\n";
         std::cout << "       행동을 선택해 주세요 : ";
 
-        int select = 0;
-        if (!(std::cin >> select))
-        {
-            std::cin.clear();
-            std::cin.ignore(
-                std::numeric_limits<std::streamsize>::max(),
-                '\n'
-            );
-
-            std::cout << "\n숫자만 입력해 주세요.\n";
-            WaitForKey();
-            continue;
-        }
+		int select = GetIntegerInRange(1, 4);
 
         switch (select)
         {
@@ -147,8 +135,6 @@ void GameManager::ShowMainMenu() {
             return;
         }
         default: {
-            std::cout << "\n1~4 중에서 선택해 주세요.\n";
-            WaitForKey();
             break;
         }
         }
