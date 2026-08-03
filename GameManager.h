@@ -15,11 +15,11 @@
 #include "Dungeon.h"
 
 enum class MenuSelect {
-	None,
-	All,
-	Character,
-	Shop,
-	Dungeon
+	Character = 1,
+	Shop = 2,
+	Dungeon = 3,
+	GameExit = 4,
+    Debug = 5
 };
 
 class GameManager {

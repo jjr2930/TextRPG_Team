@@ -25,8 +25,7 @@ void Shop::PrintMainMenu() {
         cout << "3. 종료" << endl;
 
         SelectedMenuType choice;
-        int input;
-        cin >> input;
+		int input = Tools::GetIntegerInRange(1, 3);
         choice = static_cast<SelectedMenuType>(input);
         switch (choice) {
             case SelectedMenuType::Sell:
