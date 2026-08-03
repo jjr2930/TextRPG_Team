@@ -39,7 +39,7 @@ void Goblin::ComboAttack() {
 	std::cout << name << "이 연속 공격을 합니다!!\n";
 	int totalPower = 1;
 	int randomNum = random.GetRandomValue(2, 6);
-	for (totalPower; totalPower < randomNum; totalPower++) {
+	for (totalPower; totalPower < randomNum; ++totalPower) {
 		std::cout << totalPower << "번째 공격합니다. (" << power / 3 << ")\n";
 		target->TakeDamage(power / 3);
 	}
