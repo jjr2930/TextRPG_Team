@@ -16,6 +16,10 @@
     <ClCompile Include="Dungeon.cpp" />
     <ClCompile Include="DungeonEvent.cpp" />
     <ClCompile Include="Tools.cpp" />
+    <ClCompile Include="DungeonEvent_DemonCastle.cpp" />
+    <ClCompile Include="DungeonEvent_GreenSlimeForest.cpp" />
+    <ClCompile Include="DungeonEvent_UndeadTomb.cpp" />
+    <ClCompile Include="DungeonEventCollection.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Monster.h" />
@@ -31,7 +35,10 @@
     <ClInclude Include="Random.h" />
     <ClInclude Include="Dungeon.h" />
     <ClInclude Include="DungeonEvent.h" />
-    <ClInclude Include="GreenSlimeForest.h" />
+    <ClInclude Include="DungeonEventCollection.h" />
+    <ClInclude Include="DungeonEvent_DemonCastle.h" />
+    <ClInclude Include="DungeonEvent_GreenSlimeForest.h" />
+    <ClInclude Include="DungeonEvent_UndeadTomb.h" />
     <ClInclude Include="Tools.h" />
   </ItemGroup>
   <ItemGroup>
