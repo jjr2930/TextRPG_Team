@@ -24,10 +24,6 @@ public:
     GameManager();
 
 public:
-    void Battle(Monster* monster);
-    void Encounter();
-    bool IsCharacterDead(int hp);
-    bool IsMonsterDead(int hp);
     void ShopEnter();
     void Gameover();
     void Win();

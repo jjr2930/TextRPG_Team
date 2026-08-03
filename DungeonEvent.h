@@ -7,6 +7,8 @@
 #include "Random.h"
 #include "Character.h"
 #include "Tools.h"
+#include "Monster.h"
+#include "Slime.h"
 
 enum class DungeonEventType {
 	Exploration,
@@ -25,6 +27,13 @@ enum class DungeonEventEffectType {
 	MonsterEncounter
 };
 
+enum class GameState {
+	Playing,
+	GameOver,
+	Win
+};
+
+
 class DungeonEvent {
 
 protected:
@@ -36,10 +45,14 @@ protected:
 	void RestoreHealth(int minHealth, int maxHealth);
 	void DamageHealth(int minDamage, int maxDamage);
 	void StartMonsterEncounter();
-	DungeonEventType GetRandomEventType();
+	GameState Battle(Monster* monster);
+	GameState Encounter();
+	bool IsCharacterDead(int currentHealth);
+	bool IsMonsterDead(int currentHealth);
+	DungeonEventType GetRandomEventType(Character& character);
 
 public:
-	virtual void RunRandomEvent() = 0;
+	virtual void RunRandomEvent(Character& character) = 0;
 	virtual void RunBossEvent() = 0;
 	virtual ~DungeonEvent() = default;
 
