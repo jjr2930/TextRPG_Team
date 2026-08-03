@@ -14,6 +14,13 @@
 #include "Boss.h"
 #include "Dungeon.h"
 
+enum class MenuSelect {
+	Character = 1,
+	Shop = 2,
+	Dungeon = 3,
+	GameExit = 4,
+    Debug = 5
+};
 
 class GameManager {
 private:
@@ -24,10 +31,6 @@ public:
     GameManager();
 
 public:
-    void Battle(Monster* monster);
-    void Encounter();
-    bool IsCharacterDead(int hp);
-    bool IsMonsterDead(int hp);
     void ShopEnter();
     void Gameover();
     void Win();
@@ -39,4 +42,8 @@ public:
     bool isGameover = false;
     bool isWin = false;
     bool isLevelTen = false;
+
+public:
+    MenuSelect GetLevel();
+
 };
