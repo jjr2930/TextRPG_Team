@@ -49,7 +49,7 @@ void DemonCastleEvent::RunBossEvent() {
 
 	std::cout << "보스 이벤트 발생!" << std::endl;
 
-	Boss boss(nullptr, GetCharacter().GetLevel());
+	DemonKing boss(nullptr, GetCharacter().GetLevel());
 
 	std::cout << boss.GetName() << "(이)가 등장했습니다!\n";
 	std::cout << "체력: " << boss.GetCurrentHp()

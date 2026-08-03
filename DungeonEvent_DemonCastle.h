@@ -1,7 +1,7 @@
 #pragma once
 
 #include "DungeonEvent.h"
-#include "Boss.h"
+#include "DemonKing.h"
 
 class DemonCastleEvent final : public DungeonEvent {
 public:
