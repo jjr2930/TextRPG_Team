@@ -11,8 +11,7 @@
 #include "Slime.h"
 #include "ItemDatabases.h"
 #include "Inventory.h"
-#include "Boss.h"
-#include "Dungeon.h"
+#include "DemonKing.h"
 
 
 class GameManager {

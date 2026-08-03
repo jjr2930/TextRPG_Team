@@ -55,8 +55,8 @@ void GameManager::Encounter() {
         }
     }
 	else if (isLevelTen) {
-		Boss boss(nullptr, character.GetLevel());
-		Battle(&boss);
+        DemonKing DemonKing(nullptr, character.GetLevel());
+		Battle(&DemonKing);
 	}
 
 

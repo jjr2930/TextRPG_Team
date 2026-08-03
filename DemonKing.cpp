@@ -1,14 +1,14 @@
 #include <iostream>
 #include <string>
-#include "Boss.h"
+#include "DemonKing.h"
 #include "Character.h"
 
-Boss::Boss(Item* item, int level)
-	: Monster(" 오지게 강한 마왕 ", 40, 60, 10, 20, 100, item, 1000, level) {}
+DemonKing::DemonKing(Item* item, int level)
+	: Monster(" 악마들의 정점 - 마왕 ", 80, 100, 20, 30, 100, item, 500, level) {}
 
-Boss::~Boss() {}
+DemonKing::~DemonKing() {}
 
-void Boss::Attack() {
+void DemonKing::Attack() {
 	
 
 	int currentPower = power;
@@ -34,7 +34,7 @@ void Boss::Attack() {
 	
 }
 
-void Boss::TakeDamage(int damage) {
+void DemonKing::TakeDamage(int damage) {
 
 	/* int finalDamage = (int)damage;
 		if (finalDamage < 0)
@@ -66,9 +66,7 @@ void Boss::TakeDamage(int damage) {
 		std::cout << " 모든 마력을 폭발시킨 마력이 마왕과 마검에 깃들어 마왕이 더욱 강해집니다.\n" << std::endl;
 		std::cout << " [각성 모드}: 마왕에 공격력이 2배가 됩니다.\n" << std::endl;
 		std::cin.get();
-	}
-
-	std::cout << "마왕에 성스러운 마검에 " << damage << " 대미지를 입었습니다.\n" << std::endl;      
+	}   
 
 	if (currentHp <= 0) {                                      
 		std::cout << "===================================================\n" << std::endl;

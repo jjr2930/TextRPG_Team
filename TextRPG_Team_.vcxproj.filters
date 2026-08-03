@@ -9,7 +9,7 @@
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemDatabases.cpp" />
-    <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="DemonKing.cpp" />
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="Battle.cpp" />
     <ClCompile Include="Random.cpp" />
@@ -21,6 +21,8 @@
     <ClCompile Include="DungeonEvent_GreenSlimeForest.cpp" />
     <ClCompile Include="DungeonEvent_UndeadTomb.cpp" />
     <ClCompile Include="DungeonEventCollection.cpp" />
+    <ClCompile Include="SlimeKing.cpp" />
+    <ClCompile Include="SkeletonKing.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Monster.h" />
@@ -30,7 +32,7 @@
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemDatabases.h" />
-    <ClInclude Include="Boss.h" />
+    <ClInclude Include="DemonKing.h" />
     <ClInclude Include="Slime.h" />
     <ClInclude Include="Battle.h" />
     <ClInclude Include="Random.h" />
@@ -42,6 +44,8 @@
     <ClInclude Include="DungeonEvent_UndeadTomb.h" />
     <ClInclude Include="Tools.h" />
     <ClInclude Include="Goblin.h" />
+    <ClInclude Include="SlimeKing.h" />
+    <ClInclude Include="SkeletonKing.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
