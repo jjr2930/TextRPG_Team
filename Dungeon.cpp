@@ -21,22 +21,21 @@ void Dungeon::EnterDungeon() {
 void Dungeon::SelectDungeonPath() {
 	std::cout << "들어갈 던전을 선택하세요." << std::endl << std::endl;
 
+	int dungeonNumber = 1;
 	for (DungeonMap& path : dungeonPaths) {
-		std::cout << path.mapID + 1 << ".		난이도: " << path.difficultyIcon << "  " << path.dungeonName << std::endl;
+		std::cout << dungeonNumber << ".		난이도: " << path.difficultyIcon << "  " << path.dungeonName << std::endl;
+		++dungeonNumber;
 	}
-
-	int selectedPathIndex = 0;
 
 	selectedPathIndex = Tools::GetIntegerInRange(1, (int)dungeonPaths.size()) - 1; 
 	
 	const DungeonMap& selectedPath = dungeonPaths[selectedPathIndex];
 
 	selectedMap = selectedPath.dungeonName;
-	selectedMapID = selectedPath.mapID;
 	selectedDifficultyIcon = selectedPath.difficultyIcon;
 	selectedDifficultyLevel = selectedPath.difficultyLevel;
 
-	dungeonEvent = dungeonEventCollection.CreateDungeonEvent(selectedMapID);
+	dungeonEvent = dungeonEventCollection.CreateDungeonEvent(selectedPath.mapType);
 
 	dungeonLength = random.GetRandomValue(7, 14);
 }
@@ -46,7 +45,7 @@ void Dungeon::StartDungeon() {
 	Tools::WaitForKey();
 	system("cls");
 
-	std::cout << dungeonDescriptions[selectedMapID] << std::endl;
+	std::cout << dungeonDescriptions[selectedPathIndex] << std::endl;
 	std::cout << "선택지를 골라주십시오." << std::endl;
 	std::cout << "1. 앞으로 나아간다." << std::endl;
 	std::cout << "2. 아직은 때가 아니다. 물러선다." << std::endl;

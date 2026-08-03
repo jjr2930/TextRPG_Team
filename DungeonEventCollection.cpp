@@ -7,15 +7,15 @@ DungeonEventCollection::DungeonEventCollection(Character& character)
 {
 }
 
-std::unique_ptr<DungeonEvent> DungeonEventCollection::CreateDungeonEvent(int mapID) {
-	switch (mapID) {
-	case 0:
+std::unique_ptr<DungeonEvent> DungeonEventCollection::CreateDungeonEvent(DungeonMapType mapType) {
+	switch (mapType) {
+	case DungeonMapType::GreenSlimeForest:
 		return std::make_unique<GreenSlimeForestEvent>(character);
-	case 1:
+	case DungeonMapType::UndeadTomb:
 		return std::make_unique<UndeadTombEvent>(character);
-	case 2:
+	case DungeonMapType::DemonCastle:
 		return std::make_unique<DemonCastleEvent>(character);
 	default:
-		throw std::out_of_range("존재하지 않는 던전 맵 ID입니다.");
+		throw std::out_of_range("존재하지 않는 던전 맵 종류입니다.");
 	}
 }
