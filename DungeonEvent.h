@@ -1,10 +1,12 @@
 #pragma once
 
-#include <memory>
+#include <functional>
 #include <string>
 #include <vector>
 
 #include "Random.h"
+#include "Character.h"
+#include "Tools.h"
 
 enum class DungeonEventType {
 	Exploration,
@@ -13,25 +15,35 @@ enum class DungeonEventType {
 	Rest
 };
 
-struct DungeonEventData {
-	DungeonEventType eventType;
-	std::string eventName;
-	std::string description;
+enum class DungeonEventEffectType {
+	None,
+	ItemAddition,
+	HealthRecovery,
+	HealthDamage,
+	GoldGain,
+	GoldLoss,
+	MonsterEncounter
 };
 
 class DungeonEvent {
-public:
-	virtual ~DungeonEvent() = default;
-
-	const DungeonEventData& GetRandomEvent();
-	const std::vector<DungeonEventData>& GetEvents() const;
 
 protected:
-	DungeonEvent(std::vector<DungeonEventData> events);
+	explicit DungeonEvent(Character& character);
+
+	void GiveGold(int minGold, int maxGold);
+	void LoseGold(int minGold, int maxGold);
+	void AddItem(int itemIdentifier, int quantity);
+	void RestoreHealth(int minHealth, int maxHealth);
+	void DamageHealth(int minDamage, int maxDamage);
+	void StartMonsterEncounter();
+	DungeonEventType GetRandomEventType();
+
+public:
+	virtual void RunRandomEvent() = 0;
+	virtual void RunBossEvent() = 0;
+	virtual ~DungeonEvent() = default;
 
 private:
+	Character& character;
 	Random random;
-	std::vector<DungeonEventData> events;
 };
-
-std::unique_ptr<DungeonEvent> CreateDungeonEvent(int mapID);
