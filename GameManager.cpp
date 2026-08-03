@@ -107,41 +107,43 @@ void GameManager::ShowMainMenu() {
         std::cout << "\n";
         std::cout << "       [1] 캐릭터 상태 보기\n";
         std::cout << "       [2] 상점 들어가기\n";
-        std::cout << "       [3] 몬스터 만나기\n";
-        std::cout << "       [4] 던전 입장\n";
-        std::cout << "       [5] 게임 종료\n";
+        std::cout << "       [3] 던전 입장\n";
+        std::cout << "       [4] 게임 종료\n";
+        std::cout << "       [5] 디버그 : 레벨10설정 <- 던전3 들어가는데 사용\n"; // 나중에 제거
         std::cout << "\n";
         std::cout << "----------------------------------------\n";
         std::cout << "       행동을 선택해 주세요 : ";
 
 		int select = Tools::GetIntegerInRange(1, 5);
+		MenuSelect menuSelect = static_cast<MenuSelect>(select);
 
-        switch (select)
+        switch (menuSelect)
         {
-        case 1:
+        case MenuSelect::Character:
             character.ShowCharacterInfo();
             break;
 
-        case 2:
+        case MenuSelect::Shop:
             ShopEnter();
             break;
 
-        case 3:
-			Encounter();
-            return;
-
-        case 4: {
+        case MenuSelect::Dungeon: {
             std::cout << "\n던전으로 입장합니다.\n";
 			Dungeon dungeon(character);
 			dungeon.EnterDungeon();
             return;
         }
 
-        case 5: {
+        case MenuSelect::GameExit: {
             std::cout << "\n게임을 종료합니다.\n";
             isGameover = true;
             return;
         }
+
+        case MenuSelect::Debug: 
+            GetLevel();
+            return;
+
         default: {
             break;
         }
@@ -151,7 +153,7 @@ void GameManager::ShowMainMenu() {
 
 void GameManager::LevelUp() {
     if (character.GetCurrentEXP() >= 100) {
-        character.CharacterLevelUP();
+        character.LevelUP();
         std::cout << "레벨 업!      LV " << character.GetLevel() - 1 << " ->  LV " << character.GetLevel() << std::endl;
     }
 };
@@ -166,3 +168,9 @@ void GameManager::MakeCharacter()
     character.ShowCharacterInfo();
 }
 
+MenuSelect GameManager::GetLevel() {
+	character.SetLevel(10);
+	std::cout << "레벨10 설정" << std::endl;
+    Tools::WaitForKey();
+	return MenuSelect::Debug;
+}
