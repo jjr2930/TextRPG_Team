@@ -149,6 +149,7 @@
     <ClCompile Include="Dungeon.cpp" />
     <ClCompile Include="DungeonEvent.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Goblin.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemDatabases.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="DungeonEvent.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GreenSlimeForest.h" />
+    <ClInclude Include="Goblin.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemDatabases.h" />

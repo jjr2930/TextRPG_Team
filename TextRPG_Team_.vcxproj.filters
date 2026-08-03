@@ -16,6 +16,7 @@
     <ClCompile Include="Dungeon.cpp" />
     <ClCompile Include="DungeonEvent.cpp" />
     <ClCompile Include="Tools.cpp" />
+    <ClCompile Include="Goblin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Monster.h" />
@@ -33,6 +34,7 @@
     <ClInclude Include="DungeonEvent.h" />
     <ClInclude Include="GreenSlimeForest.h" />
     <ClInclude Include="Tools.h" />
+    <ClInclude Include="Goblin.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
