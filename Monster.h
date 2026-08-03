@@ -10,16 +10,17 @@ class Item;
 
 class Monster : public Battle {
 protected:
-	Random random;
-	std::string name;
-	int maxHp;
-	int currentHp;
-	int power;
-	int dropExp;
-	Item* item;
-	int gold;
+	Random random;	// 랜덤 클래스
+	std::string name;	// 이름
+	int maxHp;				//최대 체력
+	int currentHp;			// 현재 체력
+	int power;				// 공격력
+	int dropExp;			// 드랍 경험치
+	Item* item;			// 아이템
+	int gold;					// 드랍하는 골드
 
 public:
+	// 몬스터 생성자
 	Monster(std::string name, int minHp, int maxHp, int minPower, int maxPower, int dropExp, Item* item, int price, int level);
 	int GetCurrentHp();
 	int GetPower();
