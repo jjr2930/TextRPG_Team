@@ -3,10 +3,12 @@
 
 
 Monster::Monster(std::string name, int minHp, int maxHp, int minPower, int maxPower, int dropExp, Item* item, int gold, int level)
-	: name(name), hp(RandomHp(minHp, maxHp, level)), power(RandomPower(minPower, maxPower, level)), dropExp(dropExp), item(item), gold(gold) {}
+	: name(name), maxHp(RandomHp(minHp, maxHp, level)), power(RandomPower(minPower, maxPower, level)), dropExp(dropExp), item(item), gold(gold) {
+    currentHp = maxHp;
+}
 
-int Monster::GetHp() { 
-    return hp; 
+int Monster::GetCurrentHp() { 
+    return currentHp; 
 }
 int Monster::GetPower() { 
     return power; 
@@ -21,8 +23,8 @@ Item Monster::GetItem() {
     return *item; 
 }
 
-void Monster::SetHp(int hp) { 
-    this->hp = hp; 
+void Monster::SetHp(int currentHp) {
+    this->currentHp = currentHp;
 }
 void Monster::SetPower(int power) { 
     this->power = power; 
