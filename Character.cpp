@@ -427,10 +427,6 @@ void Character::LearnAvailableSkills()
             continue;
         }
 
-        if (HasSkill(skill)) {
-            continue;
-        }
-
         learnedSkills.push_back(&skill);
 
         std::cout
