@@ -226,6 +226,4 @@ ItemDatabase::ItemDatabase()
     item.value = 40;
     item.itemType = ItemType::Miscellaneous;
     allItems[item.itemID] = item;
-
-
 }

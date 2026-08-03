@@ -1,11 +1,10 @@
 #include "Item.h"
 #include <iostream>
-#include <vector>
-#include <string>
 #include "Inventory.h"
 #include "Character.h"
 
-//Item playerWeapon 필요
+
+//Item playerWeapon
 
 
 //포션 사용
@@ -39,68 +38,141 @@ void Item::UsePotion(const Item& item, Character& character){
     }
 }
 //무기 장착
-void Item::WieldWeapon(const Item& item, Item& playerWeapon) {
+void Item::EquipWeapon(const Item& item) {
     switch (item.itemWeapon)
     {
     case ItemWeapon::Staff: {
-       
-        playerWeapon.SetWeaponAttack(item.weaponAttack);
-        playerWeapon.SetWeaponDefense(item.weaponDefense);
-        playerWeapon.SetWeaponMaxMP(item.weaponMaxMP);
+        SetWeaponAttack(item.weaponAttack);
+        SetWeaponDefense(item.weaponDefense);
+        SetWeaponMaxMP(item.weaponMaxMP);
         break;
     }
     case ItemWeapon::SwordnShield: {
-       
-        playerWeapon.SetWeaponAttack(item.weaponAttack);
-        playerWeapon.SetWeaponDefense(item.weaponDefense);
-        playerWeapon.SetWeaponMaxHP(item.weaponMaxHP);
+        SetWeaponAttack(item.weaponAttack);
+        SetWeaponDefense(item.weaponDefense);
+        SetWeaponMaxHP(item.weaponMaxHP);
         break;
     }
     case ItemWeapon::TwoHand: {
-        playerWeapon.SetWeaponAttack(item.weaponAttack);
-        playerWeapon.SetWeaponDefense(item.weaponDefense);
-        playerWeapon.SetWeaponMaxHP(item.weaponMaxHP);
+        SetWeaponAttack(item.weaponAttack);
+        SetWeaponDefense(item.weaponDefense);
+        SetWeaponMaxHP(item.weaponMaxHP);
         break;
     }
     case ItemWeapon::Bow: {
-        playerWeapon.SetWeaponAttack(item.weaponAttack);
-        playerWeapon.SetWeaponDefense(item.weaponDefense);
-        playerWeapon.SetWeaponMaxMP(item.weaponMaxMP);
+        SetWeaponAttack(item.weaponAttack);
+        SetWeaponDefense(item.weaponDefense);
+        SetWeaponMaxMP(item.weaponMaxMP);
         break;
     }
     }
 }
 //무기 각성
-void Item::UpgradeWeapon(const Item& item, Item& playerWeapon) {
+void Item::UpgradeWeapon(const Item& item) {
     switch (item.itemUpgrade)
     {
     case ItemUpgrade::UpgradeAttack: {
-        int weaponAttack = playerWeapon.weaponAttack;
+        int weaponAttack = GetWeaponAttack();
         weaponAttack += item.upgradeAmount;
-        playerWeapon.SetAdditionalWeaponAttack(weaponAttack);
-        playerWeapon.upgradeLevel++;
+        SetAdditionalWeaponAttack(weaponAttack);
+        upgradeLevel++;
         break;
     }
     case ItemUpgrade::UpgradeDefense: {
-        int weaponDefense = playerWeapon.weaponDefense;
+        int weaponDefense = GetWeaponDefense();
         weaponDefense += item.upgradeAmount;
-        playerWeapon.SetAdditionalWeaponDefense(weaponDefense);
-        playerWeapon.upgradeLevel++;
+        SetAdditionalWeaponDefense(weaponDefense);
+        upgradeLevel++;
         break;
     }
     case ItemUpgrade::UpgradeMaxHP: {
-        int weaponMaxHP = playerWeapon.weaponMaxHP;
+        int weaponMaxHP = GetWeaponMaxHP();
         weaponMaxHP += item.upgradeAmount;
-        playerWeapon.SetAdditionalWeaponMaxHP(weaponMaxHP);
-        playerWeapon.upgradeLevel++;
+        SetAdditionalWeaponMaxHP(weaponMaxHP);
+        upgradeLevel++;
         break;
     }
     case ItemUpgrade::UpgradeMaxMP: {
-        int weaponMaxMP = playerWeapon.weaponMaxMP;
+        int weaponMaxMP = GetWeaponMaxMP();
         weaponMaxMP += item.upgradeAmount;
-        playerWeapon.SetAdditionalWeaponMaxMP(weaponMaxMP);
-        playerWeapon.upgradeLevel++;
+        SetAdditionalWeaponMaxMP(weaponMaxMP);
+        upgradeLevel++;
         break;
     }
     }
+}
+//무기 장착 Getter/Setter
+int Item::GetWeaponAttack() const {
+    return weaponAttack;
+}
+int Item::GetWeaponDefense() const {
+	return weaponDefense;
+}
+int Item::GetWeaponMaxMP() const {
+	return weaponMaxMP;
+}
+int Item::GetWeaponMaxHP() const {
+	return weaponMaxHP;
+}
+void Item::SetWeaponAttack(int weaponAttack) {
+    this->weaponAttack = weaponAttack;
+}
+void Item::SetWeaponDefense(int weaponDefense) {
+    this->weaponDefense = weaponDefense;
+}
+void Item::SetWeaponMaxMP(int weaponMaxMP) {
+    this->weaponMaxMP = weaponMaxMP;
+}
+void Item::SetWeaponMaxHP(int weaponMaxHP) {
+    this->weaponMaxHP = weaponMaxHP;
+}
+//무기 각성 Getter/Setter
+int Item::GetAdditionalWeaponAttack() const {
+	return additionalWeaponAttack;
+}
+int Item::GetAdditionalWeaponDefense() const {
+	return additionalWeaponDefense;
+}
+int Item::GetAdditionalWeaponMaxMP() const {
+	return additionalWeaponMaxMP;
+}
+int Item::GetAdditionalWeaponMaxHP() const {
+	return additionalWeaponMaxHP;
+}
+void Item::SetAdditionalWeaponAttack(int additionalWeaponAttack) {
+    this->additionalWeaponAttack = additionalWeaponAttack;
+}
+void Item::SetAdditionalWeaponDefense(int additionalWeaponDefense) {
+    this->additionalWeaponDefense = additionalWeaponDefense;
+}
+void Item::SetAdditionalWeaponMaxMP(int additionalWeaponMaxMP) {
+    this->additionalWeaponMaxMP = additionalWeaponMaxMP;
+}
+void Item::SetAdditionalWeaponMaxHP(int additionalWeaponMaxHP) {
+    this->additionalWeaponMaxHP = additionalWeaponMaxHP;
+}
+//합계 무기 Getter/Setter
+int Item::GetTotalWeaponAttack() const {
+	return GetWeaponAttack() + GetAdditionalWeaponAttack();
+}
+int Item::GetTotalWeaponDefense() const {
+	return GetWeaponDefense() + GetAdditionalWeaponDefense();
+}
+int Item::GetTotalWeaponMaxMP() const {
+	return GetWeaponMaxMP() + GetAdditionalWeaponMaxMP();
+}
+int Item::GetTotalWeaponMaxHP() const {
+	return GetWeaponMaxHP() + GetAdditionalWeaponMaxHP();
+}
+void Item::SetTotalWeaponAttack(int totalWeaponAttack) {
+	SetWeaponAttack(totalWeaponAttack);
+}
+void Item::SetTotalWeaponDefense(int totalWeaponDefense) {
+	SetWeaponDefense(totalWeaponDefense);
+}
+void Item::SetTotalWeaponMaxMP(int totalWeaponMaxMP) {
+	SetWeaponMaxMP(totalWeaponMaxMP);
+}
+void Item::SetTotalWeaponMaxHP(int totalWeaponMaxHP) {
+	SetWeaponMaxHP(totalWeaponMaxHP);
 }
