@@ -4,49 +4,52 @@
 #include <vector>
 
 #include "Tools.h"
+#include "DungeonEventCollection.h"
 #include "Random.h"
-#include "DungeonEvent.h"
+#include "Character.h"
 
 struct DungeonMap {
-	int mapID; // 던전 맵 ID
+	DungeonMapType mapType; // 던전 맵 종류
 	int difficultyLevel; // 난이도 레벨
 	std::string difficultyIcon; // 난이도 아이콘
 	std::string dungeonName; //	던전 이름
-
 };
 
 
 class Dungeon { // 던전 클래스
 public:
-	Dungeon(); // 던전 생성자
+	Dungeon(Character& character); // 던전 생성자
 	
-	void ProcessDungeon(); // 던전 진행
-
 	void EnterDungeon(); // 던전 입장
 	void StartDungeon(); // 던전 시작
-	void SelectDungeonPath(); // 던전 경로 선택
-	void GenerateDungeonEvent(); // 던전 이벤트 생성
+	bool SelectDungeonPath(); // 던전 경로 선택
+	void ProcessDungeon(); // 던전 진행
 	void HandleDungeonEvent(); // 던전 이벤트 처리
-	void HandleDungeonBattle(); // 던전 전투 처리
-	void IsDungeonFinished(); // 던전 완료 여부 확인
 	void EncounterBossEvent(); // 보스 이벤트 처리
+	void FinishDungeon();
 
 private:
+	Character& character;
+	Random random;
+	DungeonEventCollection dungeonEventCollection;
+	std::unique_ptr<DungeonEvent> dungeonEvent;
+
 	bool dungeonFinished = false;
-	bool dungeonCleared = false;
 	int selectedDifficultyLevel = 0;
 	int dungeonLength = 0;
-	int selectedMapID = 0;
+	int selectedPathIndex = 0;
 	int currentDungeonLength = 0;
 
 	std::string selectedMap = "";
 	std::string selectedDifficultyIcon = "";
 
 
+
+
 	std::vector<DungeonMap> dungeonPaths = { // 난이도 설정 아이콘, 복사해서 사용 -> ★ ☆
-		{0, 10, "★☆☆", "초록빛 슬라임 숲"},
-		{1, 20, "★★☆", "망자의 지하묘지"}, 
-		{2, 30, "★★★", "마왕의 검은 성채"},
+		{DungeonMapType::GreenSlimeForest, 10, "★☆☆", "초록빛 슬라임 숲"},
+		{DungeonMapType::UndeadTomb, 20, "★★☆", "망자의 지하묘지"},
+		{DungeonMapType::DemonCastle, 30, "★★★", "마왕의 검은 성채"},
 	};
 	std::vector<std::string> dungeonDescriptions = {
 		// 초록빛 슬라임 숲에 대한 설명

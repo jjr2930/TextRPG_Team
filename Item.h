@@ -3,6 +3,7 @@
 #include <string>
 #include "Character.h"
 
+class Character;
 
 enum class ItemType {
 	Weapon,

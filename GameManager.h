@@ -12,22 +12,25 @@
 #include "ItemDatabases.h"
 #include "Inventory.h"
 #include "Boss.h"
+#include "Dungeon.h"
 
+enum class MenuSelect {
+	Character = 1,
+	Shop = 2,
+	Dungeon = 3,
+	GameExit = 4,
+    Debug = 5
+};
 
 class GameManager {
 private:
-public:
-    GameManager();
-    void Battle(Monster* monster);
-
-    //TODO: 멤버변수는 특별한 사유가 없다면 숨겨야함 고로 private;
     Character character; // gamemanager 생성 시 캐릭터 생성
     ItemDatabase itemDatabase;
 
 public:
-    void Encounter();
-    bool IsCharacterDead(int hp);
-    bool IsMonsterDead(int hp);
+    GameManager();
+
+public:
     void ShopEnter();
     void Gameover();
     void Win();
@@ -39,4 +42,8 @@ public:
     bool isGameover = false;
     bool isWin = false;
     bool isLevelTen = false;
+
+public:
+    MenuSelect GetLevel();
+
 };

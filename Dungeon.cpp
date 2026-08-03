@@ -1,32 +1,56 @@
 #include "Dungeon.h"
 
+#include <stdexcept>
+#include <utility>
 
-Dungeon::Dungeon() {
-	EnterDungeon();
-};
+
+
+Dungeon::Dungeon(Character& character)
+	: character(character), dungeonEventCollection(character) {}
 
 
 void Dungeon::EnterDungeon() {
+	dungeonFinished = false;
+	currentDungeonLength = 0;
+
 	std::cout << "앞에 여러가지 던전의 입구가 보입니다." << std::endl;
-	SelectDungeonPath();
-	GenerateDungeonEvent(); 
+	if (!SelectDungeonPath()) {
+		return;
+	}
+	StartDungeon();
 }
 
-void Dungeon::SelectDungeonPath() {
+bool Dungeon::SelectDungeonPath() {
 	std::cout << "들어갈 던전을 선택하세요." << std::endl << std::endl;
+
+	int dungeonNumber = 1;
 	for (DungeonMap& path : dungeonPaths) {
-		std::cout << "		난이도: " << path.difficultyIcon << "  " << path.dungeonName << std::endl;
+		std::cout << dungeonNumber << ".		난이도: " << path.difficultyIcon << "  " << path.dungeonName << std::endl;
+		++dungeonNumber;
 	}
-	int selectedPathIndex = 0;
+
 	selectedPathIndex = Tools::GetIntegerInRange(1, (int)dungeonPaths.size()) - 1; 
 	
-	selectedMap = dungeonPaths[selectedPathIndex].dungeonName;
-	selectedMapID = dungeonPaths[selectedPathIndex].mapID;
-	selectedDifficultyIcon = dungeonPaths[selectedPathIndex].difficultyIcon;
-	selectedDifficultyLevel = dungeonPaths[selectedPathIndex].difficultyLevel;
+	if (selectedPathIndex == 2) {
+		if (character.GetLevel() < 10) {
+			std::cout << "마왕의 검은 성채는 레벨 10 이상부터 입장 가능합니다." << std::endl;
+			std::cout << "레벨을 올린 후 다시 시도해주세요." << std::endl;
+			Tools::WaitForKey();
+			return false;
+		}
+	}
+
+	const DungeonMap& selectedPath = dungeonPaths[selectedPathIndex];
+
+	selectedMap = selectedPath.dungeonName;
+	selectedDifficultyIcon = selectedPath.difficultyIcon;
+	selectedDifficultyLevel = selectedPath.difficultyLevel;
+
+	dungeonEvent = dungeonEventCollection.CreateDungeonEvent(selectedPath.mapType);
+
+	dungeonLength = random.GetRandomValue(7, 14);
 	
-    Random random;
-	dungeonLength = random.GetRandomValue(7, 14); // 던전 길이 랜덤 설정
+	return true;
 }
 
 void Dungeon::StartDungeon() {
@@ -34,56 +58,52 @@ void Dungeon::StartDungeon() {
 	Tools::WaitForKey();
 	system("cls");
 
-	std::cout << dungeonDescriptions[selectedDifficultyLevel - 1] << std::endl;
+	std::cout << dungeonDescriptions[selectedPathIndex] << std::endl;
 	std::cout << "선택지를 골라주십시오." << std::endl;
 	std::cout << "1. 앞으로 나아간다." << std::endl;
 	std::cout << "2. 아직은 때가 아니다. 물러선다." << std::endl;
 
 	int choice = Tools::GetIntegerInRange(1, 2);
 	switch (choice) {
-	case 1:{
+	case 1: {
 		std::cout << "앞으로 나아갑니다..." << std::endl;
 		ProcessDungeon();
 		break;
 	}
-	case 2:
+	case 2: {
 		std::cout << "물러섭니다. 거점으로 돌아갑니다..." << std::endl;
-		break;
+		return;
+	}
 	default:
 		break;
 	}
 }
 
 void Dungeon::ProcessDungeon() {
-	while (!dungeonFinished) {
-		GenerateDungeonEvent();
-
-		currentDungeonLength++;
+	while (currentDungeonLength < dungeonLength) {
+		HandleDungeonEvent();
+		++currentDungeonLength;
 	}
-}
-
-void Dungeon::GenerateDungeonEvent() {
-	if (currentDungeonLength >= dungeonLength) {
-		EncounterBossEvent();
-		return;
-	}
-	
-
-
-}
-
-void Dungeon::EncounterBossEvent() {
-	
+	EncounterBossEvent();
 }
 
 void Dungeon::HandleDungeonEvent() {
+	if (!dungeonEvent)
+		return;
 
+	dungeonEvent->RunRandomEvent(character);
+	Tools::WaitForKey();
 }
 
-void Dungeon::HandleDungeonBattle() {
+void Dungeon::EncounterBossEvent() {
+	if (!dungeonEvent)
+		return;
 
+	dungeonEvent->RunBossEvent();
+	Tools::WaitForKey();
+	FinishDungeon();
 }
 
-void Dungeon::IsDungeonFinished() {
+void Dungeon::FinishDungeon() {
 	dungeonFinished = true;
 }
