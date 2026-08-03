@@ -37,6 +37,18 @@ void Item::UsePotion(const Item& item, Character& character){
     }
     }
 }
+void Item::UseWeapon(const Item& item, Character& character) {
+    if (item.itemType != ItemType::Weapon) {
+        return;
+    }
+    character.SetEquippedWeapon(
+        item.itemID,
+        item.weaponAttack,
+        item.weaponDefense,
+        item.weaponMaxHP,
+        item.weaponMaxMP
+    );
+}
 //무기 각성
 void Item::UpgradeWeapon(const Item& item) {
     switch (item.itemUpgrade)
