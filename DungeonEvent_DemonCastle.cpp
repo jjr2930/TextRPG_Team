@@ -58,7 +58,7 @@ void DemonCastleEvent::RunBossEvent() {
 	std::cout << "보스 이벤트 발생!" << std::endl;
 
 	// 현재 캐릭터 레벨을 기준으로 마왕 보스의 능력치를 설정한다.
-	Boss boss(nullptr, GetCharacter().GetLevel());
+	DemonKing boss(nullptr, GetCharacter().GetLevel());
 
 	std::cout << boss.GetName() << "(이)가 등장했습니다!\n";
 	std::cout << "체력: " << boss.GetCurrentHp()

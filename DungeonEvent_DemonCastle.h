@@ -1,7 +1,7 @@
 #pragma once
 
 #include "DungeonEvent.h"
-#include "Boss.h"
+#include "DemonKing.h"
 
 // 마왕의 검은 성채에서 발생하는 일반 이벤트와 보스 전투를 구현한다.
 class DemonCastleEvent final : public DungeonEvent {
