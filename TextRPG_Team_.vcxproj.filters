@@ -13,7 +13,9 @@
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="Battle.cpp" />
     <ClCompile Include="Random.cpp" />
-    <ClCompile Include="UtilityMethods.cpp" />
+    <ClCompile Include="Dungeon.cpp" />
+    <ClCompile Include="DungeonEvent.cpp" />
+    <ClCompile Include="Tools.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Monster.h" />
@@ -27,9 +29,13 @@
     <ClInclude Include="Slime.h" />
     <ClInclude Include="Battle.h" />
     <ClInclude Include="Random.h" />
-    <ClInclude Include="UtilityMethods.h" />
+    <ClInclude Include="Dungeon.h" />
+    <ClInclude Include="DungeonEvent.h" />
+    <ClInclude Include="GreenSlimeForest.h" />
+    <ClInclude Include="Tools.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
+    <None Include="LICENSE" />
   </ItemGroup>
 </Project>
