@@ -25,7 +25,8 @@ void Dungeon::SelectDungeonPath() {
 	selectedDifficultyIcon = dungeonPaths[selectedPathIndex].difficultyIcon;
 	selectedDifficultyLevel = dungeonPaths[selectedPathIndex].difficultyLevel;
 	
-	dungeonLength = Tools::randomInt(7, 14); // 던전 길이 랜덤 설정
+    Random random;
+	dungeonLength = random.GetRandomValue(7, 14); // 던전 길이 랜덤 설정
 }
 
 void Dungeon::StartDungeon() {
