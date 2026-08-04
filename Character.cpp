@@ -171,7 +171,7 @@ void Character::SetAdditionalMaxMP(int additionalMaximumMana) {
 }
 
 void Character::SetAdditionalAttack(int additionalAttack) {
-    this->additionalAttack = additionalAttack;
+    this->additionalAttack =    additionalAttack;
 }
 
 void Character::SetAdditionalDefense(int additionalDefense) {

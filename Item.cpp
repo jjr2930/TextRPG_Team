@@ -1,11 +1,13 @@
 #include "Item.h"
 #include <iostream>
-#include <vector>
-#include <string>
 #include "Inventory.h"
 #include "Character.h"
 
 
+//Item playerWeapon
+
+
+//포션 사용
 void Item::UsePotion(const Item& item, Character& character){
     switch (item.itemEffect)
     {
@@ -16,42 +18,35 @@ void Item::UsePotion(const Item& item, Character& character){
         break;
     }
     case ItemEffect::AttackBuff: {
-        int currentAttack = character.GetAdditionalAttack();
-        currentAttack += item.effectAmount;
-        character.SetAdditionalAttack(currentAttack);
+        int AdditionalAttack = character.GetAdditionalAttack();
+        AdditionalAttack += item.effectAmount;
+        character.SetAdditionalAttack(AdditionalAttack);
         break;
     }
     case ItemEffect::DefenseBuff: {
-        int currentDefense = character.GetAdditionalDefense();
-        currentDefense += item.effectAmount;
-        character.SetAdditionalDefense(currentDefense);
+        int AdditionalDefense = character.GetAdditionalDefense();
+        AdditionalDefense += item.effectAmount;
+        character.SetAdditionalDefense(AdditionalDefense);
         break;
     }
-    /*case ItemEffect::RestoreStamina: {
-        int currentStamina = character.GetCurrentStamina();
-        currentStamina += item.effectAmount;
-        character.SetCurrentStamina(currentStamina);
-        break;
-    }*/
     case ItemEffect::RestoreMana: {
         int currentMana = character.GetCurrentMP();
         currentMana += item.effectAmount;
         character.SetCurrentMP(currentMana);
         break;
     }
+    case ItemEffect::IncreaseEXP: {
+        int currentEXP = character.GetCurrentEXP();
+        currentEXP += item.effectAmount;
+        character.SetCurrentEXP(currentEXP);
+        break;
+    }
     }
 }
-
-//승용: 제가 생각했던 구조는 이런거라 아예 함수를 UseItem 하나로 묶고 그 안에서 if 로 아이템 타입을 받아서
-// 무기면 착용이 되고 포션이면 사용이 되는 그런 형태면 더 낫지 않을까요
-void Item::UseWeapon(
-    const Item& item,
-    Character& character
-) {
+void Item::UseWeapon(const Item& item, Character& character) {
     if (item.itemType != ItemType::Weapon) {
         return;
     }
-
     character.SetEquippedWeapon(
         item.itemID,
         item.weaponAttack,
@@ -60,56 +55,165 @@ void Item::UseWeapon(
         item.weaponMaxMP
     );
 }
-
-/*
-void Item::UseWeapon(const Item& item, Character& character) {
-    switch (item.itemWeapon)
-    {
-    case ItemWeapon::Staff: {
-        int currentAttack = character.GetAdditionalAttack();
-        int currentDefense = character.GetAdditionalDefense();
-        int maxMP = character.GetAdditionalMaxMP();
-        currentAttack += item.weaponAttack;
-        currentDefense += item.weaponDefense;
-        maxMP += item.weaponMaxMP;
-        character.SetAdditionalAttack(currentAttack);
-        character.SetAdditionalDefense(currentDefense);
-        character.SetAdditionalMaxMP(maxMP);
+//무기 각성
+bool Item::UpgradeWeapon(const Item& item){
+    if (upgradeLevel >= 3){
+        return false;
+    }
+    switch (item.itemUpgrade) {
+    case ItemUpgrade::UpgradeAttack: {
+        int additionalAttack = GetAdditionalWeaponAttack();
+        additionalAttack += item.upgradeAmount;
+        SetAdditionalWeaponAttack(additionalAttack);
         break;
     }
-    case ItemWeapon::SwordnShield: {
-        int currentAttack = character.GetAdditionalAttack();
-        int currentDefense = character.GetAdditionalDefense();
-        int maxHP = character.GetAdditionalMaxHP();
-        currentAttack += item.weaponAttack;
-        currentDefense += item.weaponDefense;
-        maxHP += item.weaponMaxHP;
-        character.SetAdditionalAttack(currentAttack);
-        character.SetAdditionalDefense(currentDefense);
-        character.SetAdditionalMaxHP(maxHP);
+    case ItemUpgrade::UpgradeDefense: {
+        int additionalDefense = GetAdditionalWeaponDefense();
+        additionalDefense += item.upgradeAmount;
+        SetAdditionalWeaponDefense(additionalDefense);
         break;
     }
-    case ItemWeapon::TwoHand: {
-        int currentAttack = character.GetAdditionalAttack();
-        int currentDefense = character.GetAdditionalDefense();
-        int maxHP = character.GetAdditionalMaxHP();
-        currentAttack += item.weaponAttack;
-        currentDefense += item.weaponDefense;
-        maxHP += item.weaponMaxHP;
-        character.SetAdditionalAttack(currentAttack);
-        character.SetAdditionalDefense(currentDefense);
-        character.SetAdditionalMaxHP(maxHP);
+    case ItemUpgrade::UpgradeMaxHP: {
+        int additionalMaxHP = GetAdditionalWeaponMaxHP();
+        additionalMaxHP += item.upgradeAmount;
+        SetAdditionalWeaponMaxHP(additionalMaxHP);
         break;
     }
-    case ItemWeapon::Bow: {
-        int currentAttack = character.GetAdditionalAttack();
-        int currentDefense = character.GetAdditionalDefense();
-        currentAttack += item.weaponAttack;
-        currentDefense += item.weaponDefense;
-        character.SetAdditionalAttack(currentAttack);
-        character.SetAdditionalDefense(currentDefense);
+    case ItemUpgrade::UpgradeMaxMP: {
+        int additionalMaxMP = GetAdditionalWeaponMaxMP();
+        additionalMaxMP += item.upgradeAmount;
+        SetAdditionalWeaponMaxMP(additionalMaxMP);
         break;
     }
     }
+    upgradeLevel++;
+    return true;
 }
-*/
+//void UseItem(Item& item, Character& character) {
+//	switch (item.itemType)
+//	{
+//	case ItemType::Potion:
+//        switch (item.itemEffect)
+//        {
+//        case ItemEffect::RestoreHealth: {
+//            int currentHP = character.GetCurrentHP();
+//            currentHP += item.effectAmount;
+//            character.SetCurrentHP(currentHP);
+//            break;
+//        }
+//        case ItemEffect::AttackBuff: {
+//            int currentAttack = character.GetAdditionalAttack();
+//            currentAttack += item.effectAmount;
+//            character.SetAdditionalAttack(currentAttack);
+//            break;
+//        }
+//        case ItemEffect::DefenseBuff: {
+//            int currentDefense = character.GetAdditionalDefense();
+//            currentDefense += item.effectAmount;
+//            character.SetAdditionalDefense(currentDefense);
+//            break;
+//        }
+//        case ItemEffect::RestoreMana: {
+//            int currentMana = character.GetCurrentMP();
+//            currentMana += item.effectAmount;
+//            character.SetCurrentMP(currentMana);
+//            break;
+//        }
+//        }
+//		break;
+//	case ItemType::Weapon:
+//        character.SetEquippedWeapon(
+//            item.itemID,
+//            item.weaponAttack,
+//            item.weaponDefense,
+//            item.weaponMaxHP,
+//            item.weaponMaxMP
+//        );
+//		break;
+//	case ItemType::UpgradeCore:
+//        switch (item.itemUpgrade)
+//        {
+//        case ItemUpgrade::UpgradeAttack: {
+//            int weaponAttack = GetWeaponAttack();
+//            weaponAttack += item.upgradeAmount;
+//            SetAdditionalWeaponAttack(weaponAttack);
+//            upgradeLevel++;
+//            break;
+//        }
+//        case ItemUpgrade::UpgradeDefense: {
+//            int weaponDefense = GetWeaponDefense();
+//            weaponDefense += item.upgradeAmount;
+//            SetAdditionalWeaponDefense(weaponDefense);
+//            upgradeLevel++;
+//            break;
+//        }
+//        case ItemUpgrade::UpgradeMaxHP: {
+//            int weaponMaxHP = GetWeaponMaxHP();
+//            weaponMaxHP += item.upgradeAmount;
+//            SetAdditionalWeaponMaxHP(weaponMaxHP);
+//            upgradeLevel++;
+//            break;
+//        }
+//        case ItemUpgrade::UpgradeMaxMP: {
+//            int weaponMaxMP = GetWeaponMaxMP();
+//            weaponMaxMP += item.upgradeAmount;
+//            SetAdditionalWeaponMaxMP(weaponMaxMP);
+//            upgradeLevel++;
+//            break;
+//        }
+//        }
+//		break;
+//	}
+//}
+//무기 장착 Getter/Setter
+int Item::GetWeaponAttack() const {
+    return weaponAttack;
+}
+int Item::GetWeaponDefense() const {
+	return weaponDefense;
+}
+int Item::GetWeaponMaxMP() const {
+	return weaponMaxMP;
+}
+int Item::GetWeaponMaxHP() const {
+	return weaponMaxHP;
+}
+
+//무기 각성 Getter/Setter
+int Item::GetAdditionalWeaponAttack() const {
+	return additionalWeaponAttack;
+}
+int Item::GetAdditionalWeaponDefense() const {
+	return additionalWeaponDefense;
+}
+int Item::GetAdditionalWeaponMaxMP() const {
+	return additionalWeaponMaxMP;
+}
+int Item::GetAdditionalWeaponMaxHP() const {
+	return additionalWeaponMaxHP;
+}
+void Item::SetAdditionalWeaponAttack(int additionalWeaponAttack) {
+    this->additionalWeaponAttack = additionalWeaponAttack;
+}
+void Item::SetAdditionalWeaponDefense(int additionalWeaponDefense) {
+    this->additionalWeaponDefense = additionalWeaponDefense;
+}
+void Item::SetAdditionalWeaponMaxMP(int additionalWeaponMaxMP) {
+    this->additionalWeaponMaxMP = additionalWeaponMaxMP;
+}
+void Item::SetAdditionalWeaponMaxHP(int additionalWeaponMaxHP) {
+    this->additionalWeaponMaxHP = additionalWeaponMaxHP;
+}
+//합계 무기 Getter/Setter
+int Item::GetTotalWeaponAttack() const {
+	return GetWeaponAttack() + GetAdditionalWeaponAttack();
+}
+int Item::GetTotalWeaponDefense() const {
+	return GetWeaponDefense() + GetAdditionalWeaponDefense();
+}
+int Item::GetTotalWeaponMaxMP() const {
+	return GetWeaponMaxMP() + GetAdditionalWeaponMaxMP();
+}
+int Item::GetTotalWeaponMaxHP() const {
+	return GetWeaponMaxHP() + GetAdditionalWeaponMaxHP();
+}

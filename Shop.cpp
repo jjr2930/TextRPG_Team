@@ -72,8 +72,7 @@ void Shop::PrintSellMenu()
         }
 
         //for llop display player inventory
-        int input;
-        cin >> input;
+        int input = Tools::GetIntegerInRange(0, inventorySize);
 
         if (1 <= input && input <= inventorySize) {
             int index = input - 1;
@@ -102,21 +101,34 @@ void Shop::PrintBuyMenu() {
     while (true) {        
         system("cls");
         size_t itemSize = itemDatabase.allItems.size();
+        auto allItems = itemDatabase.allItems; 
+        vector<Item> consumableItems;
+        consumableItems.reserve(itemSize);
+        for (auto iter : allItems)
+        {
+            if (ItemType::Potion == iter.second.itemType
+                || ItemType::Weapon == iter.second.itemType)
+            {
+                consumableItems.emplace_back(iter.second);
+            }
+        }
+
+        // Ensure the item database is populated
         cout << "구매할 아이템을 선택하세요." << endl;
         cout << "현재 골드: " << character.GetMoney() << endl;
         cout << format("1 ~ {}: 구매할 아이템", itemSize) << endl;
         cout << "0: 종료" << endl;
         cout << "----------------------------------------" << endl;
-        int count = 1;
-        for (auto iter = itemDatabase.allItems.begin(); 
-            iter != itemDatabase.allItems.end(); ++iter) {
-            cout << format("{}: {} (가격: {})", count, iter->second.name, iter->second.value) << endl;
-            ++count;
+        int consumableSize = consumableItems.size();
+        for (int i = 0; i < consumableSize; ++i) {
+            const auto& item = consumableItems[i];
+            cout << format("{}: {} (가격: {})", i + 1, item.name, item.value) << endl;
         }
+
         //for loop display shop inventory
-        int input;
+
         cout << ">> ";
-        cin >> input;
+		int input = Tools::GetIntegerInRange(0, itemSize);
 
         if (1 <= input && input <= itemSize) {
             int index = input - 1;

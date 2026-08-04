@@ -146,9 +146,8 @@ void GameManager::ShowMainMenu() {
             GetLevel();
             return;
 
-        default: {
+        default:
             break;
-        }
         }
     }
 };
