@@ -64,9 +64,12 @@ GameState DungeonEvent::Battle(Monster* monster) {
         monster->DoMyTurn();
 
         if (IsCharacterDead(character.GetCurrentHP())) {
+            character.EndBattle();
 			return GameState::GameOver;
         }
     }
+    //전투 종료 시 강화 물약 효과가 제거되는 함수입니다.
+    character.EndBattle();
 	return GameState::Playing;
 };
 

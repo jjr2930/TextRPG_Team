@@ -32,10 +32,6 @@ ItemDatabase::ItemDatabase()
     item.weaponAttack = 35;
     item.weaponDefense = 10;
     item.weaponMaxMP = 30;
-	item.SetAdditionalWeaponAttack(0);
-    item.SetAdditionalWeaponDefense(0);
-    item.SetAdditionalWeaponMaxMP(0);
-    item.SetAdditionalWeaponMaxHP(0);
 	item.upgradeLevel = 0;
     allItems[item.itemID] = item;
 
@@ -161,7 +157,6 @@ ItemDatabase::ItemDatabase()
     allItems[item.itemID] = item;
 
     item = Item{};
-
     // 버프 포션
     item.itemID = 15;
     item.name = "공격력 물약";
@@ -181,7 +176,7 @@ ItemDatabase::ItemDatabase()
 
     item = Item{};
     //각성 원소
-    item.itemID = 50;
+    /*item.itemID = 50;
     item.name = "각성 원소(공격력)";
     item.value = 300;
     item.itemType = ItemType::UpgradeCore;
@@ -211,7 +206,7 @@ ItemDatabase::ItemDatabase()
     item.itemType = ItemType::UpgradeCore;
     item.itemUpgrade = ItemUpgrade::UpgradeMaxMP;
     item.upgradeAmount = 30;
-    allItems[item.itemID] = item;
+    allItems[item.itemID] = item;*/
 
     // 기타 아이템
 

@@ -68,7 +68,7 @@ public:
 
 	void UsePotion(const Item& item, Character& character);
 	void UseWeapon(const Item& item, Character& character);
-	void UpgradeWeapon(const Item& item);
+	bool UpgradeWeapon(const Item& item);
 
 	//무기 장착 시 공격력, 방어력, 최대마나, 최대체력 증가
 	int GetWeaponAttack() const;
