@@ -14,45 +14,60 @@
 #include "Dungeon.h"
 #include "DemonKing.h"
 
-// 메인 메뉴에서 사용자가 선택할 수 있는 항목과 입력 번호를 연결한다.
+/// <summary>메인 메뉴에서 선택할 수 있는 행동을 나타냅니다.</summary>
 enum class MenuSelection {
 	Character = 1,
-	Inventory = 2,
-	Shop = 3,
-	Dungeon = 4,
-	GameExit = 5,
-    Debug = 6
+	Shop = 2,
+	Dungeon = 3,
+	GameExit = 4,
+    Debug = 5
 };
 
-// 캐릭터 생성부터 상점·던전 진입, 게임 종료까지 전체 게임 흐름을 관리한다.
+/// <summary>캐릭터 생성부터 메뉴 진행과 게임 종료까지 전체 게임 흐름을 관리합니다.</summary>
 class GameManager {
 private:
-    Character character;       // 게임 전체에서 계속 사용하는 플레이어 캐릭터
-    ItemDatabase itemDatabase; // 상점에서 조회할 공용 아이템 데이터베이스
+    /// <summary>현재 게임에서 사용하는 플레이어 캐릭터입니다.</summary>
+    Character character;
+
+    /// <summary>상점과 보상에서 참조하는 아이템 데이터베이스입니다.</summary>
+    ItemDatabase itemDatabase;
 
 public:
-    // 게임 매니저를 만들면서 캐릭터 생성 절차를 시작한다.
+    /// <summary>게임에 사용할 캐릭터를 생성하고 게임 매니저를 초기화합니다.</summary>
     GameManager();
 
 public:
-    void ShopEnter();     // 현재 캐릭터와 아이템 DB를 사용해 상점에 입장한다.
-    void Gameover();      // 게임 오버 상태로 전환하고 안내를 출력한다.
-    void Win();           // 승리 안내 후 게임 종료 상태로 전환한다.
-    void ShowMainMenu();  // 메뉴 입력을 받아 각 콘텐츠로 이동한다.
-    void LevelUp();       // 경험치가 충분하면 캐릭터 레벨을 올린다.
-    void MakeCharacter(); // 이름을 입력받아 플레이어 캐릭터를 완성한다.
+    /// <summary>현재 캐릭터와 아이템 데이터베이스를 사용해 상점에 입장합니다.</summary>
+    void ShopEnter();
 
-    void ShowInventoryMenu();                              // 보유 아이템을 나열하고 사용·장착 입력을 받는다.
-    void UseInventoryItem(const Inventory::InventoryItem& selected); // 선택한 아이템 종류에 맞는 효과를 적용한다.
-    std::string GetEquippedWeaponName();                   // 현재 장착 무기의 이름을 안내용으로 반환한다.
+    /// <summary>게임 오버 상태로 전환하고 안내 메시지를 출력합니다.</summary>
+    void Gameover();
+
+    /// <summary>게임 클리어 메시지를 출력하고 게임 진행을 종료합니다.</summary>
+    void Win();
+
+    /// <summary>메인 메뉴를 반복해서 출력하고 플레이어의 선택을 처리합니다.</summary>
+    void ShowMainMenu();
+
+    /// <summary>경험치가 조건을 만족하면 캐릭터의 레벨을 올립니다.</summary>
+    void LevelUp();
+
+    /// <summary>플레이어에게 이름을 입력받아 캐릭터를 생성합니다.</summary>
+    void MakeCharacter();
 
 public:
-    bool isGameover = false; // 게임 종료 여부
-    bool isWin = false;      // 최종 승리 여부
-    bool isLevelTen = false; // 레벨 10 도달 여부
+    /// <summary>게임 오버 또는 게임 종료 여부입니다.</summary>
+    bool isGameover = false;
+
+    /// <summary>게임 클리어 여부입니다.</summary>
+    bool isWin = false;
+
+    /// <summary>레벨 10 관련 진행 상태를 저장하기 위해 마련된 플래그입니다.</summary>
+    bool isLevelTen = false;
 
 public:
-    // 디버그용으로 캐릭터 레벨을 10까지 올리고 선택 결과를 반환한다.
+    /// <summary>디버그용으로 캐릭터를 레벨 10까지 올립니다.</summary>
+    /// <returns>디버그 메뉴 선택값을 반환합니다.</returns>
     MenuSelection GetLevel();
 
 };

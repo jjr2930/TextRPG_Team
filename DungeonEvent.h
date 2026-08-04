@@ -3,72 +3,142 @@
 #include <functional>
 #include <string>
 #include <vector>
+#include <memory>
 
 #include "Random.h"
 #include "Character.h"
 #include "Tools.h"
 #include "Monster.h"
 #include "Slime.h"
+#include "Skeleton.h"
 #include "Goblin.h"
 #include "Item.h"
 
-// 일반 던전에서 무작위로 선택되는 이벤트의 종류다.
+
+/// <summary>일반 던전 이벤트의 종류를 나타냅니다.</summary>
 enum class DungeonEventType {
-	Exploration, // 몬스터 조우
-	Treasure,    // 골드 또는 보상 획득
-	Trap,        // 체력 피해
-	Rest         // 체력 회복
+	Exploration,
+	Treasure,
+	Trap,
+	Rest
 };
 
-// 이벤트가 캐릭터에게 적용할 수 있는 효과를 분류한다.
+/// <summary>던전 이벤트가 캐릭터에게 적용할 수 있는 효과를 나타냅니다.</summary>
 enum class DungeonEventEffectType {
-	None,             // 효과 없음
-	ItemAddition,     // 아이템 추가
-	HealthRecovery,   // 체력 회복
-	HealthDamage,     // 체력 피해
-	GoldGain,         // 골드 획득
-	GoldLoss,         // 골드 손실
-	MonsterEncounter  // 몬스터 전투
+	None,
+	ItemAddition,
+	HealthRecovery,
+	HealthDamage,
+	GoldGain,
+	GoldLoss,
+	MonsterEncounter
 };
 
-// 던전 전투 결과를 상위 진행 코드에 전달하기 위한 상태다.
+/// <summary>던전 전투 후의 게임 진행 상태를 나타냅니다.</summary>
 enum class GameState {
-	Playing,  // 게임을 계속 진행할 수 있음
-	GameOver, // 캐릭터가 사망함
-	Win       // 최종 승리함
+	Playing,
+	GameOver,
+	Win
+};
+
+enum class NormalMonsterType {
+	Slime,
+	Skeleton,
+	Goblin
 };
 
 
-// 모든 맵 이벤트가 공통으로 사용하는 보상·피해·전투 기능을 제공하는 추상 부모 클래스다.
+/// <summary>모든 던전 이벤트가 공유하는 보상, 피해, 전투 기능을 제공합니다.</summary>
 class DungeonEvent {
 
 protected:
-	// 자식 클래스만 생성 과정에서 호출할 수 있으며 플레이어 참조를 공유한다.
+	/// <summary>이벤트 효과를 적용할 캐릭터를 연결합니다.</summary>
+	/// <param name="character">던전을 진행하는 플레이어 캐릭터입니다.</param>
 	explicit DungeonEvent(Character& character);
 
-	void GiveGold(int minGold, int maxGold);               // 범위 내 골드를 지급한다.
-	void LoseGold(int minGold, int maxGold);               // 골드를 잃되 0 아래로 내려가지 않게 한다.
-	void AddItem(Item item, int quantity);                 // 캐릭터 인벤토리에 아이템을 넣는다.
-	void RestoreHealth(int minHealth, int maxHealth);      // 범위 내 수치만큼 체력을 회복한다.
-	void DamageHealth(int minDamage, int maxDamage);       // 범위 내 수치만큼 체력 피해를 준다.
-	void StartMonsterEncounter();                          // 몬스터 조우 확장용 함수다.
-	GameState Battle(Monster* monster);                    // 캐릭터와 몬스터의 턴 전투를 처리한다.
-	GameState Encounter();                                 // 일반 몬스터 생성부터 보상까지 처리한다.
-	bool IsCharacterDead(int currentHealth);               // 캐릭터 사망 여부를 판정한다.
-	bool IsMonsterDead(int currentHealth);                 // 몬스터 사망 여부를 판정한다.
-	DungeonEventType GetRandomEventType(Character& character); // 일반 이벤트 종류를 무작위 선택한다.
+	/// <summary>지정 범위에서 무작위 금액을 캐릭터에게 지급합니다.</summary>
+	/// <param name="minGold">지급할 최소 골드입니다.</param>
+	/// <param name="maxGold">지급할 최대 골드입니다.</param>
+	void GiveGold(int minGold, int maxGold);
+
+	/// <summary>지정 범위에서 무작위 금액을 차감하되 골드가 0보다 작아지지 않게 합니다.</summary>
+	/// <param name="minGold">잃을 최소 골드입니다.</param>
+	/// <param name="maxGold">잃을 최대 골드입니다.</param>
+	void LoseGold(int minGold, int maxGold);
+
+	/// <summary>캐릭터 인벤토리에 아이템을 지정 수량만큼 추가합니다.</summary>
+	/// <param name="item">추가할 아이템입니다.</param>
+	/// <param name="quantity">추가할 수량입니다.</param>
+	void AddItem(Item item, int quantity);
+
+	/// <summary>지정 범위에서 무작위 수치만큼 캐릭터의 체력을 회복합니다.</summary>
+	/// <param name="minHealth">최소 회복량입니다.</param>
+	/// <param name="maxHealth">최대 회복량입니다.</param>
+	void RestoreHealth(int minHealth, int maxHealth);
+
+	/// <summary>지정 범위에서 무작위 수치만큼 캐릭터에게 피해를 줍니다.</summary>
+	/// <param name="minDamage">최소 피해량입니다.</param>
+	/// <param name="maxDamage">최대 피해량입니다.</param>
+	void DamageHealth(int minDamage, int maxDamage);
+
+	/// <summary>던전 일반 몬스터 조우를 시작하기 위한 확장 지점입니다.</summary>
+	void StartMonsterEncounter();
+
+	/// <summary>캐릭터와 지정 몬스터의 턴제 전투를 진행합니다.</summary>
+	/// <param name="monster">전투할 몬스터 포인터입니다.</param>
+	/// <returns>캐릭터가 패배하면 GameOver, 승리하면 Playing입니다.</returns>
+	GameState Battle(Monster* monster);
+
+	/// <summary>캐릭터 레벨에 맞는 일반 슬라임과 조우하여 전투와 보상을 처리합니다.</summary>
+	/// <returns>전투 후의 게임 진행 상태를 반환합니다.</returns>
+	GameState Encounter();
+
+	/// <summary>현재 체력으로 캐릭터 사망 여부를 확인합니다.</summary>
+	/// <param name="currentHealth">확인할 캐릭터의 현재 체력입니다.</param>
+	/// <returns>체력이 0 이하면 true입니다.</returns>
+	bool IsCharacterDead(int currentHealth);
+
+	/// <summary>현재 체력으로 몬스터 사망 여부를 확인합니다.</summary>
+	/// <param name="currentHealth">확인할 몬스터의 현재 체력입니다.</param>
+	/// <returns>체력이 0 이하면 true입니다.</returns>
+	bool IsMonsterDead(int currentHealth);
+
+	/// <summary>탐험, 보물, 함정, 휴식 중 하나를 무작위로 선택합니다.</summary>
+	/// <param name="character">이벤트를 진행하는 캐릭터입니다.</param>
+	/// <returns>선택된 던전 이벤트 종류를 반환합니다.</returns>
+	DungeonEventType GetRandomEventType(Character& character);
 
 protected:
-	// 매개변수 없이 현재 플레이어가 필요한 자식 클래스에 참조를 제공한다.
+	/// <summary>이벤트에 연결된 플레이어 캐릭터를 반환합니다.</summary>
+	/// <returns>플레이어 캐릭터 참조입니다.</returns>
 	Character& GetCharacter();
 
+	/// <summary> 이벤트에 연결된 몬스터를 설정합니다. 이 메서드는 던전 이벤트에서 몬스터를 생성하거나 변경할 때 사용됩니다.</summary>
+	/// <param name="monster">설정할 몬스터입니다.</param>
+	void SetMonster(NormalMonsterType monsterType);
+
 public:
-	// 이벤트 결과를 반환해 상위 던전 진행이 사망·승리를 판단할 수 있게 한다.
-	virtual GameState RunRandomEvent(Character& character) = 0; // 맵별 일반 이벤트 구현 지점
-	virtual GameState RunBossEvent() = 0;                       // 맵별 보스 이벤트 구현 지점
-	virtual ~DungeonEvent() = default;                     // 부모 포인터 삭제를 위한 가상 소멸자
+	/// <summary>던전별 무작위 일반 이벤트 하나를 실행합니다.</summary>
+	/// <param name="character">이벤트 효과를 적용할 캐릭터입니다.</param>
+	virtual GameState RunRandomEvent(Character& character) = 0;
+
+	/// <summary>던전별 보스 이벤트를 실행합니다.</summary>
+	virtual GameState RunBossEvent() = 0;
+
+	/// <summary>파생 던전 이벤트 객체를 안전하게 제거합니다.</summary>
+	virtual ~DungeonEvent() = default;
 
 private:
-	Character& character; // GameManager가 소유한 실제 플레이어
-	Random random;        // 이벤트 수치와 종류 결정용 난수 생성기
+	/// <summary>이벤트 효과와 전투 결과가 적용되는 플레이어 캐릭터입니다.</summary>
+	Character& character;
+
+	/// <summary> 던전에서 나올 몬스터를 가리키는 포인터입니다.</summary>
+	Monster* monster;
+
+	std::unique_ptr<Monster> CreateMonster();
+
+	NormalMonsterType monsterType = NormalMonsterType::Slime;
+
+	/// <summary>이벤트 종류와 효과 수치를 결정하는 난수 생성기입니다.</summary>
+	Random random;
 };

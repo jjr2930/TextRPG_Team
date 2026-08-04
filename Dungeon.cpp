@@ -73,7 +73,7 @@ GameState Dungeon::StartDungeon() {
 	std::cout << "1. 앞으로 나아간다." << std::endl;
 	std::cout << "2. 아직은 때가 아니다. 물러선다." << std::endl;
 
-	// 1은 진행, 2는 던전을 취소하고 거점으로 돌아가는 선택이다.
+	// 1은 진행, 2는 던트를 취소하고 거점으로 돌아가는 선택이다.
 	int choice = Tools::GetIntegerInRange(1, 2);
 	switch (choice) {
 	case 1: {

@@ -72,31 +72,33 @@ GameState DungeonEvent::Battle(Monster* monster) {
 
 // 일반 슬라임 한 마리를 생성해 전투하고 승리 보상을 캐릭터에게 지급한다.
 GameState DungeonEvent::Encounter() {
-    Slime monster(nullptr, character.GetLevel()); // 나중에 슬라임 드롭아이템 넣을것
+	std::unique_ptr<Monster> monster = CreateMonster();
+
     system("cls");
-    std::cout << "몬스터 " << monster.GetName() << "(이)가 난입했습니다. 전투 시작!" << std::endl;
-    std::cout << "체력 : " << monster.GetCurrentHp() << ", 공격력 : " << monster.GetPower() << std::endl;
+    std::cout << "몬스터 " << monster->GetName() << "(이)가 난입했습니다. 전투 시작!" << std::endl;
+    std::cout << "체력 : " << monster->GetCurrentHp() << ", 공격력 : " << monster->GetPower() << std::endl;
     Tools::WaitForKey();
 
-    // 패배하면 보상 처리 없이 게임 오버 결과를 호출자에게 전달한다.
-    if (Battle(&monster) == GameState::GameOver) {
+    if (Battle(monster.get()) == GameState::GameOver) {
         std::cout << "게임 오버!" << std::endl;
         return GameState::GameOver;
     }
 
-    std::cout << std::endl << monster.GetName() << " 처치!" << std::endl;
-    std::cout << character.GetName() << "(이)가 " << monster.GetDropExp() << "EXP와 " << monster.RandomGold() << "골드를 획득했습니다.\n";
+    std::cout << std::endl << monster->GetName() << " 처치!" << std::endl;
+    std::cout << character.GetName() << "(이)가 " << monster->GetDropExp() << "EXP와 " << monster->RandomGold() << "골드를 획득했습니다.\n";
 
 
-    // 전투에서 승리했으므로 경험치와 무작위 골드를 실제 캐릭터 상태에 반영한다.
-    character.SetCurrentEXP(character.GetCurrentEXP() + monster.GetDropExp());
-    character.SetMoney(character.GetMoney() + monster.RandomGold());
+    character.SetCurrentEXP(character.GetCurrentEXP() + monster->GetDropExp());
+    character.SetMoney(character.GetMoney() + monster->RandomGold());
 
     // 누적 경험치가 현재 요구량 이상이면 한 번 레벨 업한다.
     if (character.GetCurrentEXP() >= character.GetMaxEXP()) character.LevelUP();
 
     std::cout << std::endl << "현재 EXP : " << character.GetCurrentEXP() << "/" << character.GetMaxEXP() << ", 골드 : " << character.GetMoney() << std::endl;
 	
+    character.SetTarget(nullptr);
+	monster->SetTarget(nullptr);
+
     return GameState::Playing;
 };
 
@@ -115,4 +117,24 @@ bool DungeonEvent::IsMonsterDead(int hp) {
 // 자식 이벤트가 부모가 보관 중인 플레이어 원본에 접근하도록 반환한다.
 Character& DungeonEvent::GetCharacter() {
 	return character;
+}
+
+void DungeonEvent::SetMonster(NormalMonsterType monsterType) {
+	this->monsterType = monsterType;
+}
+
+std::unique_ptr<Monster> DungeonEvent::CreateMonster() {
+	int level = character.GetLevel();
+
+	switch (monsterType) {
+	case NormalMonsterType::Slime:
+		return std::make_unique<Slime>(nullptr, level);
+	case NormalMonsterType::Skeleton:
+		return std::make_unique<Skeleton>(nullptr, level);
+	case NormalMonsterType::Goblin:
+		return std::make_unique<Goblin>(nullptr, level);
+
+	default:
+		throw std::out_of_range("알 수 없는 몬스터 타입입니다.");
+	}
 }

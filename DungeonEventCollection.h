@@ -6,21 +6,26 @@
 #include "DungeonEvent_GreenSlimeForest.h"
 #include "DungeonEvent_UndeadTomb.h"
 
-// 던전 맵과 맵별 이벤트 클래스 사이를 연결하는 식별자다.
+/// <summary>생성 가능한 던전 맵 종류를 나타냅니다.</summary>
 enum class DungeonMapType {
 	GreenSlimeForest, // 초록빛 슬라임 숲
 	UndeadTomb,       // 망자의 지하묘지
 	DemonCastle       // 마왕의 검은 성채
 };
 
-// 선택한 맵 종류에 맞는 DungeonEvent 자식 객체를 생성하는 팩토리 클래스다.
+/// <summary>맵 종류에 맞는 구체적인 던전 이벤트 객체를 생성합니다.</summary>
 class DungeonEventCollection {
 private:
-	Character& character; // 생성되는 모든 이벤트가 공유할 플레이어 원본
+	/// <summary>생성되는 모든 던전 이벤트에 연결할 플레이어 캐릭터입니다.</summary>
+	Character& character;
 
 public:
-	// 플레이어 참조를 보관해 이벤트 객체 생성 시 전달한다.
+	/// <summary>던전 이벤트 생성에 사용할 캐릭터를 연결합니다.</summary>
+	/// <param name="character">던전을 진행하는 플레이어 캐릭터입니다.</param>
 	DungeonEventCollection(Character& character);
-	// 맵 종류에 맞는 이벤트 객체를 만들어 소유권과 함께 반환한다.
+
+	/// <summary>맵 종류에 맞는 던전 이벤트 객체를 생성합니다.</summary>
+	/// <param name="mapType">생성할 던전의 맵 종류입니다.</param>
+	/// <returns>생성된 던전 이벤트 객체의 소유권을 반환합니다.</returns>
 	std::unique_ptr<DungeonEvent> CreateDungeonEvent(DungeonMapType mapType);
 };
