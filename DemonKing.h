@@ -18,5 +18,5 @@ public:
 
 	virtual void Attack() override;
 	virtual void TakeDamage(int damage) override;
-
+	virtual Item GetItem() override;
 };

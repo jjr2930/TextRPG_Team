@@ -69,6 +69,7 @@ GameState DemonCastleEvent::RunBossEvent() {
 	std::cout << boss->GetName() << "(을)를 처치했습니다!" << std::endl;
 
 	int rewardGold = boss->RandomGold();
+	AddItem(boss->GetItem(), 1);
 
 	GetCharacter().SetCurrentEXP(
 		GetCharacter().GetCurrentEXP() + boss->GetDropExp()

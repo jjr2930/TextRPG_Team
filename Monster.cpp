@@ -19,9 +19,6 @@ int Monster::GetDropExp() {
 std::string Monster::GetName() { 
     return name; 
 }
-Item Monster::GetItem() { 
-    return *item;
-}
 
 void Monster::SetHp(int currentHp) {
     this->currentHp = currentHp;

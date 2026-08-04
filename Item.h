@@ -90,5 +90,4 @@ public:
 	int GetTotalWeaponDefense() const;
 	int GetTotalWeaponMaxMP() const;
 	int GetTotalWeaponMaxHP() const;
-
 };

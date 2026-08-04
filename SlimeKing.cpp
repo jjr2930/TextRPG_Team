@@ -4,11 +4,14 @@
 #include "Character.h"
 
 SlimeKing::SlimeKing(ItemDatabase* itemDB, int level)
-	:Monster(" 제일 거대한 슬라임 ", 40, 50, 10, 15, 50, itemDB, 30, level) {
-	*item = itemDB->GetItem(109);
-};
+	:Monster(" 제일 거대한 슬라임 ", 40, 50, 10, 15, 50, itemDB, 30, level) {};
 
 SlimeKing::~SlimeKing() {}
+
+Item SlimeKing::GetItem() {
+	int randomNum = random.GetRandomValue(109, 111);
+	return itemDB->GetItem(randomNum);
+}
 
 void SlimeKing::Attack() {
 

@@ -6,8 +6,7 @@ Goblin::Goblin(ItemDatabase* itemDB, int level) : Monster("Goblin", 10, 40, 2, 1
 
 Item Goblin::GetItem() {
 	int randomNum = random.GetRandomValue(103, 105);
-	*item = itemDB->GetItem(randomNum);
-	return *item;
+	return itemDB->GetItem(randomNum);
 }
 
 // 공격 메서드 - 3:2 비율로 해서 공격이 실행함 

@@ -6,8 +6,7 @@ Skeleton::Skeleton(ItemDatabase* itemDB, int level) : Monster("Skeleton", 15, 40
 
 Item Skeleton::GetItem() {
 	int randomNum = random.GetRandomValue(106, 108);
-	*item = itemDB->GetItem(randomNum);
-	return *item;
+	return itemDB->GetItem(randomNum);
 }
 
 void Skeleton::Attack() {

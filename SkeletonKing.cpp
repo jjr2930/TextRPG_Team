@@ -4,13 +4,14 @@
 #include "Character.h"
 
 SkeletonKing::SkeletonKing(ItemDatabase* itemDB, int level)
-	:Monster("망자들에 묘지기", 60, 70, 15, 20, 70, itemDB, 50, level) {
-	*item = itemDB->GetItem(150);
-};
+	:Monster("망자들에 묘지기", 60, 70, 15, 20, 70, itemDB, 50, level) {};
 
 SkeletonKing::~SkeletonKing() {}
 
-
+Item SkeletonKing::GetItem() {
+	int randomNum = random.GetRandomValue(112, 114);
+	return itemDB->GetItem(randomNum);
+}
 
 void SkeletonKing::Attack() {
 	

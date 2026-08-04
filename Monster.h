@@ -18,7 +18,6 @@ protected:
 	int currentHp;			// 현재 체력
 	int power;				// 공격력
 	int dropExp;			// 드랍 경험치
-	Item* item;			// 아이템
 	int gold;					// 드랍하는 골드
 
 public:
@@ -28,7 +27,7 @@ public:
 	int GetPower();
 	int GetDropExp();
 	std::string GetName();
-	virtual Item GetItem();
+	virtual Item GetItem() = 0;
 	int RandomGold();
 
 	virtual void SetHp(int hp);

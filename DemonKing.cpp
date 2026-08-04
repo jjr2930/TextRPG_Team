@@ -8,6 +8,11 @@ DemonKing::DemonKing(ItemDatabase* itemDB, int level)
 
 DemonKing::~DemonKing() {}
 
+Item DemonKing::GetItem() {
+	int randomNum = random.GetRandomValue(106, 108);
+	return itemDB->GetItem(randomNum);
+}
+
 void DemonKing::Attack() {
 	
 
