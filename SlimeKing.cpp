@@ -3,8 +3,10 @@
 #include "SlimeKing.h"
 #include "Character.h"
 
-SlimeKing::SlimeKing(Item* Item, int level)
-	:Monster(" 제일 거대한 슬라임 ", 40, 50, 10, 15, 50, Item, 30, level) {};
+SlimeKing::SlimeKing(ItemDatabase* itemDB, int level)
+	:Monster(" 제일 거대한 슬라임 ", 40, 50, 10, 15, 50, itemDB, 30, level) {
+	*item = itemDB->GetItem(109);
+};
 
 SlimeKing::~SlimeKing() {}
 

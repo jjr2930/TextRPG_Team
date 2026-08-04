@@ -3,8 +3,10 @@
 #include "SkeletonKing.h"
 #include "Character.h"
 
-SkeletonKing::SkeletonKing(Item* item, int level)
-	:Monster("망자들에 묘지기", 60, 70, 15, 20, 70, item, 50, level) {};
+SkeletonKing::SkeletonKing(ItemDatabase* itemDB, int level)
+	:Monster("망자들에 묘지기", 60, 70, 15, 20, 70, itemDB, 50, level) {
+	*item = itemDB->GetItem(150);
+};
 
 SkeletonKing::~SkeletonKing() {}
 

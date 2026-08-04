@@ -8,7 +8,7 @@ protected:
 	bool isReborn = false;
 
 public:
-	SkeletonKing(Item* item, int level);
+	SkeletonKing(ItemDatabase* itemDB, int level);
 
 	~SkeletonKing();
 

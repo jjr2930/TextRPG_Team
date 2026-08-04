@@ -20,7 +20,7 @@ std::string Monster::GetName() {
     return name; 
 }
 Item Monster::GetItem() { 
-    return *item; 
+    return *item;
 }
 
 void Monster::SetHp(int currentHp) {

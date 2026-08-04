@@ -8,7 +8,7 @@ protected:
 	bool isRage = false;
 
 public:
-	SlimeKing(Item* itme, int level);
+	SlimeKing(ItemDatabase* itemDB, int level);
 
 	~SlimeKing();
 

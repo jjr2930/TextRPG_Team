@@ -3,8 +3,8 @@
 #include "DemonKing.h"
 #include "Character.h"
 
-DemonKing::DemonKing(Item* item, int level)
-	: Monster(" 악마들의 정점 - 마왕 ", 80, 100, 20, 30, 100, item, 500, level) {}
+DemonKing::DemonKing(ItemDatabase* itemDB, int level)
+	: Monster(" 악마들의 정점 - 마왕 ", 80, 100, 20, 30, 100, itemDB, 500, level) {}
 
 DemonKing::~DemonKing() {}
 

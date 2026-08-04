@@ -12,7 +12,7 @@ protected:
 	// int destructcount = 3;
 
 public:
-	DemonKing(Item* item, int level);
+	DemonKing(ItemDatabase* itemDB, int level);
 
 	~DemonKing();
 
