@@ -3,11 +3,10 @@
 
 
 DemonCastleEvent::DemonCastleEvent(Character& character) : DungeonEvent(character) {
-	SetMonster(NormalMonsterType::Goblin);
 	std::cout << "마왕의 검은 성채 이벤트 생성!" << std::endl;
 }
 
-GameState DemonCastleEvent::RunRandomEvent(Character& character) {
+void DemonCastleEvent::RunRandomEvent(Character& character) {
 	DungeonEventType randomEventType = DungeonEvent::GetRandomEventType(character);
 
 	switch (randomEventType) {	
@@ -45,13 +44,12 @@ GameState DemonCastleEvent::RunRandomEvent(Character& character) {
 		std::cout << "알 수 없는 이벤트 발생!" << std::endl;
 		break;
 	}
-	return GameState::Playing;
 }
-GameState DemonCastleEvent::RunBossEvent() {
+void DemonCastleEvent::RunBossEvent() {
 
 	std::cout << "보스 이벤트 발생!" << std::endl;
 
-	DemonKing boss(nullptr, GetCharacter().GetLevel());
+	Boss boss(nullptr, GetCharacter().GetLevel());
 
 	std::cout << boss.GetName() << "(이)가 등장했습니다!\n";
 	std::cout << "체력: " << boss.GetCurrentHp()
@@ -63,7 +61,7 @@ GameState DemonCastleEvent::RunBossEvent() {
 
 	if (result == GameState::GameOver) {
 		std::cout << "보스에게 패배했습니다." << std::endl;
-		return GameState::GameOver;
+		return;
 	}
 
 	std::cout << boss.GetName() << "(을)를 처치했습니다!" << std::endl;
@@ -78,5 +76,4 @@ GameState DemonCastleEvent::RunBossEvent() {
 	);
 
 	std::cout << boss.GetDropExp() << " EXP와 " << rewardGold << " 골드를 획득했습니다.\n";
-	return GameState::Playing;
 }

@@ -3,7 +3,6 @@
 #include "Monster.h"
 
 class Skeleton  : public Monster{
-public:
 	Skeleton(Item* item, int level);
 
 	virtual void Attack() override;
