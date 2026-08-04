@@ -120,10 +120,10 @@ protected:
 public:
 	/// <summary>던전별 무작위 일반 이벤트 하나를 실행합니다.</summary>
 	/// <param name="character">이벤트 효과를 적용할 캐릭터입니다.</param>
-	virtual void RunRandomEvent(Character& character) = 0;
+	virtual GameState RunRandomEvent(Character& character) = 0;
 
 	/// <summary>던전별 보스 이벤트를 실행합니다.</summary>
-	virtual void RunBossEvent() = 0;
+	virtual GameState RunBossEvent() = 0;
 
 	/// <summary>파생 던전 이벤트 객체를 안전하게 제거합니다.</summary>
 	virtual ~DungeonEvent() = default;

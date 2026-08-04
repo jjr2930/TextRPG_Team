@@ -5,7 +5,7 @@ GreenSlimeForestEvent::GreenSlimeForestEvent(Character& character) : DungeonEven
 	std::cout << "초록 슬라임 숲 이벤트 생성!" << std::endl;
 }
 
-void GreenSlimeForestEvent::RunRandomEvent(Character& character) {
+GameState GreenSlimeForestEvent::RunRandomEvent(Character& character) {
 	DungeonEventType randomEventType = DungeonEvent::GetRandomEventType(character);
 
 	switch (randomEventType) {
@@ -43,9 +43,10 @@ void GreenSlimeForestEvent::RunRandomEvent(Character& character) {
 		std::cout << "알 수 없는 이벤트 발생!" << std::endl;
 		break;
 	}
+	return GameState::Playing;
 }
 
-void GreenSlimeForestEvent::RunBossEvent() {
+GameState GreenSlimeForestEvent::RunBossEvent() {
 
 	std::cout << "보스 이벤트 발생!" << std::endl;
 
@@ -61,7 +62,7 @@ void GreenSlimeForestEvent::RunBossEvent() {
 
 	if (result == GameState::GameOver) {
 		std::cout << "보스에게 패배했습니다." << std::endl;
-		return;
+		return GameState::GameOver;
 	}
 
 	std::cout << boss.GetName() << "(을)를 처치했습니다!" << std::endl;
@@ -76,4 +77,5 @@ void GreenSlimeForestEvent::RunBossEvent() {
 	);
 
 	std::cout << boss.GetDropExp() << " EXP와 " << rewardGold << " 골드를 획득했습니다.\n";
+	return GameState::Playing;
 }

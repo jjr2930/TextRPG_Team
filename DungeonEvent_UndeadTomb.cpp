@@ -5,7 +5,7 @@ UndeadTombEvent::UndeadTombEvent(Character& character) : DungeonEvent(character)
 	std::cout << "언데드 무덤 이벤트 생성!" << std::endl;
 }
 
-void UndeadTombEvent::RunRandomEvent(Character& character) {
+GameState UndeadTombEvent::RunRandomEvent(Character& character) {
 	DungeonEventType randomEventType = DungeonEvent::GetRandomEventType(character);
 
 	switch (randomEventType) {
@@ -43,9 +43,10 @@ void UndeadTombEvent::RunRandomEvent(Character& character) {
 		std::cout << "알 수 없는 이벤트 발생!" << std::endl;
 		break;
 	}
+	return GameState::Playing;
 }
 
-void UndeadTombEvent::RunBossEvent() {
+GameState UndeadTombEvent::RunBossEvent() {
 
 	std::cout << "보스 이벤트 발생!" << std::endl;
 
@@ -61,9 +62,9 @@ void UndeadTombEvent::RunBossEvent() {
 
 	if (result == GameState::GameOver) {
 		std::cout << "보스에게 패배했습니다." << std::endl;
-		return;
+		return GameState::GameOver;
 	}
-
+		
 	std::cout << boss.GetName() << "(을)를 처치했습니다!" << std::endl;
 
 	int rewardGold = boss.RandomGold();
@@ -76,4 +77,5 @@ void UndeadTombEvent::RunBossEvent() {
 	);
 
 	std::cout << boss.GetDropExp() << " EXP와 " << rewardGold << " 골드를 획득했습니다.\n";
+	return GameState::Playing;
 }

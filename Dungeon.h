@@ -32,23 +32,23 @@ public:
 	Dungeon(Character& character);
 	
 	/// <summary>던전 진행 상태를 초기화하고 입장 절차를 시작합니다.</summary>
-	void EnterDungeon();
+	GameState EnterDungeon();
 
 	/// <summary>선택한 던전의 설명과 진입 선택지를 출력합니다.</summary>
-	void StartDungeon();
+	GameState StartDungeon();
 
 	/// <summary>입장할 던전을 선택하고 해당 던전 이벤트를 생성합니다.</summary>
 	/// <returns>던전 입장이 가능하면 true, 취소하거나 조건을 만족하지 못하면 false입니다.</returns>
 	bool SelectDungeonPath();
 
 	/// <summary>정해진 길이만큼 일반 이벤트를 진행한 뒤 보스 이벤트를 실행합니다.</summary>
-	void ProcessDungeon();
+	GameState ProcessDungeon();
 
 	/// <summary>현재 던전의 무작위 일반 이벤트 하나를 처리합니다.</summary>
-	void HandleDungeonEvent();
+	GameState HandleDungeonEvent();
 
 	/// <summary>현재 던전의 보스 이벤트를 처리하고 던전을 종료합니다.</summary>
-	void EncounterBossEvent();
+	GameState EncounterBossEvent();
 
 	/// <summary>현재 던전 탐험을 완료 상태로 변경합니다.</summary>
 	void FinishDungeon();

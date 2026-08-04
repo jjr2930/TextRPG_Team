@@ -7,7 +7,7 @@ DemonCastleEvent::DemonCastleEvent(Character& character) : DungeonEvent(characte
 	std::cout << "마왕의 검은 성채 이벤트 생성!" << std::endl;
 }
 
-void DemonCastleEvent::RunRandomEvent(Character& character) {
+GameState DemonCastleEvent::RunRandomEvent(Character& character) {
 	DungeonEventType randomEventType = DungeonEvent::GetRandomEventType(character);
 
 	switch (randomEventType) {	
@@ -45,8 +45,9 @@ void DemonCastleEvent::RunRandomEvent(Character& character) {
 		std::cout << "알 수 없는 이벤트 발생!" << std::endl;
 		break;
 	}
+	return GameState::Playing;
 }
-void DemonCastleEvent::RunBossEvent() {
+GameState DemonCastleEvent::RunBossEvent() {
 
 	std::cout << "보스 이벤트 발생!" << std::endl;
 
@@ -62,7 +63,7 @@ void DemonCastleEvent::RunBossEvent() {
 
 	if (result == GameState::GameOver) {
 		std::cout << "보스에게 패배했습니다." << std::endl;
-		return;
+		return GameState::GameOver;
 	}
 
 	std::cout << boss.GetName() << "(을)를 처치했습니다!" << std::endl;
@@ -77,4 +78,5 @@ void DemonCastleEvent::RunBossEvent() {
 	);
 
 	std::cout << boss.GetDropExp() << " EXP와 " << rewardGold << " 골드를 획득했습니다.\n";
+	return GameState::Playing;
 }

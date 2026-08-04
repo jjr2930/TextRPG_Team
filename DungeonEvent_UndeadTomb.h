@@ -12,8 +12,8 @@ public:
 
 	/// <summary>망자의 지하묘지의 무작위 일반 이벤트를 실행합니다.</summary>
 	/// <param name="character">이벤트 효과를 적용할 캐릭터입니다.</param>
-    virtual void RunRandomEvent(Character& character) override;
+    virtual GameState RunRandomEvent(Character& character) override;
 
 	/// <summary>스켈레톤 킹과의 보스전 및 승리 보상을 처리합니다.</summary>
-    virtual void RunBossEvent() override;
+    virtual GameState RunBossEvent() override;
 };
