@@ -122,6 +122,7 @@ GameState Dungeon::EncounterBossEvent() {
 		return GameState::Playing;
 
 	GameState bossResult = dungeonEvent->RunBossEvent();
+	if (character.GetCurrentEXP() >= character.GetMaxEXP()) character.LevelUP();
 	Tools::WaitForKey();
 	FinishDungeon();
 	return bossResult;
