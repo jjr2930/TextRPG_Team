@@ -8,6 +8,7 @@ public:
 
 	virtual void Attack() override;	//공격 메서드
 	virtual void TakeDamage(int damage) override;	// 피격 메서드
+	virtual Item GetItem() override;
 
 	void NomalAttack();		// 슬라임 기본 공격 power 그대로 공격
 	void ComboAttack();		// 슬라임 연속 공격 power/2로 공격
