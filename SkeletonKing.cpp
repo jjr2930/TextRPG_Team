@@ -26,7 +26,7 @@ void SkeletonKing::Attack() {
 		currentPower = power;
 		name = "진정한 죽은자들에 왕";
 	}
-	else if (isReborn = true) {
+	else if (isReborn == true) {
 		std::cout << " 진정한 죽은자들에 왕이 주변에 해골들을 집어듭니다.\n" << std::endl;
 		std::cout << " 손에 든 해골을 강하게 던졌습니다. " << "(" << currentPower << ")" << "\n" << std::endl;
 		std::cin.get();
