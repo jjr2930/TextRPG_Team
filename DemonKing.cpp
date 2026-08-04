@@ -4,7 +4,7 @@
 #include "Character.h"
 
 DemonKing::DemonKing(ItemDatabase* itemDB, int level)
-	: Monster(" 악마들의 정점 - 마왕 ", 100, 150, 20, 30, 100, itemDB, 500, level) {}
+	: Monster(" 악마들의 정점 - 마왕 ", 150, 200, 20, 30, 300, itemDB, 500, level) {}
 
 DemonKing::~DemonKing() {}
 
@@ -18,20 +18,20 @@ void DemonKing::Attack() {
 
 	int currentPower = power;
 
-	if (currentHp <= (maxHp / 2)) {
+	if (currentHp <= maxHp / 2 && isRage) {
 		currentPower = (power * 2) / 3;
 
-		std::cout << " 마력으로 감싸진 성스러운 마검으로 " << name << "을(를) 공격했습니다.\n" << std::endl;
+		std::cout << " 마력으로 감싸진 성스러운 마검으로 공격했습니다. " << "(" << currentPower << ")" << "\n" << std::endl;
 		std::cin.get();
 	}
-	else if (currentHp <= (maxHp / 5)) {
+	else if (currentHp <= maxHp / 5 && isAwaken) {
 		currentPower = power * 2;
 
-		std::cout << " 마왕에 모든 마력이 담긴 짙은 푸른색 성스러운 마검으로 " << name << "을(를) 공격했습니다.\n" << std::endl;
+		std::cout << " 마왕에 모든 마력이 담긴 짙은 푸른색 성스러운 마검으로 공격했습니다. " << "(" << currentPower << ")" << "\n" << std::endl;
 		std::cin.get();
 	}
 	else {
-		std::cout << " 마왕에 성스러운 마검을 휘둘러 " << name << "을(를) 공격했습니다.\n" << std::endl;
+		std::cout << " 마왕에 성스러운 마검을 휘둘러 공격했습니다. " << "(" << currentPower << ")" << "\n" << std::endl;
 		std::cin.get();
 	}
 
@@ -50,7 +50,7 @@ void DemonKing::TakeDamage(int damage) {
 	if (hp <= 0)
 		hp = 0;  */
 
-	if (currentHp <= (maxHp / 2) && currentHp > (maxHp / 5) && !isRage) {
+	if (currentHp <= maxHp / 2  && !isRage) {
 		isRage = true;
 
 		std::cout << "===================================================\n" << std::endl;
@@ -62,15 +62,17 @@ void DemonKing::TakeDamage(int damage) {
 		std::cin.get();
 	}
 
-	if (currentHp <= (maxHp / 5) && !isAwaken) {
+	if (currentHp <= maxHp / 5 && !isAwaken) {
 		isAwaken = true;
 
+
 		std::cout << "===================================================\n" << std::endl;
-		std::cout << " 날 여기까지 몰아부치는" << name << "는(은) 오랜만이군......\n" << std::endl;
+		std::cout << " 날 여기까지 몰아부치는 녀석는(은) 오랜만이군......\n" << std::endl;
 		std::cout << " 여기까지 몰아부친 걸 후회하게 만들어주마!!!!!!!!!!!\n" << std::endl;
 		std::cout << " 죽어라!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n" << std::endl;
 		std::cout << " 모든 마력을 폭발시킨 마력이 마왕과 마검에 깃들어 마왕이 더욱 강해집니다.\n" << std::endl;
 		std::cout << " [각성 모드}: 마왕에 공격력이 2배가 됩니다.\n" << std::endl;
+		std::cout << "===================================================\n" << std::endl;
 		std::cin.get();
 	}   
 
