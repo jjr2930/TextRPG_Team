@@ -2,7 +2,12 @@
 
 #include "Goblin.h"
 
-Goblin::Goblin(Item* item, int level) : Monster("Goblin", 10, 40, 2, 18, 40, item, 16, level) {};
+Goblin::Goblin(ItemDatabase* itemDB, int level) : Monster("Goblin", 10, 40, 2, 18, 40, itemDB, 16, level) {};
+
+Item Goblin::GetItem() {
+	int randomNum = random.GetRandomValue(103, 105);
+	return itemDB->GetItem(randomNum);
+}
 
 // 공격 메서드 - 3:2 비율로 해서 공격이 실행함 
 void Goblin::Attack() {

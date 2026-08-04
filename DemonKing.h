@@ -12,11 +12,11 @@ protected:
 	// int destructcount = 3;
 
 public:
-	DemonKing(Item* item, int level);
+	DemonKing(ItemDatabase* itemDB, int level);
 
 	~DemonKing();
 
 	virtual void Attack() override;
 	virtual void TakeDamage(int damage) override;
-
+	virtual Item GetItem() override;
 };

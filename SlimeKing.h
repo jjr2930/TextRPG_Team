@@ -8,10 +8,11 @@ protected:
 	bool isRage = false;
 
 public:
-	SlimeKing(Item* itme, int level);
+	SlimeKing(ItemDatabase* itemDB, int level);
 
 	~SlimeKing();
 
 	virtual void Attack() override;
 	virtual void TakeDamage(int damage) override;
+	virtual Item GetItem() override;
 };

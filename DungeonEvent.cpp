@@ -4,7 +4,7 @@
 
 // 전달받은 플레이어를 복사하지 않고 참조로 보관한다.
 DungeonEvent::DungeonEvent(Character& character)
-	: character(character) {}
+	: character(character), monster(nullptr), itemDB() {}
 
 // 지정 범위에서 획득량을 뽑아 현재 보유 골드에 더한다.
 void DungeonEvent::GiveGold(int minGold, int maxGold) {
@@ -86,13 +86,16 @@ GameState DungeonEvent::Encounter() {
         std::cout << "게임 오버!" << std::endl;
         return GameState::GameOver;
     }
+    int quantity = random.GetRandomValue(1, 3);
+	character.GetInventory().AddItem(monster->GetItem(), quantity);
+	int goldDropped = monster->RandomGold();
 
     std::cout << std::endl << monster->GetName() << " 처치!" << std::endl;
-    std::cout << character.GetName() << "(이)가 " << monster->GetDropExp() << "EXP와 " << monster->RandomGold() << "골드를 획득했습니다.\n";
-
+    std::cout << character.GetName() << "(이)가 " << monster->GetDropExp() << "EXP와 " << goldDropped << "골드를 획득했습니다.\n";
+	std::cout << monster->GetName() << "이(가) " << monster->GetItem().name << "을(를) " << quantity << "개 드랍했습니다." << std::endl;
 
     character.SetCurrentEXP(character.GetCurrentEXP() + monster->GetDropExp());
-    character.SetMoney(character.GetMoney() + monster->RandomGold());
+    character.SetMoney(character.GetMoney() + goldDropped);
 
     // 누적 경험치가 현재 요구량 이상이면 한 번 레벨 업한다.
     if (character.GetCurrentEXP() >= character.GetMaxEXP()) character.LevelUP();
@@ -131,11 +134,27 @@ std::unique_ptr<Monster> DungeonEvent::CreateMonster() {
 
 	switch (monsterType) {
 	case NormalMonsterType::Slime:
-		return std::make_unique<Slime>(nullptr, level);
+		return std::make_unique<Slime>(&itemDB, level);
 	case NormalMonsterType::Skeleton:
-		return std::make_unique<Skeleton>(nullptr, level);
+		return std::make_unique<Skeleton>(&itemDB, level);
 	case NormalMonsterType::Goblin:
-		return std::make_unique<Goblin>(nullptr, level);
+		return std::make_unique<Goblin>(&itemDB, level);
+
+	default:
+		throw std::out_of_range("알 수 없는 몬스터 타입입니다.");
+	}
+}
+
+std::unique_ptr<Monster> DungeonEvent::CreateBossMonster() {
+	int level = character.GetLevel();
+
+	switch (monsterType) {
+	case NormalMonsterType::Slime:
+		return std::make_unique<SlimeKing>(&itemDB, level);
+	case NormalMonsterType::Skeleton:
+		return std::make_unique<SkeletonKing>(&itemDB, level);
+	case NormalMonsterType::Goblin:
+		return std::make_unique<DemonKing>(&itemDB, level);
 
 	default:
 		throw std::out_of_range("알 수 없는 몬스터 타입입니다.");

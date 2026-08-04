@@ -2,7 +2,12 @@
 
 #include "skeleton.h"
 
-Skeleton::Skeleton(Item* item, int level) : Monster("Skeleton", 15, 40, 5, 20, 45, item, 20, level) {};
+Skeleton::Skeleton(ItemDatabase* itemDB, int level) : Monster("Skeleton", 15, 40, 5, 20, 45, itemDB, 20, level) {};
+
+Item Skeleton::GetItem() {
+	int randomNum = random.GetRandomValue(106, 108);
+	return itemDB->GetItem(randomNum);
+}
 
 void Skeleton::Attack() {
 	int num = random.GetRandomValue(0, 2);

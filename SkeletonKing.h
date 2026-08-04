@@ -8,11 +8,12 @@ protected:
 	bool isReborn = false;
 
 public:
-	SkeletonKing(Item* item, int level);
+	SkeletonKing(ItemDatabase* itemDB, int level);
 
 	~SkeletonKing();
 
 	virtual void Attack() override;
 	virtual void TakeDamage(int damage) override;
+	virtual Item GetItem() override;
 
 	};
