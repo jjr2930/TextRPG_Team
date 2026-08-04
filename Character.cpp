@@ -276,7 +276,9 @@ void Character::ShowCharacterInfo() {
 
 
 void Character::LevelUP() {
+    if (currentExperience >= maximumExperience) {
     currentExperience -= maximumExperience;
+    }
     level += 1;
 
     maximumHealth += level * 20;
