@@ -4,7 +4,7 @@
 #include "Character.h"
 
 SkeletonKing::SkeletonKing(ItemDatabase* itemDB, int level)
-	:Monster("망자들에 묘지기", 80, 100, 15, 20, 70, itemDB, 50, level) {};
+	:Monster("망자들에 묘지기", 120, 150, 15, 20, 150, itemDB, 50, level) {};
 
 SkeletonKing::~SkeletonKing() {}
 
@@ -17,6 +17,7 @@ void SkeletonKing::Attack() {
 	
 	int currentPower = power;
 
+
 	if (!isReborn && currentHp <= 1) {
 
 		isReborn = true;
@@ -24,13 +25,16 @@ void SkeletonKing::Attack() {
 		power = power * 2;
 		currentPower = power;
 		name = "진정한 죽은자들에 왕";
-
-		std::cout << " 자기 몸에 있는 해골들에 뼛조각을 던졌다!\n" << std::endl;
+	}
+	else if (isReborn = true) {
+		std::cout << " 진정한 죽은자들에 왕이 주변에 해골들을 집어듭니다.\n" << std::endl;
+		std::cout << " 손에 든 해골을 강하게 던졌습니다. " << "(" << currentPower << ")" << "\n" << std::endl;
 		std::cin.get();
 	}
-	else {
 
-		std::cout << " 손에 있는 뼈다귀를 휘두릅니다.\n" << std::endl;
+	else {
+		std::cout << " 본인 몸에 있는 뼈를 뽑습니다.\n" << std::endl;
+		std::cout << " 손에 든 뼈다귀를 휘두릅니다. " << "(" << currentPower << ")" << "\n" << std::endl;
 		std::cin.get();
 	}
 
@@ -50,6 +54,7 @@ void SkeletonKing::TakeDamage(int damage) {
 		std::cout << " 너의 시체도 여기에 묻어주마!!!!!!!!\n" << std::endl;
 		std::cout << "===================================================\n" << std::endl;
 		std::cin.get();
+
 	}
 
 	else if (currentHp <= 0) {
