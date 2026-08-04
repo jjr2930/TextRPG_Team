@@ -27,7 +27,9 @@ GameState DemonCastleEvent::RunRandomEvent(Character& character) {
 
 	case DungeonEventType::Trap: {
 		std::cout << "함정 이벤트 발생!" << std::endl;
-		DungeonEvent::DamageHealth(5, 20);
+		if (DungeonEvent::DamageHealth(5, 20) == GameState::GameOver) {
+			return GameState::GameOver;
+		}
 		std::cout << "함정에 걸려 체력이 감소했습니다!" << std::endl;
 		std::cout << "현재 체력: " << character.GetCurrentHP() << "/" << character.GetMaxHP() << std::endl;
 		break;
