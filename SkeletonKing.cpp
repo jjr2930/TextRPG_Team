@@ -17,9 +17,10 @@ void SkeletonKing::Attack() {
 	
 	int currentPower = power;
 
+
 	if (!isReborn && currentHp <= 1) {
 
-		isReborn = true;
+		isReborn == true;
 		currentHp = maxHp;
 		power = power * 2;
 		currentPower = power;
@@ -28,9 +29,15 @@ void SkeletonKing::Attack() {
 		std::cout << " 자기 몸에 있는 해골들에 뼛조각을 던졌다!\n" << std::endl;
 		std::cin.get();
 	}
-	else {
+	else if (isReborn == true) {
+		std::cout << " 진정한 죽은자들에 왕이 주변에 해골들을 집어듭니다.\n" << std::endl;
+		std::cout << " 손에 든 해골을 강하게 던졌습니다. " << "(" << currentPower << ")" << "\n" << std::endl;
+		std::cin.get();
+	}
 
-		std::cout << " 손에 있는 뼈다귀를 휘두릅니다.\n" << std::endl;
+	else {
+		std::cout << " 진정한 죽은자들에 왕이 몸에 있는 뼈를 뽑습니다.\n" << std::endl;
+		std::cout << " 손에 든 뼈다귀를 휘두릅니다. " << "(" << currentPower << ")" << "\n" << std::endl;
 		std::cin.get();
 	}
 
