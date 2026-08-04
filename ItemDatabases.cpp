@@ -14,7 +14,7 @@ ItemDatabase::ItemDatabase()
 
     // 무기 아이템
     item.itemID = 0;
-    item.name = "신성한 지팡이";
+    item.name = "축복 받은 지팡이";
     item.value = 150;
     item.itemType = ItemType::Weapon;
     item.itemWeapon = ItemWeapon::Staff;
@@ -25,99 +25,108 @@ ItemDatabase::ItemDatabase()
     allItems[item.itemID] = item;
 
     item.itemID = 1;
-    item.name = "화염 지팡이";
-    item.value = 150;
+    item.name = "성자의 지팡이";
+    item.value = 200;
     item.itemType = ItemType::Weapon;
     item.itemWeapon = ItemWeapon::Staff;
-    item.weaponAttack = 35;
+    item.weaponAttack = 40;
     item.weaponDefense = 10;
     item.weaponMaxMP = 30;
 	item.upgradeLevel = 0;
     allItems[item.itemID] = item;
 
     item.itemID = 2;
-    item.name = "빙하 지팡이";
-    item.value = 150;
+    item.name = "아케인 지팡이";
+    item.value = 250;
     item.itemType = ItemType::Weapon;
     item.itemWeapon = ItemWeapon::Staff;
-    item.weaponAttack = 35;
-    item.weaponDefense = 5;
-    item.weaponMaxMP = 30;
+    item.weaponAttack = 50;
+    item.weaponDefense = 15;
+    item.weaponMaxMP = 35;
+	item.upgradeLevel = 0;
     allItems[item.itemID] = item;
 
     item.itemID = 3;
-    item.name = "일곱 신의 양손 검";
-    item.value = 200;
+    item.name = "일곱 신의 버클러와 장검";
+    item.value = 150;
     item.itemType = ItemType::Weapon;
-    item.itemWeapon = ItemWeapon::TwoHand;
+    item.itemWeapon = ItemWeapon::SwordnShield;
     item.weaponAttack = 30;
     item.weaponDefense = 20;
     item.weaponMaxHP = 30;
+	item.upgradeLevel = 0;
     allItems[item.itemID] = item;
 
     item.itemID = 4;
-    item.name = "양손 도끼";
+    item.name = "바이킹의 원형 방패와 도끼";
     item.value = 200;
     item.itemType = ItemType::Weapon;
-    item.itemWeapon = ItemWeapon::TwoHand;
+    item.itemWeapon = ItemWeapon::SwordnShield;
     item.weaponAttack = 30;
-    item.weaponDefense = 20;
+    item.weaponDefense = 25;
     item.weaponMaxHP = 35;
+    item.upgradeLevel = 0;
     allItems[item.itemID] = item;
 
     item.itemID = 5;
     item.name = "팔라딘의 방패와 검";
-    item.value = 300;
+    item.value = 250;
     item.itemType = ItemType::Weapon;
     item.itemWeapon = ItemWeapon::SwordnShield;
-    item.weaponAttack = 15;
+    item.weaponAttack = 35;
     item.weaponDefense = 30;
     item.weaponMaxHP = 40;
+    item.upgradeLevel = 0;
     allItems[item.itemID] = item;
 
     item.itemID = 6;
-    item.name = "신성한 활";
-    item.value = 200;
+    item.name = "로빈의 활";
+    item.value = 150;
     item.itemType = ItemType::Weapon;
     item.itemWeapon = ItemWeapon::Bow;
-    item.weaponAttack = 30;
+    item.weaponAttack = 40;
     item.weaponDefense = 15;
+    item.upgradeLevel = 0;
     allItems[item.itemID] = item;
 
     item.itemID = 7;
     item.name = "명사수의 석궁";
-    item.value = 250;
+    item.value = 200;
     item.itemType = ItemType::Weapon;
     item.itemWeapon = ItemWeapon::Bow;
-    item.weaponAttack = 30;
+    item.weaponAttack = 50;
     item.weaponDefense = 15;
+    item.upgradeLevel = 0;
     allItems[item.itemID] = item;
 
     item.itemID = 8;
-    item.name = "아킬레우스의 투창";
+    item.name = "아폴로의 활";
     item.value = 250;
     item.itemType = ItemType::Weapon;
     item.itemWeapon = ItemWeapon::Bow;
-    item.weaponAttack = 30;
-    item.weaponDefense = 15;
+    item.weaponAttack = 55;
+    item.weaponDefense = 25;
+    item.upgradeLevel = 0;
     allItems[item.itemID] = item;
 
     item.itemID = 9;
     item.name = "배신자의 단검";
-    item.value = 250;
+    item.value = 150;
     item.itemType = ItemType::Weapon;
     item.itemWeapon = ItemWeapon::Daggers;
-    item.weaponAttack = 40;
+    item.weaponAttack = 50;
     item.weaponDefense = 5;
+    item.upgradeLevel = 0;
     allItems[item.itemID] = item;
 
     item.itemID = 10;
     item.name = "살인마의 쌍검";
-    item.value = 250;
+    item.value = 200;
     item.itemType = ItemType::Weapon;
     item.itemWeapon = ItemWeapon::Daggers;
-    item.weaponAttack = 40;
+    item.weaponAttack = 55;
     item.weaponDefense = 5;
+    item.upgradeLevel = 0;
     allItems[item.itemID] = item;
 
     item.itemID = 11;
@@ -125,8 +134,9 @@ ItemDatabase::ItemDatabase()
     item.value = 250;
     item.itemType = ItemType::Weapon;
     item.itemWeapon = ItemWeapon::Daggers;
-    item.weaponAttack = 40;
-    item.weaponDefense = 5;
+    item.weaponAttack = 60;
+    item.weaponDefense = 10;
+    item.upgradeLevel = 0;
     allItems[item.itemID] = item;
 
     item = Item{};
@@ -141,14 +151,6 @@ ItemDatabase::ItemDatabase()
     allItems[item.itemID] = item;
 
     item.itemID = 13;
-    item.name = "경험치 물약";
-    item.value = 50;
-    item.itemType = ItemType::Potion;
-    item.itemEffect = ItemEffect::IncreaseEXP;
-    item.effectAmount = 50;
-    allItems[item.itemID] = item;
-
-    item.itemID = 14;
     item.name = "마나 물약";
     item.value = 50;
     item.itemType = ItemType::Potion;
@@ -158,23 +160,33 @@ ItemDatabase::ItemDatabase()
 
     item = Item{};
     // 버프 포션
-    item.itemID = 15;
+    item.itemID = 14;
     item.name = "공격력 물약";
-    item.value = 150;
+    item.value = 100;
     item.itemType = ItemType::Potion;
     item.itemEffect = ItemEffect::AttackBuff;
     item.effectAmount = 10;
     allItems[item.itemID] = item;
 
-    item.itemID = 16;
+    item.itemID = 15;
     item.name = "방어력 물약";
-    item.value = 150;
+    item.value = 100;
     item.itemType = ItemType::Potion;
     item.itemEffect = ItemEffect::DefenseBuff;
     item.effectAmount = 10;
     allItems[item.itemID] = item;
 
+    //경험치 포션
+    item.itemID = 16;
+    item.name = "경험치 물약";
+    item.value = 250;
+    item.itemType = ItemType::Potion;
+    item.itemEffect = ItemEffect::IncreaseEXP;
+    item.effectAmount = 100;
+    allItems[item.itemID] = item;
+
     item = Item{};
+
     //각성 원소
     /*item.itemID = 50;
     item.name = "각성 원소(공격력)";
