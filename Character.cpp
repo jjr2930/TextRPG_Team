@@ -3,6 +3,7 @@
 #include <algorithm>
 
 #include "Character.h"
+#include "Tools.h"
 
 const std::string& Character::GetName() const {
     return name;
@@ -170,7 +171,7 @@ void Character::SetAdditionalMaxMP(int additionalMaximumMana) {
 }
 
 void Character::SetAdditionalAttack(int additionalAttack) {
-    this->additionalAttack =    additionalAttack;
+    this->additionalAttack = additionalAttack;
 }
 
 void Character::SetAdditionalDefense(int additionalDefense) {
@@ -185,72 +186,92 @@ void Character::ChangeJob() {
         << "(으)로 전직했습니다.\n";
 }
 
-void Character::ShowCharacterInfo() const {
-    std::cout << "이름 : " << name << '\n';
-    std::cout << "직업 : ";
-    if (job == nullptr) {
-        std::cout << "무직\n";
-    }
-    else {
-        std::cout << job->GetName() << '\n';
-    }
-    std::cout << "레벨 : " << level << " (" << currentExperience << '/' << maximumExperience << ")\n";
+void Character::ShowCharacterInfo() {
+    
+    while (true) {
+        system("cls");
 
-    std::cout
-    << "체력 : "
-    << GetCurrentHP()
-    << " / "
-    << GetMaxHP()
-    << '\n';
+        std::cout << "이름 : " << name << '\n';
 
-    std::cout
-    << "마나 : "
-    << GetCurrentMP()
-    << " / "
-    << GetMaxMP()
-    << '\n';
+        std::cout << "직업 : ";
+        if (job == nullptr) {
+            std::cout << "무직\n";
+        }
+        else {
+            std::cout << job->GetName() << '\n';
+        }
 
-    std::cout << "공격력 : " << GetAttack();
-    if (additionalAttack > 0)
-        std::cout << " (+" << additionalAttack << ')';
-    std::cout << '\n';
+        std::cout
+            << "레벨 : "
+            << level
+            << " ("
+            << currentExperience
+            << '/'
+            << maximumExperience
+            << ")\n";
 
-    std::cout << "방어력 : " << GetDefense();
-    if (additionalDefense > 0)
-        std::cout << " (+" << additionalDefense << ')';
-    std::cout << '\n';
+        std::cout
+            << "체력 : "
+            << GetCurrentHP()
+            << " / "
+            << GetMaxHP()
+            << '\n';
 
-    std::cout << "보유 스킬 :\n";
+        std::cout
+            << "마나 : "
+            << GetCurrentMP()
+            << " / "
+            << GetMaxMP()
+            << '\n';
 
-    if (learnedSkills.empty()) {
-        std::cout << "  없음\n";
-    }
-    else {
-        for (const Skill* skill : learnedSkills) {
-            if (skill == nullptr) {
-                continue;
+        std::cout
+            << "공격력 : "
+            << GetAttack()
+            << '\n';
+
+        std::cout
+            << "방어력 : "
+            << GetDefense()
+            << '\n';
+
+        std::cout << "보유 스킬 :\n";
+
+        if (learnedSkills.empty()) {
+            std::cout << "  없음\n";
+        }
+        else {
+            for (const Skill* skill : learnedSkills) {
+                if (skill == nullptr) {
+                    continue;
+                }
+
+                std::cout
+                    << "  - "
+                    << skill->GetName()
+                    << '\n';
             }
+        }
 
-            std::cout
-            << "  - "
-            << skill->GetName()
-            << '\n'
-            << "    피해 계수 : "
-            << skill->GetDamagePercent()
-            << "% "
-            << "    MP 소모 : "
-            << skill->GetManaCost()
-            << ' '
-            << "    발동 확률 : "
-            << skill->GetActivationChance()
-            << "% ";
+        std::cout
+            << "소지금 : "
+            << money
+            << '\n';
+
+        std::cout << "\n";
+        std::cout << "1. 소지품 보기\n";
+        std::cout << "2. 계속하기\n";
+        std::cout << ">> ";
+
+        const int selection =
+            Tools::GetIntegerInRange(1, 2);
+
+        if (selection == 1) {
+            inventory.OpenItemMenu(*this);
+        }
+        else {
+            return;
+        }
     }
-}
-
-    std::cout << "소지금 : " << money << '\n';
-    inventory.ShowItems();
-    std::cout << ">> 계속하려면 아무 키나 누르세요" << std::endl;
-    (void)_getch();
 }
 
 
@@ -446,4 +467,93 @@ void Character::LearnAvailableSkills()
             << "%\n"
             << "================================\n";
     }
+}
+
+void Character::EndBattle()
+{
+    additionalAttack = 0;
+    additionalDefense = 0;
+}
+
+bool Character::CanUsePotion(
+    const Item& item
+) const {
+    if (item.itemType != ItemType::Potion) {
+        return false;
+    }
+
+    switch (item.itemEffect)
+    {
+    case ItemEffect::RestoreHealth:
+        return GetCurrentHP() < GetMaxHP();
+
+    case ItemEffect::RestoreMana:
+        return GetCurrentMP() < GetMaxMP();
+
+    case ItemEffect::AttackBuff:
+        return GetAdditionalAttack() == 0;
+
+    case ItemEffect::DefenseBuff:
+        return GetAdditionalDefense() == 0;
+
+    default:
+        return false;
+    }
+}
+
+bool Character::TryUseRandomPotion()
+{
+    const int potionUseChance = 30;
+
+    // 매 턴 30% 확률로 물약 사용 시도
+    const int chanceRoll =
+        random.GetRandomValue(1, 100);
+
+    if (chanceRoll > potionUseChance) {
+        return false;
+    }
+
+    const auto& inventoryItems =
+        inventory.GetItems();
+
+    std::vector<std::size_t> candidates;
+
+    for (std::size_t i = 0;
+         i < inventoryItems.size();
+         ++i) {
+        const auto& inventoryItem =
+            inventoryItems[i];
+
+        if (inventoryItem.quantity <= 0) {
+            continue;
+        }
+
+        if (CanUsePotion(inventoryItem.item)) {
+            candidates.push_back(i);
+        }
+    }
+
+    if (candidates.empty()) {
+        return false;
+    }
+
+    const int randomIndex =
+        random.GetRandomValue(
+            0,
+            static_cast<int>(candidates.size()) - 1
+        );
+
+    const std::size_t selectedIndex =
+        candidates[randomIndex];
+
+    return inventory.UsePotionAt(
+        selectedIndex,
+        *this
+    );
+}
+
+void Character::DoMyTurn()
+{
+    TryUseRandomPotion();
+    Attack();
 }

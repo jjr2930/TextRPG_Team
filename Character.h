@@ -8,6 +8,8 @@
 #include "skill.h"
 #include "Random.h"
 
+class Item;
+
 class Character : public Battle {
 private:
     std::string name;
@@ -80,6 +82,10 @@ public:
     void SetAdditionalMaxMP(int additionalMaximumMana);
     void SetAdditionalAttack(int additionalAttack);
     void SetAdditionalDefense(int additionalDefense);
+    void EndBattle();
+    bool CanUsePotion(const Item& item) const;
+    bool TryUseRandomPotion();
+    void DoMyTurn() override;
 
     const std::vector<const Skill*>&
         GetLearnedSkills() const;
@@ -98,7 +104,7 @@ public:
     //전직 함수
     void ChangeJob();
     //상태 출력 함수
-    void ShowCharacterInfo() const;
+    void ShowCharacterInfo();
     //레벨업 함수, 최대경험치 초과분 다음레벨로 이월
     void LevelUP();
     //플레이어 공격 함수
