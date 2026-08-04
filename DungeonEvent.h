@@ -86,7 +86,7 @@ protected:
 	/// <summary>지정 범위에서 무작위 수치만큼 캐릭터에게 피해를 줍니다.</summary>
 	/// <param name="minDamage">최소 피해량입니다.</param>
 	/// <param name="maxDamage">최대 피해량입니다.</param>
-	void DamageHealth(int minDamage, int maxDamage);
+	GameState DamageHealth(int minDamage, int maxDamage);
 
 	/// <summary>던전 일반 몬스터 조우를 시작하기 위한 확장 지점입니다.</summary>
 	void StartMonsterEncounter();

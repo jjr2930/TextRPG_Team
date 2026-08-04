@@ -30,9 +30,13 @@ void DungeonEvent::RestoreHealth(int minHealth, int maxHealth) {
 }
 
 // 범위 내 피해량을 뽑고 캐릭터의 공통 피해 처리 함수를 사용한다.
-void DungeonEvent::DamageHealth(int minDamage, int maxDamage) {
+GameState DungeonEvent::DamageHealth(int minDamage, int maxDamage) {
 	int damage = random.GetRandomValue(minDamage, maxDamage);
 	character.TakeDamage(damage);
+	if (IsCharacterDead(character.GetCurrentHP())) {
+		return GameState::GameOver;
+	}
+	return GameState::Playing;
 }
 
 // 추후 별도의 몬스터 조우 연출이나 준비 로직을 넣기 위한 자리다.
@@ -86,6 +90,7 @@ GameState DungeonEvent::Encounter() {
         std::cout << "게임 오버!" << std::endl;
         return GameState::GameOver;
     }
+
     int quantity = random.GetRandomValue(1, 3);
 	character.GetInventory().AddItem(monster->GetItem(), quantity);
 	int goldDropped = monster->RandomGold();

@@ -96,8 +96,8 @@ GameState Dungeon::ProcessDungeon() {
 	while (currentDungeonLength < dungeonLength) {
 		// 도중에 사망하면 남은 이벤트와 보스를 건너뛰고 즉시 결과를 전달한다.
 		GameState eventResult = HandleDungeonEvent();
-		if (eventResult != GameState::Playing) {
-			return eventResult;
+		if (eventResult == GameState::GameOver) {
+			return GameState::GameOver;
 		}
 
 		++currentDungeonLength;
