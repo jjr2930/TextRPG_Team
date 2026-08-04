@@ -65,7 +65,9 @@ void GameManager::ShowMainMenu() {
         case MenuSelection::Dungeon: {
             std::cout << "\n던전으로 입장합니다.\n";
 			Dungeon dungeon(character);
-			dungeon.EnterDungeon();
+			if (dungeon.EnterDungeon() == GameState::GameOver) {
+				Gameover();
+			}
             return;
         }
 

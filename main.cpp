@@ -16,10 +16,6 @@ int main(int argc, char *argv[])
 
     while (!gameManager.isGameover) {
         gameManager.ShowMainMenu();
-        if (gameManager.isGameover) {
-            break;
-        }
-
     }
     return 0;
 }
