@@ -9,73 +9,6 @@ GameManager::GameManager()
     MakeCharacter();
 };
 
-void GameManager::Battle(Monster* monster) {
-
-	monster->SetTarget(&character);
-	character.SetTarget(monster);
-
-    while (true) {
-        character.DoMyTurn();
-
-        if (IsMonsterDead(monster->GetCurrentHp())) {
-            std::cout << "몬스터 " << monster->GetName() << "(을)를 처치했습니다!" << std::endl;
-            //캐릭터의 강화물약 효과가 전투 종료 시 사라지게 하는 함수입니다.
-            character.EndBattle();
-            break;
-        }
-
-		monster->DoMyTurn();
-
-		if (IsCharacterDead(character.GetCurrentHP())) {
-			Gameover();
-			break;
-		}
-    }
-};
-
-void GameManager::Encounter() {
-    if (!isLevelTen) {
-        Slime monster(nullptr, character.GetLevel()); // 나중에 슬라임 드롭아이템 넣을것
-        system("cls");
-        std::cout << "몬스터 " << monster.GetName() << "(이)가 난입했습니다. 전투 시작!" << std::endl;
-        std::cout << "체력 : " << monster.GetCurrentHp() << ", 공격력 : " << monster.GetPower() << std::endl;
-        Tools::WaitForKey();
-
-        Battle(&monster);
-
-        std::cout << std::endl << monster.GetName() << " 처치!" << std::endl;
-        std::cout << character.GetName() << "(이)가 " << monster.GetDropExp() << "EXP와 " << monster.RandomGold() << "골드를 획득했습니다.\n";
-
-
-        character.SetCurrentEXP(character.GetCurrentEXP() + monster.GetDropExp());
-        character.SetMoney(character.GetMoney() + monster.RandomGold());
-        LevelUp();
-        std::cout << std::endl << "현재 EXP : " << character.GetCurrentEXP() << "/" << character.GetMaxEXP() << ", 골드 : " << character.GetMoney() << std::endl;
-
-        if (character.GetLevel() >= 10) {
-            isLevelTen = true;
-        }
-    }
-	else if (isLevelTen) {
-        DemonKing DemonKing(nullptr, character.GetLevel());
-		Battle(&DemonKing);
-	}
-
-
-    Tools::WaitForKey();
-};
-
-
-
-bool GameManager::IsCharacterDead(int hp) {
-    if (hp <= 0) return true;
-	return false;
-};
-
-bool GameManager::IsMonsterDead(int hp) {
-	if (hp <= 0) return true;
-	return false;
-};
 
 void GameManager::ShopEnter() {
 	Shop shop(&itemDatabase, &character);
@@ -146,9 +79,8 @@ void GameManager::ShowMainMenu() {
             GetLevel();
             return;
 
-        default: {
+        default:
             break;
-        }
         }
     }
 };

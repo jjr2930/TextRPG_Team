@@ -35,4 +35,5 @@ public:
 	virtual int RandomHp(int min, int max, int level);
 	virtual int RandomPower(int min, int max, int level);
 
+	virtual ~Monster() = default;
 };
