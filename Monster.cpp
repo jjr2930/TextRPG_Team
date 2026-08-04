@@ -2,8 +2,8 @@
 #include "Monster.h"
 
 
-Monster::Monster(std::string name, int minHp, int maxHp, int minPower, int maxPower, int dropExp, Item* item, int gold, int level)
-	: name(name), maxHp(RandomHp(minHp, maxHp, level)), power(RandomPower(minPower, maxPower, level)), dropExp(dropExp), item(item), gold(gold) {
+Monster::Monster(std::string name, int minHp, int maxHp, int minPower, int maxPower, int dropExp, ItemDatabase* itemDB, int gold, int level)
+	: name(name), maxHp(RandomHp(minHp, maxHp, level)), power(RandomPower(minPower, maxPower, level)), dropExp(dropExp), itemDB(itemDB), gold(gold) {
     currentHp = maxHp;
 }
 

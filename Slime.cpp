@@ -4,7 +4,9 @@
 
 
 
-Slime::Slime(Item* item, int level) : Monster("Slime", 20, 30, 5, 10, 30, item, 15, level) {};
+Slime::Slime(ItemDatabase* itemDB, int level) : Monster("Slime", 20, 30, 5, 10, 30, itemDB ,15, level) {
+	*item = itemDB->GetItem(100);
+};
 
 // 공격 메서드 - 랜덤으로 공격이 실행됨
 void Slime::Attack() {

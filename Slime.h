@@ -4,7 +4,7 @@
 class Slime : public Monster{
 public:
 	// 슬라임 생성자 Item정보와 플레이어의 레벨이 필요
-	Slime(Item* item, int level);	
+	Slime(ItemDatabase* itemDB ,int level);	
 
 	virtual void Attack() override;	//공격 메서드
 	virtual void TakeDamage(int damage) override;	// 피격 메서드

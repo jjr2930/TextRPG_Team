@@ -4,6 +4,7 @@
 
 #include "Battle.h"
 #include "Item.h"
+#include "ItemDatabases.h"
 #include "Random.h"
 
 class Item;
@@ -11,6 +12,7 @@ class Item;
 class Monster : public Battle {
 protected:
 	Random random;	// 랜덤 클래스
+	ItemDatabase* itemDB;
 	std::string name;	// 이름
 	int maxHp;				//최대 체력
 	int currentHp;			// 현재 체력
@@ -21,12 +23,12 @@ protected:
 
 public:
 	// 몬스터 생성자
-	Monster(std::string name, int minHp, int maxHp, int minPower, int maxPower, int dropExp, Item* item, int price, int level);
+	Monster(std::string name, int minHp, int maxHp, int minPower, int maxPower, int dropExp, ItemDatabase* itemDB, int price, int level);
 	int GetCurrentHp();
 	int GetPower();
 	int GetDropExp();
 	std::string GetName();
-	Item GetItem();
+	virtual Item GetItem();
 	int RandomGold();
 
 	virtual void SetHp(int hp);
