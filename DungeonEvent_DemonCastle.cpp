@@ -3,6 +3,7 @@
 
 
 DemonCastleEvent::DemonCastleEvent(Character& character) : DungeonEvent(character) {
+	SetMonster(NormalMonsterType::Goblin);
 	std::cout << "마왕의 검은 성채 이벤트 생성!" << std::endl;
 }
 

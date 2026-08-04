@@ -3,14 +3,17 @@
 #include <functional>
 #include <string>
 #include <vector>
+#include <memory>
 
 #include "Random.h"
 #include "Character.h"
 #include "Tools.h"
 #include "Monster.h"
 #include "Slime.h"
+#include "Skeleton.h"
 #include "Goblin.h"
 #include "Item.h"
+
 
 /// <summary>일반 던전 이벤트의 종류를 나타냅니다.</summary>
 enum class DungeonEventType {
@@ -36,6 +39,12 @@ enum class GameState {
 	Playing,
 	GameOver,
 	Win
+};
+
+enum class NormalMonsterType {
+	Slime,
+	Skeleton,
+	Goblin
 };
 
 
@@ -104,6 +113,10 @@ protected:
 	/// <returns>플레이어 캐릭터 참조입니다.</returns>
 	Character& GetCharacter();
 
+	/// <summary> 이벤트에 연결된 몬스터를 설정합니다. 이 메서드는 던전 이벤트에서 몬스터를 생성하거나 변경할 때 사용됩니다.</summary>
+	/// <param name="monster">설정할 몬스터입니다.</param>
+	void SetMonster(NormalMonsterType monsterType);
+
 public:
 	/// <summary>던전별 무작위 일반 이벤트 하나를 실행합니다.</summary>
 	/// <param name="character">이벤트 효과를 적용할 캐릭터입니다.</param>
@@ -118,6 +131,13 @@ public:
 private:
 	/// <summary>이벤트 효과와 전투 결과가 적용되는 플레이어 캐릭터입니다.</summary>
 	Character& character;
+
+	/// <summary> 던전에서 나올 몬스터를 가리키는 포인터입니다.</summary>
+	Monster* monster;
+
+	std::unique_ptr<Monster> CreateMonster();
+
+	NormalMonsterType monsterType = NormalMonsterType::Slime;
 
 	/// <summary>이벤트 종류와 효과 수치를 결정하는 난수 생성기입니다.</summary>
 	Random random;

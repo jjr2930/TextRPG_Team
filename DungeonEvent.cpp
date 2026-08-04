@@ -3,7 +3,7 @@
 #include <algorithm>
 
 DungeonEvent::DungeonEvent(Character& character)
-	: character(character) {}
+	: character(character), monster(nullptr) {}
 
 void DungeonEvent::GiveGold(int minGold, int maxGold) {
 	int gold = random.GetRandomValue(minGold, maxGold);
@@ -59,23 +59,24 @@ GameState DungeonEvent::Battle(Monster* monster) {
 };
 
 GameState DungeonEvent::Encounter() {
-    Slime monster(nullptr, character.GetLevel()); // 나중에 슬라임 드롭아이템 넣을것
+	std::unique_ptr<Monster> monster = CreateMonster();
+
     system("cls");
-    std::cout << "몬스터 " << monster.GetName() << "(이)가 난입했습니다. 전투 시작!" << std::endl;
-    std::cout << "체력 : " << monster.GetCurrentHp() << ", 공격력 : " << monster.GetPower() << std::endl;
+    std::cout << "몬스터 " << monster->GetName() << "(이)가 난입했습니다. 전투 시작!" << std::endl;
+    std::cout << "체력 : " << monster->GetCurrentHp() << ", 공격력 : " << monster->GetPower() << std::endl;
     Tools::WaitForKey();
 
-    if (Battle(&monster) == GameState::GameOver) {
+    if (Battle(monster.get()) == GameState::GameOver) {
         std::cout << "게임 오버!" << std::endl;
         return GameState::GameOver;
     }
 
-    std::cout << std::endl << monster.GetName() << " 처치!" << std::endl;
-    std::cout << character.GetName() << "(이)가 " << monster.GetDropExp() << "EXP와 " << monster.RandomGold() << "골드를 획득했습니다.\n";
+    std::cout << std::endl << monster->GetName() << " 처치!" << std::endl;
+    std::cout << character.GetName() << "(이)가 " << monster->GetDropExp() << "EXP와 " << monster->RandomGold() << "골드를 획득했습니다.\n";
 
 
-    character.SetCurrentEXP(character.GetCurrentEXP() + monster.GetDropExp());
-    character.SetMoney(character.GetMoney() + monster.RandomGold());
+    character.SetCurrentEXP(character.GetCurrentEXP() + monster->GetDropExp());
+    character.SetMoney(character.GetMoney() + monster->RandomGold());
 
     if (character.GetCurrentEXP() >= character.GetMaxEXP()) character.LevelUP();
 
@@ -96,4 +97,24 @@ bool DungeonEvent::IsMonsterDead(int hp) {
 
 Character& DungeonEvent::GetCharacter() {
 	return character;
+}
+
+void DungeonEvent::SetMonster(NormalMonsterType monsterType) {
+	this->monsterType = monsterType;
+}
+
+std::unique_ptr<Monster> DungeonEvent::CreateMonster() {
+	int level = character.GetLevel();
+
+	switch (monsterType) {
+	case NormalMonsterType::Slime:
+		return std::make_unique<Slime>(nullptr, level);
+	case NormalMonsterType::Skeleton:
+		return std::make_unique<Skeleton>(nullptr, level);
+	case NormalMonsterType::Goblin:
+		return std::make_unique<Goblin>(nullptr, level);
+
+	default:
+		return nullptr;
+	}
 }

@@ -1,6 +1,7 @@
 #include "DungeonEvent_GreenSlimeForest.h"
 
 GreenSlimeForestEvent::GreenSlimeForestEvent(Character& character) : DungeonEvent(character) {
+	SetMonster(NormalMonsterType::Slime);
 	std::cout << "초록 슬라임 숲 이벤트 생성!" << std::endl;
 }
 

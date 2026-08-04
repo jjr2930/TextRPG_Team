@@ -1,6 +1,7 @@
 #include "DungeonEvent_UndeadTomb.h"
 
 UndeadTombEvent::UndeadTombEvent(Character& character) : DungeonEvent(character) {
+	SetMonster(NormalMonsterType::Skeleton);
 	std::cout << "언데드 무덤 이벤트 생성!" << std::endl;
 }
 
