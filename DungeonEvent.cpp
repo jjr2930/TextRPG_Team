@@ -3,7 +3,7 @@
 #include <algorithm>
 
 DungeonEvent::DungeonEvent(Character& character)
-	: character(character), monster(nullptr) {}
+	: character(character) {}
 
 void DungeonEvent::GiveGold(int minGold, int maxGold) {
 	int gold = random.GetRandomValue(minGold, maxGold);
@@ -82,6 +82,9 @@ GameState DungeonEvent::Encounter() {
 
     std::cout << std::endl << "현재 EXP : " << character.GetCurrentEXP() << "/" << character.GetMaxEXP() << ", 골드 : " << character.GetMoney() << std::endl;
 	
+    character.SetTarget(nullptr);
+	monster->SetTarget(nullptr);
+
     return GameState::Playing;
 };
 
@@ -115,6 +118,6 @@ std::unique_ptr<Monster> DungeonEvent::CreateMonster() {
 		return std::make_unique<Goblin>(nullptr, level);
 
 	default:
-		return nullptr;
+		throw std::out_of_range("알 수 없는 몬스터 타입입니다.");
 	}
 }
