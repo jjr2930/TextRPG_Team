@@ -448,6 +448,18 @@ void Character::LearnAvailableSkills()
             continue;
         }
 
+        // 이미 습득한 스킬인지 확인
+        const bool alreadyLearned =
+            std::find(
+                learnedSkills.begin(),
+                learnedSkills.end(),
+                &skill
+            ) != learnedSkills.end();
+
+        if (alreadyLearned) {
+            continue;
+        }
+
         learnedSkills.push_back(&skill);
 
         std::cout

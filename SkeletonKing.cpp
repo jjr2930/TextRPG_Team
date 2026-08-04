@@ -42,7 +42,7 @@ void SkeletonKing::Attack() {
 }
 
 void SkeletonKing::TakeDamage(int damage) {
-	currentHp -= power;
+	currentHp -= damage;
 
 	if (!isReborn && currentHp <= 0) {
 		currentHp = 1;
