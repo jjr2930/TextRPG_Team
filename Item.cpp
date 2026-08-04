@@ -18,21 +18,27 @@ void Item::UsePotion(const Item& item, Character& character){
         break;
     }
     case ItemEffect::AttackBuff: {
-        int currentAttack = character.GetAdditionalAttack();
-        currentAttack += item.effectAmount;
-        character.SetAdditionalAttack(currentAttack);
+        int AdditionalAttack = character.GetAdditionalAttack();
+        AdditionalAttack += item.effectAmount;
+        character.SetAdditionalAttack(AdditionalAttack);
         break;
     }
     case ItemEffect::DefenseBuff: {
-        int currentDefense = character.GetAdditionalDefense();
-        currentDefense += item.effectAmount;
-        character.SetAdditionalDefense(currentDefense);
+        int AdditionalDefense = character.GetAdditionalDefense();
+        AdditionalDefense += item.effectAmount;
+        character.SetAdditionalDefense(AdditionalDefense);
         break;
     }
     case ItemEffect::RestoreMana: {
         int currentMana = character.GetCurrentMP();
         currentMana += item.effectAmount;
         character.SetCurrentMP(currentMana);
+        break;
+    }
+    case ItemEffect::IncreaseEXP: {
+        int currentEXP = character.GetCurrentEXP();
+        currentEXP += item.effectAmount;
+        character.SetCurrentEXP(currentEXP);
         break;
     }
     }
@@ -54,7 +60,6 @@ bool Item::UpgradeWeapon(const Item& item){
     if (upgradeLevel >= 3){
         return false;
     }
-
     switch (item.itemUpgrade) {
     case ItemUpgrade::UpgradeAttack: {
         int additionalAttack = GetAdditionalWeaponAttack();
