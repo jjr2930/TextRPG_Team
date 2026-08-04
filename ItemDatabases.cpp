@@ -104,6 +104,7 @@ ItemDatabase::ItemDatabase()
     item.name = "체력 물약";
     item.value = 50;
     item.itemType = ItemType::Potion;
+    item.itemEffect = ItemEffect::RestoreHealth;
     item.effectAmount = 50;
     allItems[item.itemID] = item;
 
@@ -118,6 +119,7 @@ ItemDatabase::ItemDatabase()
     item.name = "마나 물약";
     item.value = 50;
     item.itemType = ItemType::Potion;
+    item.itemEffect = ItemEffect::RestoreMana;
     item.effectAmount = 50;
     allItems[item.itemID] = item;
 
@@ -128,6 +130,7 @@ ItemDatabase::ItemDatabase()
     item.name = "공격력 물약";    
     item.value = 150;
     item.itemType = ItemType::Potion;
+    item.itemEffect = ItemEffect::AttackBuff;
     item.effectAmount = 10;
     allItems[item.itemID] = item;
 
@@ -135,6 +138,7 @@ ItemDatabase::ItemDatabase()
     item.name = "방어력 물약";
     item.value = 150;
     item.itemType = ItemType::Potion;
+    item.itemEffect = ItemEffect::DefenseBuff;
     item.effectAmount = 10;
     allItems[item.itemID] = item;
 

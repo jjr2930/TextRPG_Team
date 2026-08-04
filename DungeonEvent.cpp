@@ -46,6 +46,8 @@ GameState DungeonEvent::Battle(Monster* monster) {
 
         if (IsMonsterDead(monster->GetCurrentHp())) {
             std::cout << "몬스터 " << monster->GetName() << "(을)를 처치했습니다!" << std::endl;
+            //캐릭터의 강화물약 효과가 전투 종료 시 사라지게 하는 함수입니다.
+            character.EndBattle();
             break;
         }
 
