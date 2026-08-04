@@ -4,7 +4,7 @@
 #include "Character.h"
 
 SlimeKing::SlimeKing(ItemDatabase* itemDB, int level)
-	:Monster(" 제일 거대한 슬라임 ", 50, 80, 10, 15, 50, itemDB, 30, level) {};
+	:Monster(" 제일 거대한 슬라임 ", 150, 250, 8, 12, 100, itemDB, 30, level) {};
 
 SlimeKing::~SlimeKing() {}
 
@@ -24,7 +24,7 @@ void SlimeKing::Attack() {
 		currentPower = (power * 2) / 3;
 
 		std::cout << " 슬라임 점액을 뱉으려고 기를 모읍니다.\n" << std::endl;
-		std::cout << " 크루루룽~~ 퉷!퉷!!퉷!!! " << "(" << currentPower << ")" << "x 3" << "\n" << std::endl;
+		std::cout << " 크루루룽~~ 퉷!퉷!!퉷!!! " << currentPower  << " x 3" << "\n" << std::endl;
 		std::cin.get();
 	}
 	else {

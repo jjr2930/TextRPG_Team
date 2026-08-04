@@ -68,7 +68,7 @@ void Skill::Use(
         << character.GetName()
         << "이(가) ["
         << name
-        << "] 스킬을 사용했습니다!\n";
+        << "] 스킬을 사용했습니다!" << "\n";
 
     target.TakeDamage(damage);
 }
