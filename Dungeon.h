@@ -8,49 +8,55 @@
 #include "Random.h"
 #include "Character.h"
 
+// 던전 선택 화면과 이벤트 생성에 필요한 한 맵의 설정값을 묶는다.
 struct DungeonMap {
-	DungeonMapType mapType; // 던전 맵 종류
-	int difficultyLevel; // 난이도 레벨
-	std::string difficultyIcon; // 난이도 아이콘
-	std::string dungeonName; //	던전 이름
+	DungeonMapType mapType;          // 생성할 던전 이벤트의 종류
+	int difficultyLevel;             // 던전의 수치상 난이도
+	std::string difficultyIcon;      // 선택 화면에 표시할 별 아이콘
+	std::string dungeonName;         // 선택 화면과 안내문에 표시할 이름
 };
 
 
-class Dungeon { // 던전 클래스
+// 던전 선택부터 일반 이벤트 반복, 보스 이벤트까지의 진행 순서를 관리한다.
+class Dungeon {
 public:
-	Dungeon(Character& character); // 던전 생성자
+	// GameManager가 보유한 캐릭터를 참조로 받아 같은 상태를 계속 사용한다.
+	Dungeon(Character& character);
 	
-	void EnterDungeon(); // 던전 입장
-	void StartDungeon(); // 던전 시작
-	bool SelectDungeonPath(); // 던전 경로 선택
-	void ProcessDungeon(); // 던전 진행
-	void HandleDungeonEvent(); // 던전 이벤트 처리
-	void EncounterBossEvent(); // 보스 이벤트 처리
-	void FinishDungeon();
+	// 던전 도중 사망하거나 최종 승리할 수 있으므로 진행 결과를 호출자에게 돌려준다.
+	GameState EnterDungeon();          // 진행 상태를 초기화하고 던전 선택을 시작한다.
+	GameState StartDungeon();          // 선택한 던전 설명과 최종 입장 여부를 처리한다.
+	bool SelectDungeonPath();          // 맵을 선택하고 해당 이벤트 객체를 생성한다.
+	GameState ProcessDungeon();        // 정해진 길이만큼 일반 이벤트를 반복한다.
+	GameState HandleDungeonEvent();    // 현재 맵의 무작위 일반 이벤트 하나를 실행한다.
+	GameState EncounterBossEvent();    // 현재 맵의 보스 이벤트를 실행한다.
+	void FinishDungeon();              // 던전 완료 상태를 기록한다.
 
 private:
-	Character& character;
-	Random random;
-	DungeonEventCollection dungeonEventCollection;
-	std::unique_ptr<DungeonEvent> dungeonEvent;
+	Character& character;                              // GameManager가 소유한 플레이어
+	Random random;                                     // 던전 길이 결정용 난수 생성기
+	DungeonEventCollection dungeonEventCollection;     // 맵별 이벤트 객체 생성 담당
+	std::unique_ptr<DungeonEvent> dungeonEvent;         // 현재 선택한 맵의 이벤트 객체
 
-	bool dungeonFinished = false;
-	int selectedDifficultyLevel = 0;
-	int dungeonLength = 0;
-	int selectedPathIndex = 0;
-	int currentDungeonLength = 0;
+	bool dungeonFinished = false;      // 보스 이벤트까지 끝났는지 여부
+	int selectedDifficultyLevel = 0;   // 선택한 던전의 난이도 값
+	int dungeonLength = 0;             // 보스 전까지 실행할 일반 이벤트 수
+	int selectedPathIndex = 0;         // dungeonPaths에서 선택한 위치
+	int currentDungeonLength = 0;      // 지금까지 처리한 일반 이벤트 수
 
-	std::string selectedMap = "";
-	std::string selectedDifficultyIcon = "";
-
-
+	std::string selectedMap = "";             // 현재 던전 이름
+	std::string selectedDifficultyIcon = "";  // 현재 던전 난이도 아이콘
 
 
-	std::vector<DungeonMap> dungeonPaths = { // 난이도 설정 아이콘, 복사해서 사용 -> ★ ☆
+
+
+	// 선택 가능한 맵의 종류, 난이도, 표시 정보를 같은 순서로 보관한다.
+	std::vector<DungeonMap> dungeonPaths = {
 		{DungeonMapType::GreenSlimeForest, 10, "★☆☆", "초록빛 슬라임 숲"},
 		{DungeonMapType::UndeadTomb, 20, "★★☆", "망자의 지하묘지"},
 		{DungeonMapType::DemonCastle, 30, "★★★", "마왕의 검은 성채"},
 	};
+	// dungeonPaths와 같은 인덱스를 사용하는 맵별 입장 설명이다.
 	std::vector<std::string> dungeonDescriptions = {
 		// 초록빛 슬라임 숲에 대한 설명
 		"울창한 나무 사이로 희미한 햇빛이 스며들고 있다.\n"
