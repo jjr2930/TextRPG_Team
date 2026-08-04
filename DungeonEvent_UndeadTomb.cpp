@@ -50,32 +50,32 @@ GameState UndeadTombEvent::RunBossEvent() {
 
 	std::cout << "보스 이벤트 발생!" << std::endl;
 
-	SkeletonKing boss(nullptr, GetCharacter().GetLevel());
+	std::unique_ptr<Monster> boss = DungeonEvent::CreateBossMonster();
 
-	std::cout << boss.GetName() << "(이)가 등장했습니다!\n";
-	std::cout << "체력: " << boss.GetCurrentHp()
-		<< ", 공격력: " << boss.GetPower() << std::endl;
+	std::cout << boss->GetName() << "(이)가 등장했습니다!\n";
+	std::cout << "체력: " << boss->GetCurrentHp()
+		<< ", 공격력: " << boss->GetPower() << std::endl;
 
 	Tools::WaitForKey();
 
-	GameState result = Battle(&boss);
+	GameState result = Battle(boss.get());
 
 	if (result == GameState::GameOver) {
 		std::cout << "보스에게 패배했습니다." << std::endl;
 		return GameState::GameOver;
 	}
-		
-	std::cout << boss.GetName() << "(을)를 처치했습니다!" << std::endl;
 
-	int rewardGold = boss.RandomGold();
+	std::cout << boss->GetName() << "(을)를 처치했습니다!" << std::endl;
+
+	int rewardGold = boss->RandomGold();
 
 	GetCharacter().SetCurrentEXP(
-		GetCharacter().GetCurrentEXP() + boss.GetDropExp()
+		GetCharacter().GetCurrentEXP() + boss->GetDropExp()
 	);
 	GetCharacter().SetMoney(
 		GetCharacter().GetMoney() + rewardGold
 	);
 
-	std::cout << boss.GetDropExp() << " EXP와 " << rewardGold << " 골드를 획득했습니다.\n";
+	std::cout << boss->GetDropExp() << " EXP와 " << rewardGold << " 골드를 획득했습니다.\n";
 	return GameState::Playing;
 }

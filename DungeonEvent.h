@@ -9,10 +9,17 @@
 #include "Character.h"
 #include "Tools.h"
 #include "Monster.h"
+
 #include "Slime.h"
 #include "Skeleton.h"
 #include "Goblin.h"
+
+#include "DemonKing.h"
+#include "SlimeKing.h"
+#include "SkeletonKing.h"
+
 #include "Item.h"
+#include "ItemDatabases.h"
 
 
 /// <summary>일반 던전 이벤트의 종류를 나타냅니다.</summary>
@@ -128,17 +135,24 @@ public:
 	/// <summary>파생 던전 이벤트 객체를 안전하게 제거합니다.</summary>
 	virtual ~DungeonEvent() = default;
 
+	std::unique_ptr<Monster> CreateBossMonster();
+
 private:
 	/// <summary>이벤트 효과와 전투 결과가 적용되는 플레이어 캐릭터입니다.</summary>
 	Character& character;
 
 	/// <summary> 던전에서 나올 몬스터를 가리키는 포인터입니다.</summary>
-	Monster* monster;
-
-	std::unique_ptr<Monster> CreateMonster();
+	Monster* monster = nullptr;
 
 	NormalMonsterType monsterType = NormalMonsterType::Slime;
 
+	std::unique_ptr<Monster> CreateMonster();
+
+
 	/// <summary>이벤트 종류와 효과 수치를 결정하는 난수 생성기입니다.</summary>
 	Random random;
+
+	ItemDatabase itemDB;
+
+	
 };
