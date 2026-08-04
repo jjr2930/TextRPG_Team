@@ -4,7 +4,7 @@
 #include "Character.h"
 
 SkeletonKing::SkeletonKing(ItemDatabase* itemDB, int level)
-	:Monster("망자들에 묘지기", 60, 70, 15, 20, 70, itemDB, 50, level) {};
+	:Monster("망자들에 묘지기", 80, 100, 15, 20, 70, itemDB, 50, level) {};
 
 SkeletonKing::~SkeletonKing() {}
 
@@ -38,6 +38,7 @@ void SkeletonKing::Attack() {
 }
 
 void SkeletonKing::TakeDamage(int damage) {
+	currentHp -= damage;
 
 	if (!isReborn && currentHp <= 0) {
 		currentHp = 1;
@@ -57,6 +58,13 @@ void SkeletonKing::TakeDamage(int damage) {
 		std::cout << "===================================================\n" << std::endl;
 		std::cout << " 크아아아아아아아아악~~~~ 나의 힘이!!!! 나의 권력이!!!!!!~~~~\n" << std::endl;
 		std::cout << " 두고보자!! 인간녀석!!!!!!!!!!!~~~~\n" << std::endl;
+		std::cout << "===================================================\n" << std::endl;
+		std::cin.get();
+
+		Item droppedItem = this->GetItem();
+		std::cout << "===================================================\n" << std::endl;
+		std::cout << " 진정한 죽은자들에 왕이 쓰러졌다!\n" << std::endl;
+		std::cout << " [획득 아이템]: " << droppedItem.name << std::endl;
 		std::cout << "===================================================\n" << std::endl;
 		std::cin.get();
 	}

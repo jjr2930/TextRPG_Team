@@ -4,7 +4,7 @@
 #include "Character.h"
 
 SlimeKing::SlimeKing(ItemDatabase* itemDB, int level)
-	:Monster(" 제일 거대한 슬라임 ", 40, 50, 10, 15, 50, itemDB, 30, level) {};
+	:Monster(" 제일 거대한 슬라임 ", 50, 80, 10, 15, 50, itemDB, 30, level) {};
 
 SlimeKing::~SlimeKing() {}
 
@@ -47,8 +47,9 @@ void SlimeKing::Attack() {
 }
 
 void SlimeKing::TakeDamage(int damage) {
+	currentHp -= damage;
 
-	if (currentHp <= (maxHp / 2)) {
+	if (currentHp <= (maxHp / 2) && !isRage) {
 		isRage = true;
 
 		std::cout << "===================================================\n" << std::endl;
@@ -63,5 +64,13 @@ void SlimeKing::TakeDamage(int damage) {
 		std::cout << " 푸루루룽~~~~푸루...룽......\n" << std::endl;
 		std::cout << "===================================================\n" << std::endl;
 		std::cin.get();
+
+		Item droppedItem = this->GetItem();
+		std::cout << "===================================================\n" << std::endl;
+		std::cout << " 제일 거대한 슬라임이 쓰러졌다!\n" << std::endl;
+		std::cout << " [획득 아이템]: " << droppedItem.name << std::endl;
+		std::cout << "===================================================\n" << std::endl;
+		std::cin.get();
 	}
 }
+

@@ -4,7 +4,7 @@
 #include "Character.h"
 
 DemonKing::DemonKing(ItemDatabase* itemDB, int level)
-	: Monster(" 악마들의 정점 - 마왕 ", 80, 100, 20, 30, 100, itemDB, 500, level) {}
+	: Monster(" 악마들의 정점 - 마왕 ", 100, 150, 20, 30, 100, itemDB, 500, level) {}
 
 DemonKing::~DemonKing() {}
 
@@ -40,6 +40,7 @@ void DemonKing::Attack() {
 }
 
 void DemonKing::TakeDamage(int damage) {
+	currentHp -= damage;
 
 	/* int finalDamage = (int)damage;
 		if (finalDamage < 0)
@@ -77,6 +78,13 @@ void DemonKing::TakeDamage(int damage) {
 		std::cout << "===================================================\n" << std::endl;
 		std::cout << " 언젠간 어둠 속에서......난 다시 일어 날 것이다~~\n" << std::endl;
 		std::cout << " 그때는.내가..널...\n" << std::endl;
+		std::cout << "===================================================\n" << std::endl;
+		std::cin.get();
+
+		Item droppedItem = this->GetItem();
+		std::cout << "===================================================\n" << std::endl;
+		std::cout << " 악마들의 정점 - 마왕이 왕이 쓰러졌다!\n" << std::endl;
+		std::cout << " [획득 아이템]: " << droppedItem.name << std::endl;
 		std::cout << "===================================================\n" << std::endl;
 		std::cin.get();
 	}
