@@ -79,7 +79,12 @@ GameState DungeonEvent::Encounter() {
     std::cout << "체력 : " << monster->GetCurrentHp() << ", 공격력 : " << monster->GetPower() << std::endl;
     Tools::WaitForKey();
 
+<<<<<<< HEAD
     if (Battle(monster.get()) == GameState::GameOver) {
+=======
+    // 패배하면 보상 처리 없이 게임 오버 결과를 호출자에게 전달한다.
+    if (Battle(&monster) == GameState::GameOver) {
+>>>>>>> main
         std::cout << "게임 오버!" << std::endl;
         return GameState::GameOver;
     }
@@ -88,8 +93,14 @@ GameState DungeonEvent::Encounter() {
     std::cout << character.GetName() << "(이)가 " << monster->GetDropExp() << "EXP와 " << monster->RandomGold() << "골드를 획득했습니다.\n";
 
 
+<<<<<<< HEAD
     character.SetCurrentEXP(character.GetCurrentEXP() + monster->GetDropExp());
     character.SetMoney(character.GetMoney() + monster->RandomGold());
+=======
+    // 전투에서 승리했으므로 경험치와 무작위 골드를 실제 캐릭터 상태에 반영한다.
+    character.SetCurrentEXP(character.GetCurrentEXP() + monster.GetDropExp());
+    character.SetMoney(character.GetMoney() + monster.RandomGold());
+>>>>>>> main
 
     // 누적 경험치가 현재 요구량 이상이면 한 번 레벨 업한다.
     if (character.GetCurrentEXP() >= character.GetMaxEXP()) character.LevelUP();
@@ -118,6 +129,7 @@ bool DungeonEvent::IsMonsterDead(int hp) {
 Character& DungeonEvent::GetCharacter() {
 	return character;
 }
+<<<<<<< HEAD
 
 void DungeonEvent::SetMonster(NormalMonsterType monsterType) {
 	this->monsterType = monsterType;
@@ -138,3 +150,5 @@ std::unique_ptr<Monster> DungeonEvent::CreateMonster() {
 		throw std::out_of_range("알 수 없는 몬스터 타입입니다.");
 	}
 }
+=======
+>>>>>>> main

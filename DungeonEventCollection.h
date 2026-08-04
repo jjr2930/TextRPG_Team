@@ -9,8 +9,8 @@
 /// <summary>생성 가능한 던전 맵 종류를 나타냅니다.</summary>
 enum class DungeonMapType {
 	GreenSlimeForest,
-	UndeadTomb,
 	DemonCastle
+	DemonCastle       // 마왕의 검은 성채
 };
 
 /// <summary>맵 종류에 맞는 구체적인 던전 이벤트 객체를 생성합니다.</summary>
